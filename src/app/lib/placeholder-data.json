@@ -1,0 +1,184 @@
+{
+  "users": [
+    {
+      "user_id": 1,
+      "username": "traveller1",
+      "email": "traveller1@example.com",
+      "password": "hashedpassword1",
+      "bio": "Love exploring new places and cultures!",
+      "avatar_img_url": "http://example.com/avatar1.png"
+    },
+    {
+      "user_id": 2,
+      "username": "adventurer2",
+      "email": "adventurer2@example.com",
+      "password": "hashedpassword2",
+      "bio": "Adventure enthusiast and foodie.",
+      "avatar_img_url": "http://example.com/avatar2.png"
+    },
+    {
+      "user_id": 3,
+      "username": "globetrotter3",
+      "email": "globetrotter3@example.com",
+      "password": "hashedpassword3",
+      "bio": "Travel blogger sharing experiences around the world.",
+      "avatar_img_url": "http://example.com/avatar3.png"
+    }
+  ],
+  "itineraries": [
+    {
+      "itinerary_id": 1,
+      "user_id": 1,
+      "itinerary_description": "Exploring the Alps - A 7-day adventure through the stunning landscapes of the Swiss Alps, featuring hiking, local cuisine, and breathtaking views.",
+      "created_at": "2023-07-25T10:00:00Z",
+      "budget": 1500
+    },
+    {
+      "itinerary_id": 2,
+      "user_id": 2,
+      "itinerary_description": "Beach Vacation in Thailand - A 10-day journey through Thailand's best beaches, including island hopping, snorkeling, and experiencing the vibrant local culture.",
+      "created_at": "2023-08-10T15:00:00Z",
+      "budget": 2000
+    },
+    {
+      "itinerary_id": 3,
+      "user_id": 3,
+      "itinerary_description": "Cultural Tour of Japan - A 14-day immersion into Japanese culture, exploring ancient temples, modern cities, and the unique culinary delights of Japan.",
+      "created_at": "2023-09-01T09:00:00Z",
+      "budget": 3000
+    }
+  ],
+  "days": [
+    {
+      "day_id": 1,
+      "itineray_id": 1,
+      "day_number": 1,
+      "day_plan": "Arrival in Zurich, check-in at the hotel, and explore the old town. Visit the Swiss National Museum to understand the rich history of Switzerland. In the evening, enjoy a traditional Swiss dinner at a local restaurant.",
+      "accomodation": "Zurich Hotel",
+      "transport": "Rental car",
+      "country": "Switzerland",
+      "region": "Zurich",
+      "place": "Zurich"
+    },
+    {
+      "day_id": 2,
+      "itineray_id": 1,
+      "day_number": 2,
+      "day_plan": "Drive to Lucerne and take a boat trip on Lake Lucerne. In the afternoon, explore the Chapel Bridge and Lion Monument. End the day with a scenic walk along the lakeside promenade.",
+      "accomodation": "Lucerne Lodge",
+      "transport": "Rental car",
+      "country": "Switzerland",
+      "region": "Lucerne",
+      "place": "Lucerne"
+    },
+    {
+      "day_id": 3,
+      "itineray_id": 1,
+      "day_number": 3,
+      "day_plan": "Hike in the Swiss Alps, starting from Engelberg. Enjoy panoramic views and a picnic lunch. Return to the hotel for a relaxing evening.",
+      "accomodation": "Engelberg Chalet",
+      "transport": "Rental car",
+      "country": "Switzerland",
+      "region": "Engelberg",
+      "place": "Swiss Alps"
+    },
+    {
+      "day_id": 4,
+      "itineray_id": 2,
+      "day_number": 1,
+      "day_plan": "Arrive in Phuket, check-in at the resort, and relax by the beach. Explore Patong Beach's vibrant nightlife in the evening.",
+      "accomodation": "Phuket Resort",
+      "transport": "Taxi",
+      "country": "Thailand",
+      "region": "Phuket",
+      "place": "Patong Beach"
+    },
+    {
+      "day_id": 5,
+      "itineray_id": 2,
+      "day_number": 2,
+      "day_plan": "Take a day trip to Phi Phi Islands. Enjoy snorkeling and a beachside lunch. Return to Phuket for dinner at a seaside restaurant.",
+      "accomodation": "Phuket Resort",
+      "transport": "Boat",
+      "country": "Thailand",
+      "region": "Phuket",
+      "place": "Phi Phi Islands"
+    },
+    {
+      "day_id": 6,
+      "itineray_id": 3,
+      "day_number": 1,
+      "day_plan": "Arrival in Tokyo, check-in at the hotel. Visit the Meiji Shrine and explore the bustling streets of Shibuya. Dinner at a sushi restaurant.",
+      "accomodation": "Tokyo Central Hotel",
+      "transport": "Public transport",
+      "country": "Japan",
+      "region": "Kanto",
+      "place": "Tokyo"
+    },
+    {
+      "day_id": 7,
+      "itineray_id": 3,
+      "day_number": 2,
+      "day_plan": "Day trip to Nikko to see the Toshogu Shrine. Enjoy the natural beauty of Nikko National Park and its waterfalls. Return to Tokyo in the evening.",
+      "accomodation": "Tokyo Central Hotel",
+      "transport": "Train",
+      "country": "Japan",
+      "region": "Kanto",
+      "place": "Nikko"
+    },
+    {
+      "day_id": 8,
+      "itineray_id": 3,
+      "day_number": 3,
+      "day_plan": "Explore the traditional Asakusa district, visit Senso-ji Temple, and shop at Nakamise Street. Afternoon visit to Akihabara for electronics and anime goods.",
+      "accomodation": "Tokyo Central Hotel",
+      "transport": "Public transport",
+      "country": "Japan",
+      "region": "Kanto",
+      "place": "Tokyo"
+    }
+  ],
+  "comments": [
+    {
+      "comment_id": 1,
+      "user_id": 2,
+      "itineray_id": 1,
+      "comment_body": "This itinerary looks amazing! Any tips for the best time to visit?",
+      "created_at": "2023-07-26T12:00:00Z"
+    },
+    {
+      "comment_id": 2,
+      "user_id": 1,
+      "itineray_id": 2,
+      "comment_body": "I've always wanted to go to Thailand, thanks for the detailed plan!",
+      "created_at": "2023-08-11T09:30:00Z"
+    },
+    {
+      "comment_id": 3,
+      "user_id": 3,
+      "itineray_id": 3,
+      "comment_body": "Japan is my favorite destination! Can't wait to try this itinerary.",
+      "created_at": "2023-09-02T14:00:00Z"
+    }
+  ],
+  "itinerary_votes": [
+    {
+      "vote_id": 1,
+      "user_id": 1,
+      "itineray_id": 2,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 2,
+      "user_id": 2,
+      "itineray_id": 1,
+      "vote_value": -1
+    },
+    {
+      "vote_id": 3,
+      "user_id": 3,
+      "itineray_id": 1,
+      "vote_value": 1
+    }
+  ]
+}
