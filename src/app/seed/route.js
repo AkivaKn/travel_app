@@ -1,5 +1,11 @@
 const { db } = require("@vercel/postgres");
-const { users, itineraries, days, comments, itinerary_votes } = require("../lib/placeholder-data");
+const {
+  users,
+  itineraries,
+  days,
+  comments,
+  itinerary_votes,
+} = require("../lib/placeholder-data");
 const bcrypt = require("bcrypt");
 
 async function seedUsers(client) {
@@ -23,7 +29,6 @@ async function seedUsers(client) {
     );
     console.log(`Seeded ${insertedUsers.length} users`);
 
-
     return {
       createTable,
       users: insertedUsers,
@@ -45,9 +50,9 @@ async function seedItineraries(client) {
 );`;
     console.log("Created itineraries table");
     const insertedItineraries = await Promise.all(
-      users.map(async (itinerary) => {
+      itineraries.map(async (itinerary) => {
         return client.sql`
-                INSERT INTO itineraries (user_id,itinerary_description,created_at,budget)
+                INSERT INTO itineraries (user_id, itinerary_description, created_at, budget)
                 VALUES (${itinerary.user_id}, ${itinerary.itinerary_description},  ${itinerary.created_at}, ${itinerary.budget});`;
       })
     );
@@ -55,7 +60,7 @@ async function seedItineraries(client) {
 
     return {
       createTable,
-      itineraries:insertedItineraries,
+      itineraries: insertedItineraries,
     };
   } catch (error) {
     console.error("Error seeding itineraries:", error);
@@ -67,7 +72,7 @@ async function seedDays(client) {
   try {
     const createTable = await client.sql`CREATE TABLE days (
             day_id SERIAL PRIMARY KEY,
-  itineray_id INT REFERENCES itineraries(itinerary_id) ON DELETE CASCADE NOT NULL,
+  itinerary_id INT REFERENCES itineraries(itinerary_id) ON DELETE CASCADE NOT NULL,
             day_number INT NOT NULL,
             day_plan VARCHAR NOT NULL,
             accomodation VARCHAR(150),
@@ -77,10 +82,19 @@ async function seedDays(client) {
             place VARCHAR(150)
                     );`;
     console.log("Created days table");
-    //seed with placeholder data
+    const insertedDays = await Promise.all(
+      days.map(async (day) => {
+        return client.sql`
+            INSERT INTO days (itinerary_id, day_number, day_plan, accomodation, transport, country, region, place)
+            VALUES (${day.itinerary_id}, ${day.day_number},  ${day.day_plan}, ${day.accomodation}, 
+            ${day.transport}, ${day.country}, ${day.region}, ${day.place});`;
+      })
+    );
+    console.log(`Seeded ${insertedDays.length} days`);
 
     return {
       createTable,
+      days: insertedDays,
     };
   } catch (error) {
     console.error("Error seeding days:", error);

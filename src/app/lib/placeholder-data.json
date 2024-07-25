@@ -51,7 +51,7 @@
   "days": [
     {
       "day_id": 1,
-      "itineray_id": 1,
+      "itinerary_id": 1,
       "day_number": 1,
       "day_plan": "Arrival in Zurich, check-in at the hotel, and explore the old town. Visit the Swiss National Museum to understand the rich history of Switzerland. In the evening, enjoy a traditional Swiss dinner at a local restaurant.",
       "accomodation": "Zurich Hotel",
@@ -62,7 +62,7 @@
     },
     {
       "day_id": 2,
-      "itineray_id": 1,
+      "itinerary_id": 1,
       "day_number": 2,
       "day_plan": "Drive to Lucerne and take a boat trip on Lake Lucerne. In the afternoon, explore the Chapel Bridge and Lion Monument. End the day with a scenic walk along the lakeside promenade.",
       "accomodation": "Lucerne Lodge",
@@ -73,7 +73,7 @@
     },
     {
       "day_id": 3,
-      "itineray_id": 1,
+      "itinerary_id": 1,
       "day_number": 3,
       "day_plan": "Hike in the Swiss Alps, starting from Engelberg. Enjoy panoramic views and a picnic lunch. Return to the hotel for a relaxing evening.",
       "accomodation": "Engelberg Chalet",
@@ -84,7 +84,7 @@
     },
     {
       "day_id": 4,
-      "itineray_id": 2,
+      "itinerary_id": 2,
       "day_number": 1,
       "day_plan": "Arrive in Phuket, check-in at the resort, and relax by the beach. Explore Patong Beach's vibrant nightlife in the evening.",
       "accomodation": "Phuket Resort",
@@ -95,7 +95,7 @@
     },
     {
       "day_id": 5,
-      "itineray_id": 2,
+      "itinerary_id": 2,
       "day_number": 2,
       "day_plan": "Take a day trip to Phi Phi Islands. Enjoy snorkeling and a beachside lunch. Return to Phuket for dinner at a seaside restaurant.",
       "accomodation": "Phuket Resort",
@@ -106,7 +106,7 @@
     },
     {
       "day_id": 6,
-      "itineray_id": 3,
+      "itinerary_id": 3,
       "day_number": 1,
       "day_plan": "Arrival in Tokyo, check-in at the hotel. Visit the Meiji Shrine and explore the bustling streets of Shibuya. Dinner at a sushi restaurant.",
       "accomodation": "Tokyo Central Hotel",
@@ -117,7 +117,7 @@
     },
     {
       "day_id": 7,
-      "itineray_id": 3,
+      "itinerary_id": 3,
       "day_number": 2,
       "day_plan": "Day trip to Nikko to see the Toshogu Shrine. Enjoy the natural beauty of Nikko National Park and its waterfalls. Return to Tokyo in the evening.",
       "accomodation": "Tokyo Central Hotel",
@@ -128,7 +128,7 @@
     },
     {
       "day_id": 8,
-      "itineray_id": 3,
+      "itinerary_id": 3,
       "day_number": 3,
       "day_plan": "Explore the traditional Asakusa district, visit Senso-ji Temple, and shop at Nakamise Street. Afternoon visit to Akihabara for electronics and anime goods.",
       "accomodation": "Tokyo Central Hotel",
@@ -142,21 +142,21 @@
     {
       "comment_id": 1,
       "user_id": 2,
-      "itineray_id": 1,
+      "itinerary_id": 1,
       "comment_body": "This itinerary looks amazing! Any tips for the best time to visit?",
       "created_at": "2023-07-26T12:00:00Z"
     },
     {
       "comment_id": 2,
       "user_id": 1,
-      "itineray_id": 2,
+      "itinerary_id": 2,
       "comment_body": "I've always wanted to go to Thailand, thanks for the detailed plan!",
       "created_at": "2023-08-11T09:30:00Z"
     },
     {
       "comment_id": 3,
       "user_id": 3,
-      "itineray_id": 3,
+      "itinerary_id": 3,
       "comment_body": "Japan is my favorite destination! Can't wait to try this itinerary.",
       "created_at": "2023-09-02T14:00:00Z"
     }
@@ -165,19 +165,19 @@
     {
       "vote_id": 1,
       "user_id": 1,
-      "itineray_id": 2,
+      "itinerary_id": 2,
       "vote_value": 1
     },
     {
       "vote_id": 2,
       "user_id": 2,
-      "itineray_id": 1,
+      "itinerary_id": 1,
       "vote_value": -1
     },
     {
       "vote_id": 3,
       "user_id": 3,
-      "itineray_id": 1,
+      "itinerary_id": 1,
       "vote_value": 1
     }
   ]
