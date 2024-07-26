@@ -1,5 +1,6 @@
-import { auth } from "../../auth"
-import "./globals.css"
+import { auth } from "../../auth";
+import Nav from "./components/Nav"
+import "./globals.css";
 
 export const metadata = {
   title: "Create Next App",
@@ -8,17 +9,18 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await auth();
- return (
-   <html lang="en">
-
-    
-      <body >
-      {session?.user ? <div>
-          <img src={session?.user.avatar_img_url} alt="User Avatar" />
-          <p className="text-red-500">{session?.user.username}</p>
-    </div>:  null}
-      
-        {children}</body>
+  return (
+    <html lang="en">
+      <body>
+        {session?.user ? (
+          <div>
+            <img src={session?.user.avatar_img_url} alt="User Avatar" />
+            <p className="text-red-500">{session?.user.username}</p>
+          </div>
+        ) : null}
+        <Nav/>
+        {children}
+      </body>
     </html>
   );
 }
