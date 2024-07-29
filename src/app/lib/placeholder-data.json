@@ -27,23 +27,29 @@
   ],
   "itineraries": [
     {
+      "title": "Exploring the Alps",
+      "itinerary_image_url": "https://www.civitatis.com/blog/wp-content/uploads/2023/01/panoramica-mont-blanc-francia.jpg",
       "itinerary_id": 1,
       "user_id": 1,
-      "itinerary_description": "Exploring the Alps - A 7-day adventure through the stunning landscapes of the Swiss Alps, featuring hiking, local cuisine, and breathtaking views.",
+      "itinerary_description": "A 7-day adventure through the stunning landscapes of the Swiss Alps, featuring hiking, local cuisine, and breathtaking views.",
       "created_at": "2023-07-25T10:00:00Z",
       "budget": 2
     },
     {
+      "title": "Beach Vacation in Thailand",
+      "itinerary_image_url": "https://www.travelandleisure.com/best-places-to-visit-in-thailand-8558482",
       "itinerary_id": 2,
       "user_id": 2,
-      "itinerary_description": "Beach Vacation in Thailand - A 10-day journey through Thailand's best beaches, including island hopping, snorkeling, and experiencing the vibrant local culture.",
+      "itinerary_description": "A 10-day journey through Thailand's best beaches, including island hopping, snorkeling, and experiencing the vibrant local culture.",
       "created_at": "2023-08-10T15:00:00Z",
       "budget": 1
     },
     {
+      "title": "Cultural Tour of Japan",
+      "itinerary_image_url": "https://media.cnn.com/api/v1/images/stellar/prod/230210161917-01-japan-never-traveler-culture-tokyo.jpg?c=16x9&q=h_833,w_1480,c_fill",
       "itinerary_id": 3,
       "user_id": 3,
-      "itinerary_description": "Cultural Tour of Japan - A 14-day immersion into Japanese culture, exploring ancient temples, modern cities, and the unique culinary delights of Japan.",
+      "itinerary_description": "A 14-day immersion into Japanese culture, exploring ancient temples, modern cities, and the unique culinary delights of Japan.",
       "created_at": "2023-09-01T09:00:00Z",
       "budget": 3
     }
