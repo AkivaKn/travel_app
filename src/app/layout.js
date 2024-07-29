@@ -14,8 +14,8 @@ export default async function RootLayout({ children }) {
     
       <body >
       {session?.user ? <div>
-          <img src={session?.user.avatar_img_url} alt="User Avatar" />
-          <p className="text-red-500">{session?.user.username}</p>
+          <img src={session.user.avatar_img_url} alt="User Avatar" />
+          <p className="text-red-500">{session.user.username}</p>
     </div>:  null}
       
         {children}</body>

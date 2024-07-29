@@ -5,7 +5,7 @@ const {
   days,
   comments,
   itinerary_votes,
-} = require("../lib/placeholder-data");
+} = require("../src/app/lib/placeholder-data.json");
 const bcrypt = require("bcrypt");
 
 async function seedUsers(client) {
