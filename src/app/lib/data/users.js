@@ -1,5 +1,8 @@
+"use server"
+
 import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt"
+import { signOut } from "../../../../auth";
 
 
 export async function getUserFromDb(email, password) {
@@ -26,4 +29,8 @@ export async function getUserFromDb(email, password) {
       console.error("Authorisation error:", error);
       return null;
     }
+  }
+
+  export async function logout(){
+    await signOut()
   }

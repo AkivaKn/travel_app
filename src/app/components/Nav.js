@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
+import { logout } from "../lib/data/users";
 // import logo from "../assets/images/logo.svg"
 // import profile from "../assets/icons/profile.svg"
 
@@ -10,7 +11,7 @@ export default function Nav({ session, signOut }) {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   return (
-    <nav className="flex-between p-10">
+    <nav className="flex-between pt-5 px-5">
       <Link className="flex gap-2 flex-center" href="/">
         <Image
           src="/assets/images/logo.svg"
@@ -23,7 +24,7 @@ export default function Nav({ session, signOut }) {
       </Link>
 
       {/* Desktop Navigation */}
-      <div className= "hidden sm:flex items-center gap-8">
+      <div className="hidden sm:flex items-center gap-16">
         <Link className="outline_btn" href="/plantrip">
           Plan Your Trip
         </Link>
@@ -32,9 +33,11 @@ export default function Nav({ session, signOut }) {
         </Link>
         {session?.user ? (
           <>
-            <Link className="black_btn" href="/signout">
+            <form action={logout}>
+            <button className="black_btn" >
               Sign Out
-            </Link>
+            </button>
+            </form>
             <div>
               <Image
                 // src={session?.user.avatar_img_url}
@@ -66,72 +69,70 @@ export default function Nav({ session, signOut }) {
             console.log("dropdown is toggling");
           }}
         />
-        {toggleDropdown && (
-          session?.user ? (
+        {toggleDropdown &&
+          (session?.user ? (
             <div className="dropdown">
-            <Link
-              href="/profile"
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              View Profile
-            </Link>
-            <Link
-              href="/plantrip"
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              Plan Your Trip
-            </Link>
-            <Link
-              href="/postitineray"
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              Post Itinerary
-            </Link>
-            <Link
-              type="button"
-              onClick={() => {
-                setToggleDropdown(false);
-              }}
-              href="/signout"
-              className="mt-5 w-full black_btn"
-            >
-              Sign Out
-            </Link>
-          </div>
-          )
-         : (
+              <Link
+                href="/profile"
+                className="dropdown_link"
+                onClick={() => setToggleDropdown(false)}
+              >
+                View Profile
+              </Link>
+              <Link
+                href="/plantrip"
+                className="dropdown_link"
+                onClick={() => setToggleDropdown(false)}
+              >
+                Plan Your Trip
+              </Link>
+              <Link
+                href="/postitineray"
+                className="dropdown_link"
+                onClick={() => setToggleDropdown(false)}
+              >
+                Post Itinerary
+              </Link>
+              <Link
+                type="button"
+                onClick={() => {
+                  setToggleDropdown(false);
+                  // logout()
+                }}
+                href="/signout"
+                className="mt-5 w-full black_btn"
+              >
+                Sign Out
+              </Link>
+            </div>
+          ) : (
             <div className="dropdown">
-            <Link
-              href="/plantrip"
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              Plan Your Trip
-            </Link>
-            <Link
-              href="/postitineray"
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              Post Itinerary
-            </Link>
-            <Link
-              type="button"
-              onClick={() => {
-                setToggleDropdown(false);
-              }}
-              href="/login"
-              className="mt-5 w-full black_btn"
-            >
-              Sign In
-            </Link>
-          </div>
-
-         )
-        )}
+              <Link
+                href="/plantrip"
+                className="dropdown_link"
+                onClick={() => setToggleDropdown(false)}
+              >
+                Plan Your Trip
+              </Link>
+              <Link
+                href="/postitineray"
+                className="dropdown_link"
+                onClick={() => setToggleDropdown(false)}
+              >
+                Post Itinerary
+              </Link>
+              <Link
+                type="button"
+                onClick={() => {
+                  setToggleDropdown(false);
+                }}
+                href="/login"
+                className="mt-5 w-full black_btn"
+              >
+                Sign In
+              </Link>
+            </div>
+          ))}
       </div>
     </nav>
   );
