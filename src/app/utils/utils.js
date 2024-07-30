@@ -11,11 +11,11 @@ function dateFormatting(date) {
 
 function formatBudget(budget) {
   if (budget === 1) {
-    return "Low budget holiday";
+    return "Budget: $";
   } else if (budget === 2) {
-    return "Medium budget holiday";
+    return "Budget: $$";
   } else if (budget === 3) {
-    return "Luxury holiday";
+    return "Budget: $$$";
   }
 }
 

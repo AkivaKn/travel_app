@@ -37,7 +37,7 @@
     },
     {
       "title": "Beach Vacation in Thailand",
-      "itinerary_image_url": "https://www.travelandleisure.com/best-places-to-visit-in-thailand-8558482",
+      "itinerary_image_url": "https://lp-cms-production.imgix.net/2024-01/GettyImages-1273413451.jpg",
       "itinerary_id": 2,
       "user_id": 2,
       "itinerary_description": "A 10-day journey through Thailand's best beaches, including island hopping, snorkeling, and experiencing the vibrant local culture.",
@@ -430,11 +430,23 @@
     {
       "vote_id": 2,
       "user_id": 2,
+      "itinerary_id": 2,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 3,
+      "user_id": 3,
+      "itinerary_id": 2,
+      "vote_value": -1
+    },
+    {
+      "vote_id": 4,
+      "user_id": 2,
       "itinerary_id": 1,
       "vote_value": -1
     },
     {
-      "vote_id": 3,
+      "vote_id": 5,
       "user_id": 3,
       "itinerary_id": 1,
       "vote_value": 1

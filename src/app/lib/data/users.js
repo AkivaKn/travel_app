@@ -3,6 +3,8 @@ import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt";
 import { uploadImage } from "./utils";
 import { signIn } from "../../../../auth";
+import { signOut } from "../../../../auth";
+
 
 export async function getUserFromDb(email, password) {
   try {
@@ -54,3 +56,8 @@ export async function postNewUser(formData) {
 export async function login(user) {
   await signIn("credentials", user);
 }
+
+export async function logout(){
+    await signOut()
+  }
+
