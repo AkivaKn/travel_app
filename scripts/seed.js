@@ -38,18 +38,20 @@ async function seedItineraries(client) {
   try {
     const createTable = await client.sql`CREATE TABLE itineraries (
               itinerary_id SERIAL PRIMARY KEY,
-              user_id INT REFERENCES users(user_id) ON DELETE SET NULL,
+              title VARCHAR(50) NOT NULL,
+              itinerary_image_url VARCHAR,
               itinerary_description VARCHAR,
+              user_id INT REFERENCES users(user_id) ON DELETE SET NULL,
               created_at TIMESTAMP DEFAULT NOW(),
-              budget INT NOT NULL,
+              budget INT NOT NULL
               CHECK (budget BETWEEN 1 AND 3)
 );`;
     console.log("Created itineraries table");
     const insertedItineraries = await Promise.all(
       itineraries.map(async (itinerary) => {
         return client.sql`
-                INSERT INTO itineraries (user_id, itinerary_description, created_at, budget)
-                VALUES (${itinerary.user_id}, ${itinerary.itinerary_description},  ${itinerary.created_at}, ${itinerary.budget});`;
+                INSERT INTO itineraries (title, itinerary_image_url, itinerary_description, user_id,created_at, budget)
+                VALUES (${itinerary.title}, ${itinerary.itinerary_image_url}, ${itinerary.itinerary_description}, ${itinerary.user_id}, ${itinerary.created_at}, ${itinerary.budget});`;
       })
     );
     console.log(`Seeded ${insertedItineraries.length} itineraries`);
