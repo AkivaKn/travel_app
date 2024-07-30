@@ -1,18 +1,19 @@
-"use server"
- 
-import { signIn } from "next-auth/react"
-import { postNewUser } from "./lib/data/users"
+import ItineraryCard from "./components/ItineraryCard";
+import { getPopularItineraries } from "./lib/data/itineraries";
 
 export default async function Home() {
-  
-  //   postNewUser({
-  //     username: 'testing testingk 12',
-  //     password: 'test123',
-  //     email: 'test1m2@test.com',
-  //     bio: 'i am a test',
-  //     avatar_img_url: 'dummy link'
-  // })
+  const popularItineraries = await getPopularItineraries();
 
-  return (<button >Sign in</button>
-)
+  return (
+    <>
+      <h1 className="text-center text-3xl m-10">Home Page</h1>
+      <ul>
+        {popularItineraries.map((itinerary) => (
+          <li key={itinerary.itinerary_id}>
+            <ItineraryCard itinerary={itinerary} />
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }

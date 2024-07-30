@@ -3,6 +3,7 @@ import { Button } from "flowbite-react";
 import Link from "next/link";
 import { useState } from "react";
 import { login } from "../lib/data/users";
+import { validateSignInForm } from "../lib/data/utils";
 
 export default function SignInForm() {
   const [errors, setErrors] = useState({});
@@ -11,35 +12,15 @@ export default function SignInForm() {
       email: formData.get("email"),
       password: formData.get("password"),
     };
-    const valid = validateForm(user);
-    if (valid) {
-      login(user);
+    const formErrors = validateSignInForm(user);
+    if (formErrors.email || formErrors.password)  {
+      setErrors(formErrors)
+    }
+    else {
+      login(user)
     }
   }
-  function validateForm({ email, password }) {
-    let errors = {};
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,16}$/;
-    if (!email) {
-      errors.email = "Please provide your email address.";
-    } else if (!emailRegex.test(email)) {
-      errors.email = "Email is invalid.";
-    }
-    if (!password) {
-      errors.password = "Password is required.";
-    } else if (password.length < 8 || password.length > 16) {
-      errors.password = "Password must be between 8 and 16 characters.";
-    } else if (!passwordRegex.test(password)) {
-      errors.password =
-        "Password must contain at least one lowercase letter and one digit.";
-    }
-    setErrors(errors);
-    if (errors.email || errors.password) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+
   return (
     <div className="h-screen flex max-height:100px max-width:100px m-3 p-3 border-black border-2">
       <div className="grow">
@@ -47,12 +28,12 @@ export default function SignInForm() {
           <h3 className="text-xl font-medium text-gray-900 dark:text-white my-3">
             Sign in to our platform
           </h3>
-          <form action={signInUser}>
+          <form action={signInUser} noValidate>
             <div>
               <div className="mb-2 block">
                 <label htmlFor="email">Email</label>
               </div>
-              <input className="w-full" id="email" name="email" type="email" />
+              <input className="w-full" id="email" name="email" type="email"/>
               {errors.email && <p>{errors.email}</p>}
             </div>
             <div className="my-3">

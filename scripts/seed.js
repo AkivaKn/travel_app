@@ -14,7 +14,7 @@ async function seedUsers(client) {
               user_id SERIAL PRIMARY KEY,
               username VARCHAR(20) NOT NULL UNIQUE,
               email VARCHAR(30) NOT NULL UNIQUE,
-              password VARCHAR NOT NULL,
+              password VARCHAR(16) NOT NULL,
               bio VARCHAR(1000),
               avatar_img_url VARCHAR
           );`;
