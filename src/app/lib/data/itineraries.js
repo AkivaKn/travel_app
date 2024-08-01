@@ -1,4 +1,7 @@
+"use server";
 import { sql } from "@vercel/postgres";
+import { auth } from "../../../../auth";
+import { uploadImage } from "../../utils/auth_utils";
 
 export async function getPopularItineraries() {
   // throw new Error("bad error")
@@ -14,6 +17,32 @@ export async function getPopularItineraries() {
     return res.rows;
   } catch (error) {
     console.error("Data fetching error:", error);
-    throw new Error("500: Server error")
+    throw new Error("500: Server error");
+  }
+}
+
+export async function postItinerary(formData) {
+  const session = await auth()
+
+  const user_id = session.user.user_id
+  const title = formData.get("title");
+  const itinerary_description = formData.get("description");
+  const budget = formData.get("budget");
+  const itinerary_image = formData.get("image");
+  let itinerary_image_url;
+
+  try {
+    if (itinerary_image.size > 0) {
+      itinerary_image_url = await uploadImage(itinerary_image);
+    }
+    const res = await sql`
+      INSERT INTO itineraries 
+      (title, itinerary_image_url, itinerary_description, user_id, budget)
+      VALUES (${title}, ${itinerary_image_url}, ${itinerary_description}, ${user_id}, ${budget})
+      RETURNING *`;
+    return res.rows[0];
+  } catch (error) {
+    console.error("Error posting to itineraries:", error);
+    throw new Error("Error posting to itineraries");
   }
 }
