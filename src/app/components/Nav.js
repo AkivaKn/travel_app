@@ -11,8 +11,8 @@ export default function Nav({ session, signOut }) {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   return (
-    <nav className="flex-between pt-5 px-5">
-      <Link className="flex gap-2 flex-center" href="/">
+    <nav className="flex pt-5 px-5 mb-5">
+      <Link className="flex gap-2 flex-start sm:justify-center sm:ml-[8%] w-96" href="/">
         <Image
           src="/assets/images/logo.svg"
           alt="WhereToGo logo"
@@ -24,40 +24,38 @@ export default function Nav({ session, signOut }) {
       </Link>
 
       {/* Desktop Navigation */}
-      <div className="hidden sm:flex items-center gap-16">
-        <Link className="outline_btn" href="/plantrip">
+      <div className="hidden sm:flex w-full justify-evenly">
+        <Link className="outline_btn w-[25%] max-w-48 " href="/plantrip">
           Plan Your Trip
         </Link>
-        <Link className="outline_btn" href="/postitinerary">
+        <Link className="outline_btn w-[25%] max-w-48 " href="/postitinerary">
           Post Itinerary
         </Link>
+
         {session?.user ? (
-          <>
-            <form action={logout}>
-            <button className="black_btn" >
-              Sign Out
-            </button>
-            </form>
-            <div>
-              <Image
-                // src={session?.user.avatar_img_url}
-                src="/assets/icons/profile.svg"
-                alt="User Avatar"
-                width={37}
-                height={37}
-              />
-              <p className="text-red-500">{session?.user.username}</p>
-            </div>
-          </>
-        ) : (
-          <Link className="black_btn" href="/login">
-            Sign In
-          </Link>
-        )}
+          <form className="w-[25%] max-w-48" action={logout}>
+            <button className="black_btn w-[100%]">Sign Out</button>
+          </form>
+        ):
+        <Link className="black_btn w-[25%] max-w-48" href="/login">
+          Sign In
+        </Link>}
       </div>
 
+      {session?.user && (
+        <div className="hidden sm:flex absolute flex-col items-center ml-[1%] w-min-fit">
+          <Image
+            src="/assets/icons/profile.svg"
+            alt="User Avatar"
+            width={25}
+            height={25}
+          />
+          <p className="text-red-500">{session?.user.username}</p>
+        </div>
+      )}
+
       {/* Mobile Navigation */}
-      <div className="flex relative sm:hidden ">
+      <div className="absolute right-4 sm:hidden">
         <Image
           src="/assets/icons/burger.svg"
           alt="Menu"
@@ -65,8 +63,6 @@ export default function Nav({ session, signOut }) {
           height={37}
           onClick={() => {
             setToggleDropdown((prev) => !prev);
-            console.log(toggleDropdown);
-            console.log("dropdown is toggling");
           }}
         />
         {toggleDropdown &&

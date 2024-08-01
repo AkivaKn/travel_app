@@ -3,7 +3,7 @@ import { Button } from "flowbite-react";
 import Link from "next/link";
 import { useState } from "react";
 import { login } from "../lib/data/users";
-import { validateSignInForm } from "../lib/data/utils";
+import { validateSignInForm } from "../utils/auth_utils";
 
 export default function SignInForm() {
   const [errors, setErrors] = useState({});
@@ -13,11 +13,10 @@ export default function SignInForm() {
       password: formData.get("password"),
     };
     const formErrors = validateSignInForm(user);
-    if (formErrors.email || formErrors.password)  {
-      setErrors(formErrors)
-    }
-    else {
-      login(user)
+    if (formErrors.email || formErrors.password) {
+      setErrors(formErrors);
+    } else {
+      login(user);
     }
   }
 
@@ -33,7 +32,7 @@ export default function SignInForm() {
               <div className="mb-2 block">
                 <label htmlFor="email">Email</label>
               </div>
-              <input className="w-full" id="email" name="email" type="email"/>
+              <input className="w-full" id="email" name="email" type="email" />
               {errors.email && <p>{errors.email}</p>}
             </div>
             <div className="my-3">

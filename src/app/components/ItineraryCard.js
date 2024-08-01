@@ -1,10 +1,8 @@
 import { dateFormatting, formatBudget } from "../utils/utils";
 
 export default function ItineraryCard({ itinerary }) {
-  console.log(typeof itinerary.total_votes);
   return (
-    // className="px-5 py-2 border-4 w-80 h-300 border-solid border-black m-4 rounded-md"
-    <section className="px-5 py-2 border- sm:w-80 border-solid bg-slate-300 hover:bg-slate-400 border-black border-2 m-4 rounded-md">
+    <section className="px-5 py-2 border- sm:w-80 border-solid bg-slate-300 hover:bg-slate-400 border-black border-2 mb-8 mx-4 rounded-md">
       <h1 className="font-satoshi font-semibold text-lg">{itinerary.title}</h1>
       <hr/>
       <img

@@ -74,11 +74,11 @@
   }
   
   .black_btn {
-    @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+    @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center lg:text-[1em] text-[0.75em] font-inter flex items-center justify-center h-full truncate;
   }
   
   .outline_btn {
-    @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm flex items-center justify-center;
+    @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center lg:text-[1em] text-[0.75em] flex items-center justify-center truncate;
   }
   
   .head_text {
@@ -133,7 +133,7 @@
   
   /* Nav Component */
   .logo_text {
-    @apply font-satoshi font-semibold text-xl text-black tracking-wide;
+    @apply font-satoshi font-semibold text-2xl text-black tracking-wide;
   }
   
   .dropdown {

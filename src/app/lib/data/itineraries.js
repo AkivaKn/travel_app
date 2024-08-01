@@ -11,7 +11,6 @@ export async function getPopularItineraries() {
         GROUP BY i.itinerary_id
         ORDER BY total_votes DESC
         LIMIT 3`;
-    console.log(res.rows, "<-- sql results");
     return res.rows;
   } catch (error) {
     console.error("Data fetching error:", error);
