@@ -3,19 +3,19 @@ import { Button } from "flowbite-react";
 import Link from "next/link";
 import { postNewUser } from "../lib/data/users";
 import { useRouter } from "next/navigation";
-import { validateRegisterForm } from "../lib/data/utils";
+import { validateRegisterForm } from "../utils/auth_utils";
 import { useState, useEffect } from "react";
 
 export default function RegisterForm() {
-  const router = useRouter()
+  const router = useRouter();
   const [errors, setErrors] = useState({});
   const [user, setUser] = useState({});
-  const [valid, setValid] = useState(false)
+  const [valid, setValid] = useState(false);
 
   useEffect(() => {
     const postUser = async () => {
       await postNewUser(user);
-      router.push("/login")
+      router.push("/login");
     };
     if (valid) {
       postUser();
@@ -35,9 +35,8 @@ export default function RegisterForm() {
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
     } else {
-      setValid(true)
+      setValid(true);
       setUser(formData);
-      console.log(newUser);
     }
   }
   return (

@@ -9,11 +9,11 @@ export async function uploadImage(imageFile) {
 
 export function validateSignInForm({ email, password }) {
   let errors = {};
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const emailRegex = /^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/;
   const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,16}$/;
   if (!email) {
     errors.email = "Please provide your email address.";
-  } else if (!emailRegex.test(email) || email.length > 20) {
+  } else if (!emailRegex.test(email) || email.length > 320) {
     errors.email = "Email is invalid.";
   }
   if (!password) {
@@ -36,7 +36,7 @@ export function validateRegisterForm({
 }) {
   let errors = {};
   const usernameRegex = /^[\w]+$/;
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const emailRegex = /^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/;
   const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,16}$/;
 
   if (!username) {
@@ -49,7 +49,7 @@ export function validateRegisterForm({
 
   if (!email) {
     errors.email = "Please provide your email address.";
-  } else if (!emailRegex.test(email) || email.length > 20) {
+  } else if (!emailRegex.test(email) || email.length > 320) {
     errors.email = "Email is invalid.";
   }
 

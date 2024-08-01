@@ -1,4 +1,4 @@
-import SignInForm from "../ui/SignInForm"
+import SignInForm from "../components/SignInForm"
  
 export default function Login() {
   return <SignInForm />

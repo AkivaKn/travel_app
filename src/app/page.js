@@ -6,7 +6,7 @@ export default async function Home() {
 
     return (
       <>
-        <h1 className="font-satoshi text-center text-3xl m-5">Popular Itineraries:</h1>
+        <h1 className="font-satoshi text-center text-2xl m-2">Popular Itineraries:</h1>
         <ul className="flex flex-wrap justify-center">
           {popularItineraries.map((itinerary) => (
             <li key={itinerary.itinerary_id}>
