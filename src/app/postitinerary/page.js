@@ -1,5 +1,10 @@
+import ItineraryForm from "../components/ItineraryForm";
+
 export default function PostItinerary() {
-    return (
+  return (
+      <>
       <h1 className="text-center text-3xl m-10">Post Itinerary</h1>
-  )
+      <ItineraryForm/>
+    </>
+      )
   }
