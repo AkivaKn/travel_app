@@ -5,6 +5,7 @@ import { generateBudgetString } from "../utils/utils";
 import { useState } from "react";
 import PlacesSelector from "./PlacesSelector";
 import { postItinerary } from "../lib/data/itineraries";
+import { validateItinerariesForm } from "../utils/validation_utils";
 
 export default function ItineraryForm() {
   const [budget, setBudget] = useState(1);
@@ -19,20 +20,26 @@ export default function ItineraryForm() {
     },
   ]);
 
+  const [errors, setErrors] = useState({});
+
   function removeDay(index) {
     let itineraryDays = [...dayInputs];
     itineraryDays.splice(index, 1);
     setDayInputs(itineraryDays);
   }
   const handleFormChange = (index, event) => {
-    console.log(event);
     let itineraryDays = [...dayInputs];
     itineraryDays[index][event.target.name] = event.target.value;
     setDayInputs(itineraryDays);
   };
 
   function createItinerary(formData) {
-    postItinerary(formData, dayInputs);
+    const title = formData.get("title");
+    const formErrors = validateItinerariesForm(title, dayInputs);
+    setErrors(formErrors);
+    if (!formErrors.title && formErrors.days.length === 0) {
+      postItinerary(formData, dayInputs);
+    }
   }
 
   function addAnotherDay() {
@@ -56,6 +63,7 @@ export default function ItineraryForm() {
               <div className='mb-2 block'>
                 <label htmlFor='title'>Title</label>
               </div>
+              {errors.title && <p>{errors.title}</p>}
               <input className='w-full' id='title' name='title' type='text' />
             </div>
             <div>
@@ -107,10 +115,15 @@ export default function ItineraryForm() {
                 return (
                   <li key={index}>
                     <h3>{`Day ${index + 1}`}</h3>
-                    <div>
+                    <div key={index + 1}>
                       <div className='mb-2 block'>
                         <label htmlFor='dayPlan'>Day Plan</label>
                       </div>
+                      {errors.days?.map((error) => {
+                        if (error.dayPlan && error.index === index) {
+                          return <p key={error.index}>{error.dayPlan}</p>;
+                        }
+                      })}
                       <textarea
                         className='w-full'
                         id='dayPlan'
@@ -124,6 +137,11 @@ export default function ItineraryForm() {
                       <div className='mb-2 block'>
                         <label htmlFor='transport'>Transport</label>
                       </div>
+                      {errors.days?.map((error) => {
+                        if (error.transport && error.index === index) {
+                          return <p key={error.index}>{error.transport}</p>;
+                        }
+                      })}
                       <input
                         className='w-full'
                         id='transport'
@@ -134,6 +152,7 @@ export default function ItineraryForm() {
                       />
                     </div>
                     <PlacesSelector
+                      errors={errors}
                       dayInputs={dayInputs}
                       setDayInputs={setDayInputs}
                       index={index}
@@ -145,6 +164,11 @@ export default function ItineraryForm() {
                       <div className='mb-2 block'>
                         <label htmlFor='accomodation'>Accomodation</label>
                       </div>
+                      {errors.days?.map((error) => {
+                        if (error.accomodation && error.index === index) {
+                          return <p key={error.index}>{error.accomodation}</p>;
+                        }
+                      })}
                       <input
                         className='w-full'
                         id='accomodation'

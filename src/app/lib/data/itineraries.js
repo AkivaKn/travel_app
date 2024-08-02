@@ -1,10 +1,9 @@
 "use server";
 import { sql } from "@vercel/postgres";
 import { auth } from "../../../../auth";
-import { uploadImage } from "../../utils/auth_utils";
+import { uploadImage } from "./images";
 
 export async function getPopularItineraries() {
-  // throw new Error("bad error")
   try {
     const res = await sql`
         SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
@@ -22,9 +21,7 @@ export async function getPopularItineraries() {
 }
 
 export async function postItinerary(formData, daysArray) {
-  console.log(formData, daysArray, "FORM log");
   const session = await auth();
-
   const user_id = session.user.user_id;
   const title = formData.get("title");
   const itinerary_description = formData.get("itineraryDescription");
