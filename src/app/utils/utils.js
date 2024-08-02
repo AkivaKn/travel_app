@@ -19,4 +19,7 @@ function formatBudget(budget) {
   }
 }
 
-module.exports = { dateFormatting, formatBudget };
+function generateBudgetString(length,char) {
+  return Array.from({ length }, () => char).join('');
+}
+module.exports = {generateBudgetString, dateFormatting, formatBudget };
