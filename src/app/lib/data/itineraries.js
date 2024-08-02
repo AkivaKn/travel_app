@@ -22,9 +22,10 @@ export async function getPopularItineraries() {
 }
 
 export async function postItinerary(formData, daysArray) {
-  const session = await auth()
+  console.log(formData, daysArray, "FORM log");
+  const session = await auth();
 
-  const user_id = session.user.user_id
+  const user_id = session.user.user_id;
   const title = formData.get("title");
   const itinerary_description = formData.get("itineraryDescription");
   const budget = formData.get("budget");
@@ -41,24 +42,27 @@ export async function postItinerary(formData, daysArray) {
       VALUES (${title}, ${itinerary_image_url}, ${itinerary_description}, ${user_id}, ${budget})
       RETURNING *`;
 
-    const itineraryInfo = itineraries_res.rows[0]
+    const itineraryInfo = itineraries_res.rows[0];
 
     const itineraryDays = await Promise.all(
       daysArray.map(async (day, index) => {
-        const res= await sql`
+        const res = await sql`
             INSERT INTO days (itinerary_id, day_number, day_plan, accomodation, transport, country, region, place)
-            VALUES (${itineraryInfo.itinerary_id}, ${index+1}, ${day.dayPlan}, ${day.accomodation}, 
-            ${day.transport}, ${day.country}, ${day.region}, ${day.place}) RETURNING *;`;
-        return res.rows[0]
-      }) 
-    )
-    const returnObject= {
+            VALUES (${itineraryInfo.itinerary_id}, ${index + 1}, ${
+          day.dayPlan
+        }, ${day.accomodation}, 
+            ${day.transport}, ${day.country}, ${day.region}, ${
+          day.city
+        }) RETURNING *;`;
+        return res.rows[0];
+      })
+    );
+    const returnObject = {
       itineraryInfo,
-      itineraryDays
-    }
+      itineraryDays,
+    };
 
-    return returnObject
-
+    return returnObject;
   } catch (error) {
     console.error("Error posting to itineraries:", error);
     throw new Error("Error posting to itineraries");

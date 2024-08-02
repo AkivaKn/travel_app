@@ -4,6 +4,7 @@ import ReactSlider from "react-slider";
 import { generateBudgetString } from "../utils/utils";
 import { useState } from "react";
 import PlacesSelector from "./PlacesSelector";
+import { postItinerary } from "../lib/data/itineraries";
 
 export default function ItineraryForm() {
   const [budget, setBudget] = useState(1);
@@ -31,11 +32,7 @@ export default function ItineraryForm() {
   };
 
   function createItinerary(formData) {
-    for (let key of formData) {
-      console.log(key);
-      console.log(dayInputs, "full day inputs");
-    }
-    //post data to sql db
+    postItinerary(formData, dayInputs);
   }
 
   function addAnotherDay() {
@@ -51,87 +48,87 @@ export default function ItineraryForm() {
   }
 
   return (
-    <div className="h-screen flex max-height:100px max-width:100px m-3 p-3 border-black border-2">
-      <div className="grow">
+    <div className='h-screen flex max-height:100px max-width:100px m-3 p-3 border-black border-2'>
+      <div className='grow'>
         <div>
           <form action={createItinerary}>
             <div>
-              <div className="mb-2 block">
-                <label htmlFor="title">Title</label>
+              <div className='mb-2 block'>
+                <label htmlFor='title'>Title</label>
               </div>
-              <input className="w-full" id="title" name="title" type="text" />
+              <input className='w-full' id='title' name='title' type='text' />
             </div>
             <div>
-              <div className="mb-2 block">
-                <label htmlFor="itineraryDescription">Description</label>
+              <div className='mb-2 block'>
+                <label htmlFor='itineraryDescription'>Description</label>
               </div>
               <textarea
-                className="w-full"
-                id="itineraryDescription"
-                name="itineraryDescription"
-              ></textarea>
+                className='w-full'
+                id='itineraryDescription'
+                name='itineraryDescription'></textarea>
             </div>
-            <div className="my-3">
-              <div className="mb-2 block">
-                <label htmlFor="slider">Budget</label>
+            <div className='my-3'>
+              <div className='mb-2 block'>
+                <label htmlFor='slider'>Budget</label>
               </div>
               <ReactSlider
-                id="slider"
-                className="horizontal-slider"
-                thumbClassName="example-thumb"
-                trackClassName="example-track"
+                id='slider'
+                className='horizontal-slider'
+                thumbClassName='example-thumb'
+                trackClassName='example-track'
                 onAfterChange={(newValue, thumbIndex) => {
                   setBudget(newValue);
                 }}
                 min={1}
                 max={3}
                 renderThumb={(props, state) => (
-                <div {...props} key={1}>
-                  {generateBudgetString(state.valueNow, "$")}
-                </div>
+                  <div {...props} key={1}>
+                    {generateBudgetString(state.valueNow, "$")}
+                  </div>
                 )}
               />
-              <input type="hidden" id="budget" name="budget" value={budget} />
+              <input type='hidden' id='budget' name='budget' value={budget} />
             </div>
 
             <div>
-              <div className="mb-2 block">
-                <label htmlFor="itineraryImage">Upload Image (max 4.5mb)</label>
+              <div className='mb-2 block'>
+                <label htmlFor='itineraryImage'>Upload Image (max 4.5mb)</label>
               </div>
               <input
-                className="w-full"
-                id="itineraryImage"
-                name="itineraryImage"
-                type="file"
-                accept="image/*"
+                className='w-full'
+                id='itineraryImage'
+                name='itineraryImage'
+                type='file'
+                accept='image/*'
               />
             </div>
-            <ul className="w-full" id="daysList">
+            <ul className='w-full' id='daysList'>
               {dayInputs.map((day, index) => {
                 return (
                   <li key={index}>
                     <h3>{`Day ${index + 1}`}</h3>
                     <div>
-                      <div className="mb-2 block">
-                        <label htmlFor="dayPlan">Day Plan</label>
+                      <div className='mb-2 block'>
+                        <label htmlFor='dayPlan'>Day Plan</label>
                       </div>
                       <textarea
-                        className="w-full"
-                        id="dayPlan"
-                        name="dayPlan"
+                        className='w-full'
+                        id='dayPlan'
+                        name='dayPlan'
                         value={day.dayPlan}
-                        onChange={(event) => handleFormChange(index, event)}
-                      ></textarea>
+                        onChange={(event) =>
+                          handleFormChange(index, event)
+                        }></textarea>
                     </div>
                     <div>
-                      <div className="mb-2 block">
-                        <label htmlFor="transport">Transport</label>
+                      <div className='mb-2 block'>
+                        <label htmlFor='transport'>Transport</label>
                       </div>
                       <input
-                        className="w-full"
-                        id="transport"
-                        name="transport"
-                        type="text"
+                        className='w-full'
+                        id='transport'
+                        name='transport'
+                        type='text'
                         value={day.transport}
                         onChange={(event) => handleFormChange(index, event)}
                       />
@@ -145,14 +142,14 @@ export default function ItineraryForm() {
                     />
 
                     <div>
-                      <div className="mb-2 block">
-                        <label htmlFor="accomodation">Accomodation</label>
+                      <div className='mb-2 block'>
+                        <label htmlFor='accomodation'>Accomodation</label>
                       </div>
                       <input
-                        className="w-full"
-                        id="accomodation"
-                        name="accomodation"
-                        type="text"
+                        className='w-full'
+                        id='accomodation'
+                        name='accomodation'
+                        type='text'
                         value={day.accomodation}
                         onChange={(event) => handleFormChange(index, event)}
                       />
@@ -164,8 +161,8 @@ export default function ItineraryForm() {
             </ul>
             <Button onClick={addAnotherDay}>Add Another Day</Button>
 
-            <div className="w-full">
-              <Button type="submit">Submit</Button>
+            <div className='w-full'>
+              <Button type='submit'>Submit</Button>
             </div>
           </form>
         </div>
