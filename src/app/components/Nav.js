@@ -83,7 +83,7 @@ export default function Nav({ session, signOut }) {
                 Plan Your Trip
               </Link>
               <Link
-                href="/postitineray"
+                href="/postitinerary"
                 className="dropdown_link"
                 onClick={() => setToggleDropdown(false)}
               >

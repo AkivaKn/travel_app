@@ -6,9 +6,7 @@
 
 .horizontal-slider {
   width: 100%;
-  max-width: 500px;
   height: 50px;
-  border: 1px solid grey;
 }
 
 .example-thumb {
@@ -19,16 +17,17 @@
   cursor: pointer;
   border: 5px solid gray;
   box-sizing: border-box;
+  border-radius: 50%
 }
 .example-thumb.active {
   background-color: grey;
 }
 .example-track {
   position: relative;
-  background: #ddd;
+  background: rgb(28, 100, 242) ;
 }
 .example-track.example-track-1 {
-  background: #f00;
+  background:#ddd
 }
 
 .example-track.example-track-2 {
@@ -120,9 +119,13 @@
   .black_btn {
     @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center lg:text-[1em] text-[0.75em] font-inter flex items-center justify-center h-full truncate;
   }
-  
+
+  .red_btn {
+    @apply rounded-full border border-black bg-red-500 py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center lg:text-[1em] text-[0.75em] font-inter flex items-center justify-center h-full truncate;
+  }
+
   .outline_btn {
-    @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center lg:text-[1em] text-[0.75em] flex items-center justify-center truncate;
+    @apply rounded-full border border-black bg-white py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center lg:text-[1em] text-[0.75em] flex items-center justify-center truncate;
   }
   
   .head_text {
@@ -154,7 +157,7 @@
   }
   
   .glassmorphism {
-    @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
+    @apply rounded-xl border border-gray-300 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
   }
   
   .prompt_layout {
