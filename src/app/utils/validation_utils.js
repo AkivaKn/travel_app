@@ -1,12 +1,3 @@
-import { put } from "@vercel/blob";
-
-export async function uploadImage(imageFile) {
-  const blob = await put(imageFile.name, imageFile, {
-    access: "public",
-  });
-  return blob.url;
-}
-
 export function validateSignInForm({ email, password }) {
   let errors = {};
   const emailRegex = /^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -68,5 +59,54 @@ export function validateRegisterForm({
     errors.bio = "Bio must be less than 1000 characters.";
   }
 
+  return errors;
+}
+
+export function validateItinerariesForm(title, days) {
+  let errors = {};
+  errors.days = [];
+
+  if (!title) {
+    errors.title = "Please enter a title";
+  } else if (title.length > 50) {
+    errors.title = "Title must be less than 50 characters";
+  }
+
+  days.map((day, index) => {
+    if (!day.dayPlan) {
+      const dayError = { index, dayPlan: "Please enter a day plan" };
+      errors.days.push(dayError);
+    }
+    if (day.accomodation && day.accomodation.length > 150) {
+      const dayError = {
+        index,
+        accomodation: "Accomodation must be less than 150 characters",
+      };
+      errors.days.push(dayError);
+    }
+    if (day.transport && day.transport.length > 150) {
+      const dayError = {
+        index,
+        transport: "Transport must be less than 150 characters",
+      };
+      errors.days.push(dayError);
+    }
+    if (!day.country) {
+      const dayError = { index, country: "Please enter a country" };
+      errors.days.push(dayError);
+    }
+    if (!day.region) {
+      const dayError = { index, region: "Please enter a region" };
+      errors.days.push(dayError);
+    }
+
+    if (day.city && day.city.length > 150) {
+      const dayError = {
+        index,
+        city: "City must be less than 150 characters",
+      };
+      errors.days.push(dayError);
+    }
+  });
   return errors;
 }

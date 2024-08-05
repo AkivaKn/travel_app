@@ -1,10 +1,9 @@
 "use server";
 import { sql } from "@vercel/postgres";
 import { auth } from "../../../../auth";
-import { uploadImage } from "../../utils/auth_utils";
+import { uploadImage } from "./images";
 
 export async function getPopularItineraries() {
-  // throw new Error("bad error")
   try {
     const res = await sql`
         SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
@@ -22,9 +21,8 @@ export async function getPopularItineraries() {
 }
 
 export async function postItinerary(formData, daysArray) {
-  const session = await auth()
-
-  const user_id = session.user.user_id
+  const session = await auth();
+  const user_id = session.user.user_id;
   const title = formData.get("title");
   const itinerary_description = formData.get("itineraryDescription");
   const budget = formData.get("budget");
@@ -41,24 +39,27 @@ export async function postItinerary(formData, daysArray) {
       VALUES (${title}, ${itinerary_image_url}, ${itinerary_description}, ${user_id}, ${budget})
       RETURNING *`;
 
-    const itineraryInfo = itineraries_res.rows[0]
+    const itineraryInfo = itineraries_res.rows[0];
 
     const itineraryDays = await Promise.all(
       daysArray.map(async (day, index) => {
-        const res= await sql`
+        const res = await sql`
             INSERT INTO days (itinerary_id, day_number, day_plan, accomodation, transport, country, region, place)
-            VALUES (${itineraryInfo.itinerary_id}, ${index+1}, ${day.dayPlan}, ${day.accomodation}, 
-            ${day.transport}, ${day.country}, ${day.region}, ${day.place}) RETURNING *;`;
-        return res.rows[0]
-      }) 
-    )
-    const returnObject= {
+            VALUES (${itineraryInfo.itinerary_id}, ${index + 1}, ${
+          day.dayPlan
+        }, ${day.accomodation}, 
+            ${day.transport}, ${day.country}, ${day.region}, ${
+          day.city
+        }) RETURNING *;`;
+        return res.rows[0];
+      })
+    );
+    const returnObject = {
       itineraryInfo,
-      itineraryDays
-    }
+      itineraryDays,
+    };
 
-    return returnObject
-
+    return returnObject;
   } catch (error) {
     console.error("Error posting to itineraries:", error);
     throw new Error("Error posting to itineraries");
