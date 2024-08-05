@@ -4,6 +4,8 @@ import ReactSlider from "react-slider";
 import { generateBudgetString } from "../utils/utils";
 import { useState } from "react";
 import PlacesSelector from "./PlacesSelector";
+import { postItinerary } from "../lib/data/itineraries";
+import { validateItinerariesForm } from "../utils/validation_utils";
 
 export default function ItineraryForm() {
   const [budget, setBudget] = useState(1);
@@ -18,24 +20,26 @@ export default function ItineraryForm() {
     },
   ]);
 
+  const [errors, setErrors] = useState({});
+
   function removeDay(index) {
     let itineraryDays = [...dayInputs];
     itineraryDays.splice(index, 1);
     setDayInputs(itineraryDays);
   }
   const handleFormChange = (index, event) => {
-    console.log(event);
     let itineraryDays = [...dayInputs];
     itineraryDays[index][event.target.name] = event.target.value;
     setDayInputs(itineraryDays);
   };
 
   function createItinerary(formData) {
-    for (let key of formData) {
-      console.log(key);
-      console.log(dayInputs, "full day inputs");
+    const title = formData.get("title");
+    const formErrors = validateItinerariesForm(title, dayInputs);
+    setErrors(formErrors);
+    if (!formErrors.title && formErrors.days.length === 0) {
+      postItinerary(formData, dayInputs);
     }
-    //post data to sql db
   }
 
   function addAnotherDay() {
@@ -51,6 +55,7 @@ export default function ItineraryForm() {
   }
 
   return (
+
     <div className="w-full max-w-full flex-center flex-col ">
       <form
         className="mt-10 w-full max-w-4xl flex flex-col gap-7 glassmorphism"
@@ -65,6 +70,7 @@ export default function ItineraryForm() {
               Title
             </label>
           </div>
+          {errors.title && <p>{errors.title}</p>}
 
           <input
             className="form_input"
@@ -168,6 +174,11 @@ export default function ItineraryForm() {
                         Day Plan
                       </label>
                     </div>
+                     {errors.days?.map((error) => {
+                        if (error.dayPlan && error.index === index) {
+                          return <p key={error.index}>{error.dayPlan}</p>;
+                        }
+                      })}
                     <textarea
                       className="form_textarea"
                       id="dayPlan"
@@ -187,6 +198,11 @@ export default function ItineraryForm() {
                         Transport
                       </label>
                     </div>
+                    {errors.days?.map((error) => {
+                        if (error.transport && error.index === index) {
+                          return <p key={error.index}>{error.transport}</p>;
+                        }
+                      })}
                     <input
                       className="form_input"
                       id="transport"
@@ -195,9 +211,12 @@ export default function ItineraryForm() {
                       value={day.transport}
                       placeholder="Describe any transport used..."
                       onChange={(event) => handleFormChange(index, event)}
+
+
                     />
                   </section>
                   <PlacesSelector
+                    errors={errors}
                     dayInputs={dayInputs}
                     setDayInputs={setDayInputs}
                     index={index}
@@ -205,6 +224,7 @@ export default function ItineraryForm() {
                     key={index}
                     
                   />
+
 
                   <section className="mb-7">
                     <div className="mb-2 block">
@@ -215,6 +235,11 @@ export default function ItineraryForm() {
                         Accomodation
                       </label>
                     </div>
+                     {errors.days?.map((error) => {
+                        if (error.accomodation && error.index === index) {
+                          return <p key={error.index}>{error.accomodation}</p>;
+                        }
+                      })}
                     <input
                       className="form_input"
                       id="accomodation"
@@ -241,6 +266,7 @@ export default function ItineraryForm() {
           <Button className="outline_btn w-52" onClick={addAnotherDay}>
             Add Another Day
           </Button>
+
         </div>
 
         <Button className="black_btn" type="submit">

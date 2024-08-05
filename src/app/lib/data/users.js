@@ -1,7 +1,7 @@
 "use server";
 import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt";
-import { uploadImage } from "../../utils/auth_utils";
+import { uploadImage } from "./images";
 import { signIn } from "../../../../auth";
 import { signOut } from "../../../../auth";
 
