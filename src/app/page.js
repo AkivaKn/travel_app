@@ -5,16 +5,16 @@ export default async function Home() {
     const popularItineraries = await getPopularItineraries();
 
     return (
-      <>
-        <h1 className="font-satoshi text-center text-2xl m-2">Popular Itineraries:</h1>
-        <ul className="flex flex-wrap justify-center">
+      <div className="flex flex-col">
+        <h1 className="head_text orange_gradient text-center pb-4">Popular Itineraries:</h1>
+        <ul className="flex flex-wrap justify-center mt-10">
           {popularItineraries.map((itinerary) => (
             <li key={itinerary.itinerary_id}>
               <ItineraryCard itinerary={itinerary} />
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
 
 }

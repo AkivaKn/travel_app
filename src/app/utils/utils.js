@@ -11,11 +11,11 @@ function dateFormatting(date) {
 
 function formatBudget(budget) {
   if (budget === 1) {
-    return "Budget: $";
+    return "$";
   } else if (budget === 2) {
-    return "Budget: $$";
+    return "$$";
   } else if (budget === 3) {
-    return "Budget: $$$";
+    return "$$$";
   }
 }
 

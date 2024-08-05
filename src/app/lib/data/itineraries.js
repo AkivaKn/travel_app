@@ -56,7 +56,7 @@ export async function postItinerary(formData, daysArray) {
       itineraryInfo,
       itineraryDays
     }
-
+      
     return returnObject
 
   } catch (error) {
