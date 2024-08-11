@@ -1,8 +1,9 @@
 import ItineraryCard from "./components/ItineraryCard";
-import { getPopularItineraries } from "./lib/data/itineraries";
+import { getItineraries, getPopularItineraries } from "./lib/data/itineraries";
 
 export default async function Home() {
     const popularItineraries = await getPopularItineraries();
+    const allItineraries = await getItineraries();
 
     return (
       <div className="flex flex-col">
