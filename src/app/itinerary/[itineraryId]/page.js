@@ -1,41 +1,60 @@
 import DayCard from "@/app/components/DayCard";
 import CommentCard from "@/app/components/CommentCard";
 import { getItineraryById } from "@/app/lib/data/itineraries";
-import { dateFormatting, formatBudget} from "@/app/utils/utils";
+import { dateFormatting, formatBudget } from "@/app/utils/utils";
 
-export default async function ViewSingleItinerary({params}) {
-    const {itineraryId} = params
+export default async function ViewSingleItinerary({ params }) {
+  const { itineraryId } = params;
 
-    const {itineraryInfo, itineraryDays, itineraryComments} = await getItineraryById(itineraryId)
-    const formattedDate = dateFormatting(itineraryInfo.created_at)
-    const formattedBudget = formatBudget(itineraryInfo.budget)
+  const { itineraryInfo, itineraryDays, itineraryComments } =
+    await getItineraryById(itineraryId);
+  const formattedDate = dateFormatting(itineraryInfo.created_at);
+  const formattedBudget = formatBudget(itineraryInfo.budget);
 
-  return <div>
-    <section className="border-2 border-black p-2 m-2">
-        <h1>Itinerary Info:</h1>
-        <h2>Title: {itineraryInfo.title}</h2>
-        <h2>Description: {itineraryInfo.itinerary_description}</h2>
-        <h2>Username: {itineraryInfo.username}</h2>
-        <h2>Date Posted: {formattedDate}</h2>
-        <h2>Budget: {formattedBudget}</h2>
-        <h2>Votes: {itineraryInfo.total_votes}</h2>
-        <img src={itineraryInfo.itinerary_image_url}/>
-    </section>
-    <h1 className="m-2">Days:</h1>
-    <ol>
+  return (
+    <div className="max-w-4xl mx-auto p-4 mt-12">
+      <section className="border-2 border-gray-300 rounded-lg p-6 mb-6 shadow-lg bg-white">
+        <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+          <h1 className="text-3xl font-bold ml-2">{itineraryInfo.title}</h1>
+          <p className="flex flex-wrap items-center text-gray-700 mx-2">
+            {itineraryInfo.username}, {formattedDate}
+          </p>
+        </div>
+        <img
+          src={itineraryInfo.itinerary_image_url}
+          alt="Itinerary Image"
+          className="w-full h-auto rounded-lg shadow-md mb-6"
+        />
+        <p className="text-gray-700 mx-2 mb-4">
+          {itineraryInfo.itinerary_description}
+        </p>
+        <div className="flex justify-between mt-4 mx-2">
+          <div className="flex items-center">
+            <h2 className="text-lg font-semibold mr-2">Budget:</h2>
+            <p className="text-gray-700">{formattedBudget}</p>
+          </div>
+          <div className="flex items-center">
+            <h2 className="text-lg font-semibold mr-2">Votes:</h2>
+            <p className="text-gray-700">{itineraryInfo.total_votes}</p>
+          </div>
+        </div>
+      </section>
+      <h1 className="text-2xl font-bold mb-4">Days</h1>
+      <ol className="space-y-4">
         {itineraryDays.map((day) => (
-            <li key={day.day_id}>
-                <DayCard day={day} />
-            </li>
+          <li key={day.day_id}>
+            <DayCard day={day} />
+          </li>
         ))}
-    </ol>
-    <h1 className="m-2 p-2">Comments:</h1>
-    <ol>
+      </ol>
+      <h1 className="text-2xl font-bold my-6">Comments</h1>
+      <ol className="space-y-4">
         {itineraryComments.map((comment) => (
-            <li key={comment.comment_id}>
-                <CommentCard comment={comment} />
-            </li>
+          <li key={comment.comment_id}>
+            <CommentCard comment={comment} />
+          </li>
         ))}
-    </ol>
-  </div>;
+      </ol>
+    </div>
+  );
 }
