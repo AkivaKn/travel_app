@@ -104,15 +104,17 @@ export async function getItineraryById(id) {
 export async function getItineraries(){
   try {
     const itineraryRes = await sql`
-    SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, u.username, COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) AS number_of_days, COALESCE(CAST(SUM(v.vote_value)AS INTEGER),0) AS total_votes
-    FROM itineraries i
-    LEFT JOIN itinerary_votes v
-    ON i.itinerary_id=v.itinerary_id
-    FULL OUTER JOIN days d
+   SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) AS number_of_days 
+    FROM itineraries i 
+  LEFT JOIN LATERAL 
+    (SELECT *
+    FROM itinerary_votes v 
+    WHERE v.itinerary_id=i.itinerary_id GROUP BY vote_id) AS total_votes 
+    LEFT JOIN days d
     ON i.itinerary_id=d.itinerary_id
-    INNER JOIN users u
-    ON i.user_id=u.user_id
-    GROUP BY i.itinerary_id, u.username;`
+    WHERE i.itinerary_id=2 
+    GROUP BY i.itinerary_id
+    ;`
 
     
     console.log(itineraryRes.rows, "<-- response")
