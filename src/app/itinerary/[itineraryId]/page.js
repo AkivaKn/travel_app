@@ -13,29 +13,35 @@ export default async function ViewSingleItinerary({ params }) {
 
   return (
     <div className="max-w-4xl mx-auto p-4 mt-12">
-      <section className="border-2 border-gray-300 rounded-lg p-6 mb-6 shadow-lg bg-white">
+      <section className="border-2 border-gray-300 rounded-lg p-6 mb-6 shadow-lg bg-sky-100">
         <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
           <h1 className="text-3xl font-bold ml-2">{itineraryInfo.title}</h1>
-          <p className="flex flex-wrap items-center text-gray-700 mx-2">
+          <p className="flex flex-wrap items-center text-gray-700 mx-2 text-lg">
             {itineraryInfo.username}, {formattedDate}
           </p>
         </div>
-        <img
-          src={itineraryInfo.itinerary_image_url}
-          alt="Itinerary Image"
-          className="w-full h-auto rounded-lg shadow-md mb-6"
-        />
-        <p className="text-gray-700 mx-2 mb-4">
+        <div>
+          <img
+            src={
+              itineraryInfo.itinerary_image_url
+                ? itineraryInfo.itinerary_image_url
+                : "/assets/images/beach-picture.png"
+            }
+            alt="Itinerary Image"
+            className="w-full h-auto rounded-lg shadow-md mb-6 object-scale-down"
+          />
+        </div>
+        <p className="text-gray-700 mx-2 mb-4 text-lg">
           {itineraryInfo.itinerary_description}
         </p>
         <div className="flex justify-between mt-4 mx-2">
           <div className="flex items-center">
             <h2 className="text-lg font-semibold mr-2">Budget:</h2>
-            <p className="text-gray-700">{formattedBudget}</p>
+            <p className="text-gray-700 text-lg">{formattedBudget}</p>
           </div>
           <div className="flex items-center">
             <h2 className="text-lg font-semibold mr-2">Votes:</h2>
-            <p className="text-gray-700">{itineraryInfo.total_votes}</p>
+            <p className="text-lg text-gray-700">{itineraryInfo.total_votes}</p>
           </div>
         </div>
       </section>
