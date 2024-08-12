@@ -86,7 +86,8 @@ export async function getItineraryById(id) {
     SELECT comments.comment_id, comments.user_id, comments.itinerary_id, comments.comment_body, u.username, comments.created_at FROM comments 
     INNER JOIN users u
     ON comments.user_id=u.user_id
-    WHERE comments.itinerary_id= ${id}`;
+    WHERE comments.itinerary_id= ${id}
+    ORDER BY comments.created_at DESC;`;
 
     const itineraryObject = {
       itineraryInfo: itineraryRes.rows[0],
