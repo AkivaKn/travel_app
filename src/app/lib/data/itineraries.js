@@ -100,3 +100,40 @@ export async function getItineraryById(id) {
     throw new Error("500: Server error");
   }
 }
+
+export async function getItineraries(minStay = 0, maxStay = 999999999) {
+  try {
+    const allItinerariesSQL = await sql`
+    SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) AS number_of_days, uv.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
+    FROM itineraries i 
+    LEFT JOIN days d
+    ON i.itinerary_id=d.itinerary_id
+
+    LEFT JOIN (
+      SELECT i.itinerary_id, u.username, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
+      FROM itineraries i
+      FULL JOIN itinerary_votes v
+      ON i.itinerary_id=v.itinerary_id
+      INNER JOIN users u
+      ON i.user_id=u.user_id
+      GROUP BY i.itinerary_id, u.username
+    ) uv
+    ON i.itinerary_id=uv.itinerary_id
+
+    LEFT JOIN(
+      SELECT i.itinerary_id, ARRAY_AGG(DISTINCT(country)) AS country_list, ARRAY_AGG(DISTINCT(region)) AS region_list, ARRAY_AGG(DISTINCT(place)) AS place_list
+      FROM itineraries i
+      JOIN days d
+      ON i.itinerary_id = d.itinerary_id
+      GROUP BY i.itinerary_id
+    ) loc
+    ON i.itinerary_id=loc.itinerary_id
+    GROUP BY i.itinerary_id, uv.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
+    HAVING COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) BETWEEN ${minStay} AND ${maxStay}
+    ;`;
+    return allItinerariesSQL.rows;
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw new Error("500: Server error");
+  }
+}

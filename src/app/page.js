@@ -1,5 +1,5 @@
 import ItineraryCard from "./components/ItineraryCard";
-import { getPopularItineraries } from "./lib/data/itineraries";
+import { getItineraries, getPopularItineraries } from "./lib/data/itineraries";
 
 export default async function Home() {
     const popularItineraries = await getPopularItineraries();
