@@ -2,6 +2,7 @@ import DayCard from "@/app/components/DayCard";
 import CommentCard from "@/app/components/CommentCard";
 import { getItineraryById } from "@/app/lib/data/itineraries";
 import { dateFormatting, formatBudget } from "@/app/utils/utils";
+import { postComment } from "@/app/lib/data/comments";
 
 export default async function ViewSingleItinerary({ params }) {
   const { itineraryId } = params;
@@ -10,6 +11,7 @@ export default async function ViewSingleItinerary({ params }) {
     await getItineraryById(itineraryId);
   const formattedDate = dateFormatting(itineraryInfo.created_at);
   const formattedBudget = formatBudget(itineraryInfo.budget);
+  postComment({userId: 1,itineraryId:1,commentBody: 'Sounds amazing!'})
 
   return (
     <div className="max-w-4xl mx-auto p-4 mt-12">
