@@ -101,7 +101,7 @@ export async function getItineraryById(id) {
   }
 }
 
-export async function getItineraries(searchTerm){
+export async function getItineraries(minStay = 0, maxStay = 999999999) {
   try {
     const allItinerariesSQL = await sql`
     SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) AS number_of_days, uv.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
@@ -128,32 +128,12 @@ export async function getItineraries(searchTerm){
       GROUP BY i.itinerary_id
     ) loc
     ON i.itinerary_id=loc.itinerary_id
-
     GROUP BY i.itinerary_id, uv.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
-    ;`
-    const allItineraries=allItinerariesSQL.rows
-    console.log(allItineraries, "<-- all itineraries")
-    
-    if(searchTerm){
-      const filteredItineraries = allItineraries.filter((itinerary)=>
-        itinerary.country_list.map(c=>c.toUpperCase()).includes(searchTerm.toUpperCase()) 
-        || itinerary.country_list.filter(i=>i.toUpperCase().includes(searchTerm.toUpperCase())).length
-        
-        || itinerary.region_list.map(r=>r.toUpperCase()).includes(searchTerm.toUpperCase()) 
-        || itinerary.region_list.filter(i=>i.toUpperCase().includes(searchTerm.toUpperCase())).length
-  
-        || itinerary.place_list.map(p=>p.toUpperCase()).includes(searchTerm.toUpperCase())
-        || itinerary.place_list.filter(i=>i.toUpperCase().includes(searchTerm.toUpperCase())).length
-      )
-      console.log(filteredItineraries, "<-- filtered itineraries")
-      return filteredItineraries
-    } else {
-      
-      return allItineraries
-    }
-} catch (error) {
-  console.error("Data fetching error:", error);
-  throw new Error("500: Server error");
-}
-
+    HAVING COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) BETWEEN ${minStay} AND ${maxStay}
+    ;`;
+    return allItinerariesSQL.rows;
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw new Error("500: Server error");
+  }
 }
