@@ -13,9 +13,9 @@ export default function CommentsSection({ itineraryComments, session, itineraryI
                 <CommentForm session={session} itineraryId={itineraryId} setComments={setComments} />
     }
       <ol className="space-y-4">
-        {comments.map((comment) => (
+        {comments.map((comment, index) => (
           <li key={comment.comment_id}>
-            <CommentCard comment={comment} />
+            <CommentCard session={session} comment={comment} setComments={setComments} index={index} />
           </li>
         ))}
       </ol>
