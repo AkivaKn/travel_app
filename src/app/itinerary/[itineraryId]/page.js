@@ -1,15 +1,21 @@
+"use server"
 import DayCard from "@/app/components/DayCard";
 import CommentCard from "@/app/components/CommentCard";
 import { getItineraryById } from "@/app/lib/data/itineraries";
 import { dateFormatting, formatBudget } from "@/app/utils/utils";
+import CommentForm from "@/app/components/CommentForm";
+import { auth } from "../../../../auth";
+import CommentsSection from "@/app/components/CommentsSection";
 
 export default async function ViewSingleItinerary({ params }) {
   const { itineraryId } = params;
+  const session = await auth();
 
   const { itineraryInfo, itineraryDays, itineraryComments } =
     await getItineraryById(itineraryId);
   const formattedDate = dateFormatting(itineraryInfo.created_at);
   const formattedBudget = formatBudget(itineraryInfo.budget);
+  // postComment({userId: 1,itineraryId:1,commentBody: 'Sounds amazing!'})
 
   return (
     <div className="max-w-4xl mx-auto p-4 mt-12">
@@ -53,14 +59,7 @@ export default async function ViewSingleItinerary({ params }) {
           </li>
         ))}
       </ol>
-      <h1 className="text-2xl font-bold my-6">Comments</h1>
-      <ol className="space-y-4">
-        {itineraryComments.map((comment) => (
-          <li key={comment.comment_id}>
-            <CommentCard comment={comment} />
-          </li>
-        ))}
-      </ol>
+      <CommentsSection itineraryComments={itineraryComments} session={session} itineraryId={itineraryId}/>
     </div>
   );
 }
