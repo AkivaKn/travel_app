@@ -4,57 +4,61 @@ import { useState } from "react";
 import { postComment } from "../lib/data/comments";
 
 export default function CommentForm({ session, itineraryId, setComments }) {
-  // const [isPending, setIsPending] = useState(false);
-  const [commentInput, setCommentInput] = useState("");
-  // console.log(session?.user);
-  // async function createComment(formData) {
-  //     setIsPending(true);
-  //     const newComment = {
-  //         commentBody: formData.get('commentBody'),
-  //         itineraryId: itineraryId,
-  //         userId: session?.user?.user_id
-  //     }
-  //     if (newComment.commentBody.length === 0) return;
-  //     const postedComment = await postComment(newComment);
-  //     postedComment.username = session?.user?.username;
-  //     setComments((comments) => [postedComment, ...comments]);
-  //     setIsPending(false);
-  //     console.log(postedComment);
-  // }
+  const [isPending, setIsPending] = useState(false);
+    const [commentInput, setCommentInput] = useState("");
+    const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setCommentInput(e.target.value);
   };
-  const handleSubmit = async (e) => {
-    console.log(e, "event");
-    e.preventDefault();
-    e.target.disabled = true;
-    const newComment = {
-      commentBody: commentInput,
-      itineraryId: itineraryId,
-      userId: session?.user?.user_id,
-    };
-    console.log(newComment, "new comment");
-    if (newComment.commentBody.length === 0) return;
-    const postedComment = await postComment(newComment);
-    postedComment.username = session?.user?.username;
-    console.log(postedComment, "posted");
-    setComments((comments) => [postedComment, ...comments]);
-    e.target.disabled = false;
-    setCommentInput("");
-    console.log(postedComment);
+  const handleSubmit = async () => {
+    if (commentInput.length === 0) return;
+    try {
+      await setIsPending(true);
+
+      const newComment = {
+        commentBody: commentInput,
+        itineraryId: itineraryId,
+        userId: session?.user?.user_id,
+      };
+      console.log(newComment, "new comment");
+        const postedComment = await postComment(newComment);
+        console.log(postedComment, "posted");
+      postedComment.username = session?.user?.username;
+      setComments((comments) => [postedComment, ...comments]);
+        setCommentInput("");
+        setError('')
+    } catch (error) {
+        console.log(error);
+        setError('Error when posting comment to database. Please try again.')
+    } finally {
+      setIsPending(false);
+    }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        handleSubmit();
+      }}
+      method="post"
+      >
+          
+      <textarea
         name="commentBody"
         placeholder={`Comment as ${session?.user?.username}`}
         value={commentInput}
         onChange={handleChange}
-      />
-      <button type="submit" className="disabled:border-2">
-        Comment
+        className="search_input"
+        maxLength={300}
+          ></textarea>
+          {error && <p>{error}</p>}
+      <button
+        type="submit"
+        disabled={isPending}
+        className="black_btn disabled:opacity-75 disabled:bg-gray-500 my-5 w-52 "
+      >
+        {isPending ? "Loading..." : "Comment"}
       </button>
     </form>
   );
