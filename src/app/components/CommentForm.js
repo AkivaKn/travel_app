@@ -36,6 +36,7 @@ export default function CommentForm({ session, itineraryId, setComments }) {
     }
   };
   return (
+   
     <form
       onSubmit={(event) => {
         event.preventDefault();
@@ -43,23 +44,27 @@ export default function CommentForm({ session, itineraryId, setComments }) {
       }}
       method="post"
       >
-          
+           <div className="flex justify-between items-end mb-4" >
       <textarea
         name="commentBody"
         placeholder={`Comment as ${session?.user?.username}`}
         value={commentInput}
         onChange={handleChange}
-        className="search_input"
+        className="form_input"
         maxLength={300}
           ></textarea>
           {error && <p>{error}</p>}
+          <div className="h-full">
+
       <button
         type="submit"
         disabled={isPending}
-        className="black_btn disabled:opacity-75 disabled:bg-gray-500 my-5 w-52 "
-      >
+        className="black_btn disabled:opacity-75 disabled:bg-gray-500 w-52"
+        >
         {isPending ? "Loading..." : "Comment"}
       </button>
+        </div>
+      </div>
     </form>
   );
 }

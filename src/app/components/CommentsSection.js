@@ -8,7 +8,7 @@ export default function CommentsSection({ itineraryComments, session, itineraryI
 
     return (
         <div>
-            <h1 className="text-2xl font-bold my-6">Comments</h1>
+            <h1 className="text-3xl font-bold my-4">Comments</h1>
       {session?.user &&
                 <CommentForm session={session} itineraryId={itineraryId} setComments={setComments} />
     }

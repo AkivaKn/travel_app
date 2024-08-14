@@ -2,6 +2,8 @@ import Link from "next/link";
 import { dateFormatting, formatBudget } from "../utils/utils";
 
 export default function ItineraryCard({ itinerary }) {
+  const formattedDate = dateFormatting(itinerary.created_at)
+  
   return (
     <div className="w-72 p-2 bg-white rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl mx-4 mb-8 flex flex-col">
       {/* Image */}
@@ -17,6 +19,7 @@ export default function ItineraryCard({ itinerary }) {
         <Link href={`/itinerary/${itinerary.itinerary_id}`}>
         <h2 className="font-bold text-lg hover:underline pb-2">{itinerary.title}</h2>
         </Link>
+            
         {/* Description */}
         <div className="h-32 overflow-hidden">
         <p className="text-sm text-gray-600 overflow-hidden line-clamp-6">

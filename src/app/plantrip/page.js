@@ -5,6 +5,7 @@ import ReactSlider from "react-slider";
 import { filterItineraries, generateBudgetString } from "../utils/utils";
 import { getItineraries } from "../lib/data/itineraries";
 import ItineraryCard from "../components/ItineraryCard";
+import Typewriter from 'typewriter-effect';
 
 export default function PlanYourTrip() {
   const [budget, setBudget] = useState(1);
@@ -14,6 +15,7 @@ export default function PlanYourTrip() {
   const [itinerariesList, setItinerariesList] = useState([]);
   const [minDays, setMinDays] = useState("");
   const [maxDays, setMaxDays] = useState("");
+  const [showCards, setShowCards] = useState(false)
 
   useEffect(() => {
     const fetchItineraries = async () => {
@@ -31,6 +33,9 @@ export default function PlanYourTrip() {
       budget
     );
     setItinerariesList(filteredItineraries);
+    if(value.length === 0){
+      setShowCards(false)
+    }
   }, [allItineraries, budget, value]);
 
   const handleKeyDown = (event) => {
@@ -42,6 +47,8 @@ export default function PlanYourTrip() {
         setInputValue("");
         event.preventDefault();
     }
+    console.log(value.length, "<--value.length")
+    
   };
 
   const createOption = (label) => ({
@@ -57,8 +64,15 @@ export default function PlanYourTrip() {
     setMaxDays(event.target.value);
   };
 
+  const handleClick = ()=>{
+    console.log(value)
+    if(value.length !== 0){
+      setShowCards(true)
+    }
+  }
+
   return (
-    <section className='w-full max-w-full flex-center flex-col'>
+    <section className=' w-full max-w-full flex-center flex-col p-4'>
       <h1 className='text-center text-3xl mx-auto head_text green_gradient'>
         Plan Your Trip
       </h1>
@@ -112,10 +126,10 @@ export default function PlanYourTrip() {
           <h1 className='font-satoshi font-semibold text-base text-gray-700 mb-2'>
             Length of stay:
           </h1>
-          <div className='flex flex-row justify-start gap-7'>
+          <div className='flex flex-row flex-wrap items-center justify-between mx-auto gap-5'>
             <input
               placeholder='Min stay (days)'
-              className='form_input max-w-40'
+              className='form_input w-full sm:w-1/4'
               id='minDays'
               type='number'
               value={minDays}
@@ -123,15 +137,21 @@ export default function PlanYourTrip() {
 
             <input
               placeholder='Max stay (days)'
-              className='form_input max-w-40'
+              className='form_input w-full sm:w-1/4'
               id='maxDays'
               type='number'
               value={maxDays}
-              onChange={handleMaxDays}></input>
+              onChange={handleMaxDays}>
+
+              </input>
+              <button className=" black_btn justify-start w-full sm:w-1/4" onClick={handleClick}>Search</button>
           </div>
+          {/* <button className="sm:hidden black_btn w-1/4 justify-start" onClick={handleClick}>Search</button> */}
         </div>
+        
       </div>
 
+      { showCards ?
       <ul className='flex flex-wrap justify-center mt-10 max-w-5xl'>
         {itinerariesList.map((itinerary) => (
           <li key={itinerary.itinerary_id}>
@@ -139,6 +159,21 @@ export default function PlanYourTrip() {
           </li>
         ))}
       </ul>
+      : 
+      <div className="sm:mt-32 hidden sm:block text-md font-satoshi drop-shadow-6xl leading-[1.15] green_gradient sm:text-6xl">
+
+        <Typewriter
+        
+        options={{
+          strings: ['Spain', 'Turkey', 'Cyprus', 'Portugal', 'India', 'Thailand', 'Domincan Republic', 'Mexico', 'Cuba', 'St Lucia', 'Jamaica', 'Barbados' ],
+          autoStart: true,
+          loop: true,
+        }}
+      
+    />
+    </div>
+      }
+
     </section>
   );
 }
