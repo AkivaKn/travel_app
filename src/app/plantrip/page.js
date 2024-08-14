@@ -58,74 +58,87 @@ export default function PlanYourTrip() {
   };
 
   return (
-    <section>
-      <h1 className="text-center text-3xl mx-auto">Plan Your Trip</h1>
-      <div className="flex flex-row ">
-        <CreatableSelect
-          instanceId="filterSelect"
-          className="w-1/2 m-10 mx-auto"
-          components={{
-            DropdownIndicator: null,
-          }}
-          inputValue={inputValue}
-          isClearable
-          isMulti
-          menuIsOpen={false}
-          onChange={(newValue) => setValue(newValue)}
-          onInputChange={(newValue) => setInputValue(newValue)}
-          onKeyDown={handleKeyDown}
-          placeholder="Type a location and press enter"
-          value={value}
-        />
-      </div>
+    <section className='w-full max-w-full flex-center flex-col'>
+      <h1 className='text-center text-3xl mx-auto head_text green_gradient'>
+        Plan Your Trip
+      </h1>
 
-      <div className="w-1/2 mx-auto">
-        <h1>Choose your budget: </h1>
-        <ReactSlider
-          id="slider"
-          className="horizontal-slider"
-          thumbClassName="example-thumb"
-          trackClassName="example-track"
-          onAfterChange={(newValue, thumbIndex) => {
-            setBudget(newValue);
-          }}
-          min={1}
-          max={3}
-          renderThumb={(props, state) => (
-            <div {...props} key={1}>
-              {generateBudgetString(state.valueNow, "$")}
-            </div>
-          )}
-        />
-      </div>
+      <div className='mt-10 w-full max-w-5xl flex flex-col gap-7 glassmorphism'>
+        <div className=' w-full mx-auto'>
+          <h1 className='font-satoshi font-semibold text-base text-gray-700 mb-2 mt-4'>
+            Where do you want to go?
+          </h1>
+          <CreatableSelect
+            instanceId='filterSelect'
+            className='w-full'
+            components={{
+              DropdownIndicator: null,
+            }}
+            inputValue={inputValue}
+            isClearable
+            isMulti
+            menuIsOpen={false}
+            onChange={(newValue) => setValue(newValue)}
+            onInputChange={(newValue) => setInputValue(newValue)}
+            onKeyDown={handleKeyDown}
+            placeholder='Type a location and press enter'
+            value={value}
+          />
+        </div>
 
-      <div className="flex flex-col">
-        <h1 className="text-center">Length of stay:</h1>
-        <div className="flex flex-row justify-center">
-          <label htmlFor="minDays">Min</label>
-          <input
-            id="minDays"
-            type="number"
-            value={minDays}
-            onChange={handleMinDays}
-          ></input>
-          <label htmlFor="maxDays">Max</label>
-          <input
-            id="maxDays"
-            type="number"
-            value={maxDays}
-            onChange={handleMaxDays}
-          ></input>
+        <div className='w-full mx-auto '>
+          <h1 className='font-satoshi font-semibold text-base text-gray-700 mb-2 mt-4'>
+            Choose your budget:{" "}
+          </h1>
+          <ReactSlider
+            id='slider'
+            className='horizontal-slider'
+            thumbClassName='example-thumb'
+            trackClassName='example-track'
+            onAfterChange={(newValue, thumbIndex) => {
+              setBudget(newValue);
+            }}
+            min={1}
+            max={3}
+            renderThumb={(props, state) => (
+              <div {...props} key={1}>
+                {generateBudgetString(state.valueNow, "$")}
+              </div>
+            )}
+          />
+        </div>
+
+        <div className='w-full mx-auto'>
+          <h1 className='font-satoshi font-semibold text-base text-gray-700 mb-2'>
+            Length of stay:
+          </h1>
+          <div className='flex flex-row justify-start gap-7'>
+            <input
+              placeholder='Min stay (days)'
+              className='form_input max-w-40'
+              id='minDays'
+              type='number'
+              value={minDays}
+              onChange={handleMinDays}></input>
+
+            <input
+              placeholder='Max stay (days)'
+              className='form_input max-w-40'
+              id='maxDays'
+              type='number'
+              value={maxDays}
+              onChange={handleMaxDays}></input>
+          </div>
         </div>
       </div>
 
-      <ul className="flex flex-wrap justify-center mt-10">
-          {itinerariesList.map((itinerary) => (
-            <li key={itinerary.itinerary_id}>
-              <ItineraryCard itinerary={itinerary} />
-            </li>
-          ))}
-        </ul>
+      <ul className='flex flex-wrap justify-center mt-10 max-w-5xl'>
+        {itinerariesList.map((itinerary) => (
+          <li key={itinerary.itinerary_id}>
+            <ItineraryCard itinerary={itinerary} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
