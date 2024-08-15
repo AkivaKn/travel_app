@@ -5,7 +5,7 @@ import ReactSlider from "react-slider";
 import { filterItineraries, generateBudgetString } from "../utils/utils";
 import { getItineraries } from "../lib/data/itineraries";
 import ItineraryCard from "../components/ItineraryCard";
-import Typewriter from 'typewriter-effect';
+import Typewriter from "typewriter-effect";
 
 export default function PlanYourTrip() {
   const [budget, setBudget] = useState(1);
@@ -15,7 +15,7 @@ export default function PlanYourTrip() {
   const [itinerariesList, setItinerariesList] = useState([]);
   const [minDays, setMinDays] = useState("");
   const [maxDays, setMaxDays] = useState("");
-  const [showCards, setShowCards] = useState(false)
+  const [showCards, setShowCards] = useState(false);
 
   useEffect(() => {
     const fetchItineraries = async () => {
@@ -33,8 +33,8 @@ export default function PlanYourTrip() {
       budget
     );
     setItinerariesList(filteredItineraries);
-    if(value.length === 0){
-      setShowCards(false)
+    if (value.length === 0) {
+      setShowCards(false);
     }
   }, [allItineraries, budget, value]);
 
@@ -47,8 +47,7 @@ export default function PlanYourTrip() {
         setInputValue("");
         event.preventDefault();
     }
-    console.log(value.length, "<--value.length")
-    
+    console.log(value.length, "<--value.length");
   };
 
   const createOption = (label) => ({
@@ -64,12 +63,12 @@ export default function PlanYourTrip() {
     setMaxDays(event.target.value);
   };
 
-  const handleClick = ()=>{
-    console.log(value)
-    if(value.length !== 0){
-      setShowCards(true)
+  const handleClick = () => {
+    console.log(value);
+    if (value.length !== 0) {
+      setShowCards(true);
     }
-  }
+  };
 
   return (
     <section className=' w-full max-w-full flex-center flex-col p-4'>
@@ -141,39 +140,49 @@ export default function PlanYourTrip() {
               id='maxDays'
               type='number'
               value={maxDays}
-              onChange={handleMaxDays}>
-
-              </input>
-              <button className=" black_btn justify-start w-full sm:w-1/4" onClick={handleClick}>Search</button>
+              onChange={handleMaxDays}></input>
+            <button
+              className=' black_btn justify-start w-full sm:w-1/4'
+              onClick={handleClick}>
+              Search
+            </button>
           </div>
           {/* <button className="sm:hidden black_btn w-1/4 justify-start" onClick={handleClick}>Search</button> */}
         </div>
-        
       </div>
 
-      { showCards ?
-      <ul className='flex flex-wrap justify-center mt-10 max-w-5xl'>
-        {itinerariesList.map((itinerary) => (
-          <li key={itinerary.itinerary_id}>
-            <ItineraryCard itinerary={itinerary} />
-          </li>
-        ))}
-      </ul>
-      : 
-      <div className="sm:mt-32 hidden sm:block text-md font-satoshi drop-shadow-6xl leading-[1.15] green_gradient sm:text-6xl">
-
-        <Typewriter
-        
-        options={{
-          strings: ['Spain', 'Turkey', 'Cyprus', 'Portugal', 'India', 'Thailand', 'Domincan Republic', 'Mexico', 'Cuba', 'St Lucia', 'Jamaica', 'Barbados' ],
-          autoStart: true,
-          loop: true,
-        }}
-      
-    />
-    </div>
-      }
-
+      {showCards ? (
+        <ul className='flex flex-wrap justify-center mt-10 max-w-5xl'>
+          {itinerariesList.map((itinerary) => (
+            <li key={itinerary.itinerary_id}>
+              <ItineraryCard itinerary={itinerary} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className='sm:mt-32 hidden sm:block text-md font-satoshi drop-shadow-6xl leading-[1.15] green_gradient sm:text-6xl'>
+          <Typewriter
+            options={{
+              strings: [
+                "Spain",
+                "Turkey",
+                "Cyprus",
+                "Portugal",
+                "India",
+                "Thailand",
+                "Domincan Republic",
+                "Mexico",
+                "Cuba",
+                "St Lucia",
+                "Jamaica",
+                "Barbados",
+              ],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </div>
+      )}
     </section>
   );
 }
