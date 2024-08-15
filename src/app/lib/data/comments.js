@@ -7,7 +7,7 @@ export async function postComment({ userId, itineraryId, commentBody }) {
 
   try {
     if (!session?.user) {
-      throw new Error()
+      throw new Error();
     }
     const comment_res = await sql`
         INSERT INTO comments 
@@ -23,8 +23,8 @@ export async function postComment({ userId, itineraryId, commentBody }) {
 
 export async function deleteComment({ user_id, comment_id }) {
   const session = await auth();
-  const currentUserId = session.user.user_id;
-    
+  const currentUserId = session?.user?.user_id;
+
   try {
     const deletedComment = await sql`
         DELETE FROM comments
@@ -41,7 +41,7 @@ export async function deleteComment({ user_id, comment_id }) {
   }
 }
 
-export async function patchComment(commentBody,commentId) {
+export async function patchComment(commentBody, commentId) {
   try {
     const comment_res = await sql`
         UPDATE comments 

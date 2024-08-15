@@ -2,6 +2,8 @@
 import { sql } from "@vercel/postgres";
 import { auth } from "../../../../auth";
 import { uploadImage } from "./images";
+import { del } from "@vercel/blob";
+import { postDays } from "./days";
 
 export async function getPopularItineraries() {
   try {
@@ -40,20 +42,8 @@ export async function postItinerary(formData, daysArray) {
       RETURNING *`;
 
     const itineraryInfo = itineraries_res.rows[0];
+    const itineraryDays = await postDays(daysArray, itineraryInfo.itinerary_id);
 
-    const itineraryDays = await Promise.all(
-      daysArray.map(async (day, index) => {
-        const res = await sql`
-            INSERT INTO days (itinerary_id, day_number, day_plan, accomodation, transport, country, region, place)
-            VALUES (${itineraryInfo.itinerary_id}, ${index + 1}, ${
-          day.dayPlan
-        }, ${day.accomodation}, 
-            ${day.transport}, ${day.country}, ${day.region}, ${
-          day.city
-        }) RETURNING *;`;
-        return res.rows[0];
-      })
-    );
     const returnObject = {
       itineraryInfo,
       itineraryDays,
@@ -103,8 +93,8 @@ export async function getItineraryById(id) {
 }
 
 export async function getItineraries(minStay, maxStay) {
-  minStay? null : minStay = 0
-  maxStay? null : maxStay = 99999999
+  minStay ? null : (minStay = 0);
+  maxStay ? null : (maxStay = 99999999);
 
   try {
     const allItinerariesSQL = await sql`
@@ -139,5 +129,45 @@ export async function getItineraries(minStay, maxStay) {
   } catch (error) {
     console.error("Data fetching error:", error);
     throw new Error("500: Server error");
+  }
+}
+
+export async function patchItineraries(
+  formData,
+  itineraryId,
+  itineraryImageUrl,
+  daysArray
+) {
+  const title = formData.get("title");
+  const itinerary_description = formData.get("itineraryDescription");
+  const budget = formData.get("budget");
+  const itinerary_image = formData.get("itineraryImage");
+  const session = await auth();
+  const currentUserId = session?.user?.user_id;
+
+  try {
+    if (itinerary_image.size > 0) {
+      del(itineraryImageUrl);
+      itineraryImageUrl = await uploadImage(itinerary_image);
+    }
+    const patchItinerary = await sql`
+    UPDATE itineraries
+    SET title = ${title}, itinerary_description = ${itinerary_description}, budget = ${budget}, itinerary_image_url=${itineraryImageUrl}
+    WHERE itinerary_id = ${itineraryId}
+    AND user_id = ${currentUserId}
+    RETURNING *`;
+
+    if (patchItineraries.rows.length === 0) {
+      throw new Error();
+    }
+
+    const deleteDays = await sql`
+    DELETE from days
+    WHERE itinerary_id=${itineraryId}
+    `;
+
+    await postDays(daysArray, itineraryId);
+  } catch (error) {
+    return error;
   }
 }
