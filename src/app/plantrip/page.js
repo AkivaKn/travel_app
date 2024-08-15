@@ -147,7 +147,6 @@ export default function PlanYourTrip() {
               Search
             </button>
           </div>
-          {/* <button className="sm:hidden black_btn w-1/4 justify-start" onClick={handleClick}>Search</button> */}
         </div>
       </div>
 

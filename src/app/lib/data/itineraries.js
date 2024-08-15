@@ -132,11 +132,11 @@ export async function getItineraries(minStay, maxStay) {
   }
 }
 
-export async function patchItineraries(
+export async function patchItinerary(
   formData,
+  daysArray,
   itineraryId,
-  itineraryImageUrl,
-  daysArray
+  itineraryImageUrl
 ) {
   const title = formData.get("title");
   const itinerary_description = formData.get("itineraryDescription");
@@ -144,11 +144,13 @@ export async function patchItineraries(
   const itinerary_image = formData.get("itineraryImage");
   const session = await auth();
   const currentUserId = session?.user?.user_id;
+  
 
   try {
     if (itinerary_image.size > 0) {
       del(itineraryImageUrl);
       itineraryImageUrl = await uploadImage(itinerary_image);
+      
     }
     const patchItinerary = await sql`
     UPDATE itineraries
@@ -156,17 +158,20 @@ export async function patchItineraries(
     WHERE itinerary_id = ${itineraryId}
     AND user_id = ${currentUserId}
     RETURNING *`;
-
-    if (patchItineraries.rows.length === 0) {
+    
+    
+    if (patchItinerary.rows.length === 0) {
       throw new Error();
     }
-
+    
     const deleteDays = await sql`
     DELETE from days
     WHERE itinerary_id=${itineraryId}
+    RETURNING *
     `;
 
-    await postDays(daysArray, itineraryId);
+    const returnedDays = await postDays(daysArray, itineraryId);
+    
   } catch (error) {
     return error;
   }
