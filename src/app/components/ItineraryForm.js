@@ -2,25 +2,53 @@
 import { Button } from "flowbite-react";
 import ReactSlider from "react-slider";
 import { generateBudgetString } from "../utils/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlacesSelector from "./PlacesSelector";
-import { postItinerary } from "../lib/data/itineraries";
+import { patchItinerary, postItinerary } from "../lib/data/itineraries";
 import { validateItinerariesForm } from "../utils/validation_utils";
+import { useRouter } from "next/navigation";
 
-export default function ItineraryForm() {
-  const [budget, setBudget] = useState(1);
-  const [dayInputs, setDayInputs] = useState([
-    {
-      dayPlan: "",
-      accomodation: "",
-      transport: "",
-      country: "",
-      region: "",
-      city: "",
-    },
-  ]);
+//route caching
+export default function UpdateItineraryForm({ itinerary, page }) {
+  const router = useRouter();
+  let newItineraryDays;
+  let newBudget;
+  if (itinerary) {
+    const { itineraryDays, itineraryInfo } = itinerary;
 
+    newItineraryDays = itineraryDays.map((itinerary) => {
+      return {
+        dayPlan: itinerary.day_plan,
+        accomodation: itinerary.accomodation,
+        transport: itinerary.transport,
+        country: itinerary.country,
+        region: itinerary.region,
+        city: itinerary.place,
+      };
+    });
+
+    newBudget = itineraryInfo.budget;
+  } else {
+    newItineraryDays = [
+      {
+        dayPlan: "",
+        accomodation: "",
+        transport: "",
+        country: "",
+        region: "",
+        city: "",
+      },
+    ];
+    //newBudget = 1;
+  }
+
+  const [budget, setBudget] = useState(newBudget);
+  const [dayInputs, setDayInputs] = useState(newItineraryDays);
   const [errors, setErrors] = useState({});
+  const [showImage, setShowImage] = useState(true);
+  const [image, setImage] = useState(
+    itinerary?.itineraryInfo?.itinerary_image_url
+  );
 
   function removeDay(index) {
     let itineraryDays = [...dayInputs];
@@ -33,12 +61,28 @@ export default function ItineraryForm() {
     setDayInputs(itineraryDays);
   };
 
-  function createItinerary(formData) {
+  async function createItinerary(formData) {
     const title = formData.get("title");
+
     const formErrors = validateItinerariesForm(title, dayInputs);
     setErrors(formErrors);
     if (!formErrors.title && formErrors.days.length === 0) {
-      postItinerary(formData, dayInputs);
+      try {
+        let itineraryId;
+        if (page === "post") {
+          const newItinerary = await postItinerary(formData, dayInputs);
+          itineraryId = newItinerary.itineraryInfo.itinerary_id;
+        } else if (page === "patch") {
+          await patchItinerary(
+            formData,
+            dayInputs,
+            itinerary.itineraryInfo.itinerary_id,
+            itinerary.itineraryInfo.itinerary_image_url
+          );
+          itineraryId = itinerary.itineraryInfo.itinerary_id;
+        }
+        router.replace(`/itinerary/${itineraryId}`);
+      } catch (error) {}
     }
   }
 
@@ -52,6 +96,11 @@ export default function ItineraryForm() {
       city: "",
     };
     setDayInputs([...dayInputs, newDayInput]);
+  }
+
+  function handleShowImage() {
+    setImage(image);
+    setShowImage(false);
   }
 
   return (
@@ -75,6 +124,7 @@ export default function ItineraryForm() {
             name='title'
             type='text'
             placeholder='Enter itinerary title here...'
+            defaultValue={itinerary?.itineraryInfo?.title}
           />
         </section>
 
@@ -90,7 +140,11 @@ export default function ItineraryForm() {
             className='form_textarea'
             id='itineraryDescription'
             name='itineraryDescription'
-            placeholder='Enter a short description of your itinerary here...'></textarea>
+            placeholder='Enter a short description of your itinerary here...
+            '
+            defaultValue={
+              itinerary?.itineraryInfo?.itinerary_description
+            }></textarea>
         </section>
 
         <section>
@@ -109,7 +163,9 @@ export default function ItineraryForm() {
             className='horizontal-slider w-full'
             thumbClassName='example-thumb'
             trackClassName='example-track'
+            defaultValue={budget}
             onAfterChange={(newValue, thumbIndex) => {
+              //console.log(newValue, "<--new value budget");
               setBudget(newValue);
             }}
             min={1}
@@ -123,6 +179,7 @@ export default function ItineraryForm() {
         </section>
 
         <section>
+          <img src={image} />
           <div className='mb-2 block'>
             <label
               htmlFor='itineraryImage'
@@ -142,6 +199,7 @@ export default function ItineraryForm() {
               name='itineraryImage'
               type='file'
               accept='image/*'
+              onChange={handleShowImage}
             />
           </label>
         </section>
