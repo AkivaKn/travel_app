@@ -10,8 +10,6 @@ export default function PlacesSelector({
   errors,
   day,
 }) {
-  console.log(day);
-
   const [selectedCountry, setSelectedCountry] = useState(
     day.country ? { name: day.country } : null
   );
@@ -66,21 +64,20 @@ export default function PlacesSelector({
   const handleSelectCityChange = (city, index) => {
     let itineraryDays = [...dayInputs];
 
-    console.log(city);
     if (city) {
       itineraryDays[index].city = city.value;
     } else {
       city = "";
       itineraryDays[index].city = city;
     }
-    console.log(itineraryDays, "itinerary days");
+
     setDayInputs(itineraryDays);
     setSelectedCity(city);
   };
 
   return (
-    <div className="App mb-7">
-      <h1 className="font-satoshi font-normal text-base text-gray-700">
+    <div className='App mb-7'>
+      <h1 className='font-satoshi font-normal text-base text-gray-700'>
         Location
       </h1>
       {errors.days?.map((error) => {
@@ -91,10 +88,10 @@ export default function PlacesSelector({
 
       <Select
         isClearable
-        className="rounded-lg mt-2 text-sm text-gray-500 outline-0 "
+        className='rounded-lg mt-2 text-sm text-gray-500 outline-0 '
         instanceId={1}
-        name="country"
-        placeholder="Country..."
+        name='country'
+        placeholder='Country...'
         options={Country.getAllCountries()}
         getOptionLabel={(options) => {
           return options["name"];
@@ -112,10 +109,10 @@ export default function PlacesSelector({
       })}
       <Select
         isClearable
-        className=" rounded-lg mt-2 text-sm text-gray-500 outline-0"
+        className=' rounded-lg mt-2 text-sm text-gray-500 outline-0'
         instanceId={2}
-        name="region"
-        placeholder="Region..."
+        name='region'
+        placeholder='Region...'
         options={State?.getStatesOfCountry(selectedCountry?.isoCode)}
         getOptionLabel={(options) => {
           return options["name"];
@@ -134,10 +131,10 @@ export default function PlacesSelector({
       })}
       <CreatableSelect
         isClearable
-        className="rounded-lg mt-2 text-sm text-gray-500 outline-0"
+        className='rounded-lg mt-2 text-sm text-gray-500 outline-0'
         instanceId={3}
-        name="city"
-        placeholder="City..."
+        name='city'
+        placeholder='City...'
         options={cityList}
         value={selectedCity}
         onChange={(city) => handleSelectCityChange(city, index)}

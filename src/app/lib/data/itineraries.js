@@ -144,13 +144,14 @@ export async function patchItinerary(
   const itinerary_image = formData.get("itineraryImage");
   const session = await auth();
   const currentUserId = session?.user?.user_id;
-  
+  console.log(budget);
 
   try {
     if (itinerary_image.size > 0) {
-      del(itineraryImageUrl);
+      console.log(itineraryImageUrl);
+      itineraryImageUrl && del(itineraryImageUrl);
       itineraryImageUrl = await uploadImage(itinerary_image);
-      
+      console.log(itineraryImageUrl);
     }
     const patchItinerary = await sql`
     UPDATE itineraries
@@ -158,12 +159,11 @@ export async function patchItinerary(
     WHERE itinerary_id = ${itineraryId}
     AND user_id = ${currentUserId}
     RETURNING *`;
-    
-    
+
     if (patchItinerary.rows.length === 0) {
       throw new Error();
     }
-    
+
     const deleteDays = await sql`
     DELETE from days
     WHERE itinerary_id=${itineraryId}
@@ -171,7 +171,6 @@ export async function patchItinerary(
     `;
 
     const returnedDays = await postDays(daysArray, itineraryId);
-    
   } catch (error) {
     return error;
   }
