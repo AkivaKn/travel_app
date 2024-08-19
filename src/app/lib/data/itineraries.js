@@ -92,10 +92,7 @@ export async function getItineraryById(id) {
   }
 }
 
-export async function getItineraries(minStay, maxStay) {
-  minStay ? null : (minStay = 0);
-  maxStay ? null : (maxStay = 99999999);
-
+export async function getItineraries() {
   try {
     const allItinerariesSQL = await sql`
     SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) AS number_of_days, uv.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
@@ -123,8 +120,8 @@ export async function getItineraries(minStay, maxStay) {
     ) loc
     ON i.itinerary_id=loc.itinerary_id
     GROUP BY i.itinerary_id, uv.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
-    HAVING COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) BETWEEN ${minStay} AND ${maxStay}
     ;`;
+
     return allItinerariesSQL.rows;
   } catch (error) {
     console.error("Data fetching error:", error);
