@@ -20,7 +20,7 @@ export default function Votes({userId, itineraryInfo, session}) {
             }       
             writeVote()
         }
-    },[displayedVoteCount])
+    },[displayedVoteCount, userId, itineraryId, voteValue])
 
     function handleClick(increment, button_index){
         const incrementedVoteCount = displayedVoteCount + increment
