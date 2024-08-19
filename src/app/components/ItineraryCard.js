@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { dateFormatting, formatBudget } from "../utils/utils";
 import { MdOutlineModeEdit, MdOutlineClose } from "react-icons/md";
-import { auth } from "../../../auth";
 
-export default async function ItineraryCard({ itinerary }) {
+export default function ItineraryCard({ itinerary, session }) {
   const formattedDate = dateFormatting(itinerary.created_at);
-  const session = await auth();
 
   return (
     <div className='w-72 p-2 bg-white rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl mx-4 mb-8 flex flex-col'>
