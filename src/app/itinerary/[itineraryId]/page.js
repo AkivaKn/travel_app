@@ -66,7 +66,7 @@ export default async function ViewSingleItinerary({ params }) {
               <span className='font-bold'>{formattedBudget}</span>
             </p>
           </div>
-          <Votes userId={session.user.user_id} itineraryInfo={itineraryInfo}/>
+          <Votes userId={session?.user?.user_id} itineraryInfo={itineraryInfo} session={session}/>
           
         </div>
       </section>
