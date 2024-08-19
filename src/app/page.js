@@ -18,12 +18,7 @@ export default async function Home() {
           </li>
         ))}
       </ul>
-      <Carroussel
-        itineraryId={popularItineraries.map(
-          (itinerary) => itinerary.itinerary_id
-        )}
-        images={images}
-      />
+      <Carroussel images={images} />
     </div>
   );
 }
