@@ -7,12 +7,16 @@ import CommentForm from "@/app/components/CommentForm";
 import { auth } from "../../../../auth";
 import CommentsSection from "@/app/components/CommentsSection";
 import { MdOutlineModeEdit, MdOutlineClose } from "react-icons/md";
+import Votes from "@/app/components/Votes"
 
 import Link from "next/link";
+
+
 
 export default async function ViewSingleItinerary({ params }) {
   const { itineraryId } = params;
   const session = await auth();
+  console.log(session)
 
   const { itineraryInfo, itineraryDays, itineraryComments } =
     await getItineraryById(itineraryId);
@@ -49,6 +53,7 @@ export default async function ViewSingleItinerary({ params }) {
                 </Link>
               </div>
             )}
+          
           </div>
         </div>
         <p className='text-gray-700 mx-2 mb-4 text-lg'>
@@ -61,12 +66,8 @@ export default async function ViewSingleItinerary({ params }) {
               <span className='font-bold'>{formattedBudget}</span>
             </p>
           </div>
-          <div className='flex items-center'>
-            <h2 className='text-lg font-semibold mr-2'>Votes:</h2>
-            <p className='text-lg text-gray-700'>
-              <span className='font-bold'>{itineraryInfo.total_votes}</span>
-            </p>
-          </div>
+          <Votes userId={session?.user?.user_id} itineraryInfo={itineraryInfo} session={session}/>
+          
         </div>
       </section>
       <h1 className='text-3xl font-bold mb-4 '>Days</h1>
