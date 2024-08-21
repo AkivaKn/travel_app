@@ -21,7 +21,7 @@ export async function postComment({ userId, itineraryId, commentBody }) {
   }
 }
 
-export async function deleteComment({ user_id, comment_id }) {
+export async function deleteComment({ comment_id }) {
   const session = await auth();
   const currentUserId = session?.user?.user_id;
 

@@ -172,3 +172,23 @@ export async function patchItinerary(
     return error;
   }
 }
+
+export async function deleteItinerary({itinerary_id }) {
+  const session = await auth();
+  const currentUserId = session?.user?.user_id;
+
+  try {
+    const deletedItinerary = await sql`
+        DELETE FROM itineraries
+        WHERE itinerary_id = ${itinerary_id}
+        AND user_id = ${currentUserId}
+        RETURNING *`;
+
+    if (deletedItinerary.rows.length === 0) {
+      throw new Error();
+    }
+    return deletedItinerary.rows[0];
+  } catch (error) {
+    return error;
+  }
+}
