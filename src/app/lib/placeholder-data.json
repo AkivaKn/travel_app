@@ -2,453 +2,1427 @@
   "users": [
     {
       "user_id": 1,
-      "username": "traveller1",
-      "email": "traveller1@example.com",
-      "password": "hashedpassword1",
-      "bio": "Love exploring new places and cultures!",
-      "avatar_img_url": "http://example.com/avatar1.png"
+      "username": "Traveler101",
+      "email": "traveler101@example.com",
+      "password": "password123",
+      "bio": "Avid traveler and adventure seeker. Love exploring new cultures.",
+      "avatar_img_url": "https://example.com/avatar1.jpg"
     },
     {
       "user_id": 2,
-      "username": "adventurer2",
-      "email": "adventurer2@example.com",
-      "password": "hashedpassword2",
-      "bio": "Adventure enthusiast and foodie.",
-      "avatar_img_url": "http://example.com/avatar2.png"
+      "username": "GlobeTrotter",
+      "email": "globetrotter@example.com",
+      "password": "password456",
+      "bio": "Exploring the world, one country at a time.",
+      "avatar_img_url": "https://example.com/avatar2.jpg"
     },
     {
       "user_id": 3,
-      "username": "globetrotter3",
-      "email": "globetrotter3@example.com",
-      "password": "hashedpassword3",
-      "bio": "Travel blogger sharing experiences around the world.",
-      "avatar_img_url": "http://example.com/avatar3.png"
+      "username": "Wanderlust",
+      "email": "wanderlust@example.com",
+      "password": "password789",
+      "bio": "Photographer with a passion for travel and adventure.",
+      "avatar_img_url": "https://example.com/avatar3.jpg"
+    },
+    {
+      "user_id": 4,
+      "username": "AdventureQueen",
+      "email": "adventurequeen@example.com",
+      "password": "password321",
+      "bio": "Living life on the edge. Mountains, oceans, and everything in between.",
+      "avatar_img_url": "https://example.com/avatar4.jpg"
+    },
+    {
+      "user_id": 5,
+      "username": "CultureVulture",
+      "email": "culturevulture@example.com",
+      "password": "password654",
+      "bio": "Art and history enthusiast. Exploring the cultural wonders of the world.",
+      "avatar_img_url": "https://example.com/avatar5.jpg"
     }
   ],
   "itineraries": [
     {
-      "title": "Exploring the Alps",
-      "itinerary_image_url": "https://www.civitatis.com/blog/wp-content/uploads/2023/01/panoramica-mont-blanc-francia.jpg",
       "itinerary_id": 1,
+      "title": "Greek Adventure",
+      "itinerary_image_url": "https://example.com/itinerary1.jpg",
+      "itinerary_description": "Explore the wonders of ancient Greece.",
       "user_id": 1,
-      "itinerary_description": "A 7-day adventure through the stunning landscapes of the Swiss Alps, featuring hiking, local cuisine, and breathtaking views.",
-      "created_at": "2023-07-25T10:00:00Z",
+      "created_at": "2024-08-01",
       "budget": 2
     },
     {
-      "title": "Beach Vacation in Thailand",
-      "itinerary_image_url": "https://lp-cms-production.imgix.net/2024-01/GettyImages-1273413451.jpg",
       "itinerary_id": 2,
+      "title": "New Zealand Explorer",
+      "itinerary_image_url": "https://example.com/itinerary2.jpg",
+      "itinerary_description": "Adventure in the land of the long white cloud.",
       "user_id": 2,
-      "itinerary_description": "A 10-day journey through Thailand's best beaches, including island hopping, snorkeling, and experiencing the vibrant local culture.",
-      "created_at": "2023-08-10T15:00:00Z",
+      "created_at": "2024-08-02",
+      "budget": 3
+    },
+    {
+      "itinerary_id": 3,
+      "title": "Australian Outback",
+      "itinerary_image_url": "https://example.com/itinerary3.jpg",
+      "itinerary_description": "Experience the rugged beauty of Australia.",
+      "user_id": 3,
+      "created_at": "2024-08-03",
       "budget": 1
     },
     {
-      "title": "Cultural Tour of Japan",
-      "itinerary_image_url": "https://media.cnn.com/api/v1/images/stellar/prod/230210161917-01-japan-never-traveler-culture-tokyo.jpg?c=16x9&q=h_833,w_1480,c_fill",
-      "itinerary_id": 3,
-      "user_id": 3,
-      "itinerary_description": "A 14-day immersion into Japanese culture, exploring ancient temples, modern cities, and the unique culinary delights of Japan.",
-      "created_at": "2023-09-01T09:00:00Z",
+      "itinerary_id": 4,
+      "title": "Peruvian Peaks",
+      "itinerary_image_url": "https://example.com/itinerary4.jpg",
+      "itinerary_description": "Hike the Inca Trail to Machu Picchu.",
+      "user_id": 4,
+      "created_at": "2024-08-04",
+      "budget": 2
+    },
+    {
+      "itinerary_id": 5,
+      "title": "Parisian Romance",
+      "itinerary_image_url": "https://example.com/itinerary5.jpg",
+      "itinerary_description": "A romantic getaway in the city of love.",
+      "user_id": 5,
+      "created_at": "2024-08-05",
+      "budget": 2
+    },
+    {
+      "itinerary_id": 6,
+      "title": "Japanese Journey",
+      "itinerary_image_url": "https://example.com/itinerary6.jpg",
+      "itinerary_description": "Explore the cultural and natural wonders of Japan.",
+      "user_id": 1,
+      "created_at": "2024-08-06",
       "budget": 3
+    },
+    {
+      "itinerary_id": 7,
+      "title": "Italian Odyssey",
+      "itinerary_image_url": "https://example.com/itinerary7.jpg",
+      "itinerary_description": "A journey through Italy's most iconic destinations.",
+      "user_id": 2,
+      "created_at": "2024-08-07",
+      "budget": 2
+    },
+    {
+      "itinerary_id": 8,
+      "title": "Egyptian Expedition",
+      "itinerary_image_url": "https://example.com/itinerary8.jpg",
+      "itinerary_description": "Discover the ancient treasures of Egypt.",
+      "user_id": 3,
+      "created_at": "2024-08-08",
+      "budget": 1
+    },
+    {
+      "itinerary_id": 9,
+      "title": "Safari in Kenya",
+      "itinerary_image_url": "https://example.com/itinerary9.jpg",
+      "itinerary_description": "Experience the wildlife and culture of Kenya.",
+      "user_id": 4,
+      "created_at": "2024-08-09",
+      "budget": 3
+    },
+    {
+      "itinerary_id": 10,
+      "title": "Icelandic Adventure",
+      "itinerary_image_url": "https://example.com/itinerary10.jpg",
+      "itinerary_description": "Explore the land of fire and ice.",
+      "user_id": 5,
+      "created_at": "2024-08-10",
+      "budget": 2
+    },
+    {
+      "itinerary_id": 11,
+      "title": "Brazilian Beaches",
+      "itinerary_image_url": "https://example.com/itinerary11.jpg",
+      "itinerary_description": "Relax on the sandy shores of Brazil.",
+      "user_id": 1,
+      "created_at": "2024-08-11",
+      "budget": 3
+    },
+    {
+      "itinerary_id": 12,
+      "title": "Canadian Rockies",
+      "itinerary_image_url": "https://example.com/itinerary12.jpg",
+      "itinerary_description": "Adventure through the stunning Canadian Rockies.",
+      "user_id": 2,
+      "created_at": "2024-08-12",
+      "budget": 1
+    },
+    {
+      "itinerary_id": 13,
+      "title": "Thai Temples",
+      "itinerary_image_url": "https://example.com/itinerary13.jpg",
+      "itinerary_description": "Discover the spiritual heart of Thailand.",
+      "user_id": 3,
+      "created_at": "2024-08-13",
+      "budget": 2
+    },
+    {
+      "itinerary_id": 14,
+      "title": "Moroccan Magic",
+      "itinerary_image_url": "https://example.com/itinerary14.jpg",
+      "itinerary_description": "Experience the colors and flavors of Morocco.",
+      "user_id": 4,
+      "created_at": "2024-08-14",
+      "budget": 3
+    },
+    {
+      "itinerary_id": 15,
+      "title": "Norwegian Fjords",
+      "itinerary_image_url": "https://example.com/itinerary15.jpg",
+      "itinerary_description": "Sail through the majestic fjords of Norway.",
+      "user_id": 5,
+      "created_at": "2024-08-15",
+      "budget": 1
     }
   ],
-  "days": [
-    {
-      "day_id": 1,
-      "itinerary_id": 1,
-      "day_number": 1,
-      "day_plan": "Arrival in Zurich, check-in at the hotel, and explore the old town. Visit the Swiss National Museum to understand the rich history of Switzerland. In the evening, enjoy a traditional Swiss dinner at a local restaurant.",
-      "accomodation": "Zurich Hotel",
-      "transport": "Rental car",
-      "country": "Switzerland",
-      "region": "Zurich",
-      "place": "Zurich"
+  
+    "days": [
+      {
+        "day_id": 1,
+        "itinerary_id": 1,
+        "day_number": 1,
+        "day_plan": "Arrive in Athens and check into your hotel.",
+        "accomodation": "Athens Plaza Hotel",
+        "transport": "Taxi",
+        "country": "Greece",
+        "region": "Attica",
+        "place": "Athens"
+      },
+      {
+        "day_id": 2,
+        "itinerary_id": 1,
+        "day_number": 2,
+        "day_plan": "Visit the Acropolis and Parthenon.",
+        "accomodation": "Athens Plaza Hotel",
+        "transport": "Walking",
+        "country": "Greece",
+        "region": "Attica",
+        "place": "Athens"
+      },
+      {
+        "day_id": 3,
+        "itinerary_id": 1,
+        "day_number": 3,
+        "day_plan": "Explore the Ancient Agora and Plaka neighborhood.",
+        "accomodation": "Athens Plaza Hotel",
+        "transport": "Walking",
+        "country": "Greece",
+        "region": "Attica",
+        "place": "Athens"
+      },
+      {
+        "day_id": 4,
+        "itinerary_id": 1,
+        "day_number": 4,
+        "day_plan": "Travel to Delphi and visit the Oracle.",
+        "accomodation": "Delphi Hotel",
+        "transport": "Bus",
+        "country": "Greece",
+        "region": "Central Greece",
+        "place": "Delphi"
+      },
+      {
+        "day_id": 5,
+        "itinerary_id": 1,
+        "day_number": 5,
+        "day_plan": "Head to Santorini and explore the island.",
+        "accomodation": "Santorini Suites",
+        "transport": "Ferry",
+        "country": "Greece",
+        "region": "Cyclades",
+        "place": "Santorini"
+      },
+      {
+        "day_id": 6,
+        "itinerary_id": 1,
+        "day_number": 6,
+        "day_plan": "Relax on the beaches and enjoy a sunset tour.",
+        "accomodation": "Santorini Suites",
+        "transport": "Local Shuttle",
+        "country": "Greece",
+        "region": "Cyclades",
+        "place": "Santorini"
+      },
+      {
+        "day_id": 7,
+        "itinerary_id": 1,
+        "day_number": 7,
+        "day_plan": "Fly back to Athens for your departure.",
+        "accomodation": "Athens Plaza Hotel",
+        "transport": "Flight",
+        "country": "Greece",
+        "region": "Attica",
+        "place": "Athens"
+      },
+      {
+        "day_id": 8,
+        "itinerary_id": 2,
+        "day_number": 1,
+        "day_plan": "Arrive in Auckland and check into your hotel.",
+        "accomodation": "Auckland Sky Tower Hotel",
+        "transport": "Taxi",
+        "country": "New Zealand",
+        "region": "Auckland",
+        "place": "Auckland"
+      },
+      {
+        "day_id": 9,
+        "itinerary_id": 2,
+        "day_number": 2,
+        "day_plan": "Explore the Auckland Harbour and Sky Tower.",
+        "accomodation": "Auckland Sky Tower Hotel",
+        "transport": "Walking",
+        "country": "New Zealand",
+        "region": "Auckland",
+        "place": "Auckland"
+      },
+      {
+        "day_id": 10,
+        "itinerary_id": 2,
+        "day_number": 3,
+        "day_plan": "Travel to Rotorua and visit geothermal parks.",
+        "accomodation": "Rotorua Resort",
+        "transport": "Bus",
+        "country": "New Zealand",
+        "region": "Bay of Plenty",
+        "place": "Rotorua"
+      },
+      {
+        "day_id": 11,
+        "itinerary_id": 2,
+        "day_number": 4,
+        "day_plan": "Explore Hobbiton and enjoy a movie set tour.",
+        "accomodation": "Rotorua Resort",
+        "transport": "Bus",
+        "country": "New Zealand",
+        "region": "Waikato",
+        "place": "Matamata"
+      },
+      {
+        "day_id": 12,
+        "itinerary_id": 2,
+        "day_number": 5,
+        "day_plan": "Travel to Queenstown and enjoy adventure activities.",
+        "accomodation": "Queenstown Grand Hotel",
+        "transport": "Flight",
+        "country": "New Zealand",
+        "region": "Otago",
+        "place": "Queenstown"
+      },
+      {
+        "day_id": 13,
+        "itinerary_id": 2,
+        "day_number": 6,
+        "day_plan": "Experience a day of bungee jumping and skydiving.",
+        "accomodation": "Queenstown Grand Hotel",
+        "transport": "Local Shuttle",
+        "country": "New Zealand",
+        "region": "Otago",
+        "place": "Queenstown"
+      },
+      {
+        "day_id": 14,
+        "itinerary_id": 2,
+        "day_number": 7,
+        "day_plan": "Fly back to Auckland and prepare for departure.",
+        "accomodation": "Auckland Sky Tower Hotel",
+        "transport": "Flight",
+        "country": "New Zealand",
+        "region": "Auckland",
+        "place": "Auckland"
+      },
+      {
+        "day_id": 15,
+        "itinerary_id": 3,
+        "day_number": 1,
+        "day_plan": "Arrive in Sydney and check into your hotel.",
+        "accomodation": "Sydney Harbour Hotel",
+        "transport": "Taxi",
+        "country": "Australia",
+        "region": "New South Wales",
+        "place": "Sydney"
+      },
+      {
+        "day_id": 16,
+        "itinerary_id": 3,
+        "day_number": 2,
+        "day_plan": "Visit the Sydney Opera House and Harbour Bridge.",
+        "accomodation": "Sydney Harbour Hotel",
+        "transport": "Walking",
+        "country": "Australia",
+        "region": "New South Wales",
+        "place": "Sydney"
+      },
+      {
+        "day_id": 17,
+        "itinerary_id": 3,
+        "day_number": 3,
+        "day_plan": "Take a day trip to the Blue Mountains.",
+        "accomodation": "Sydney Harbour Hotel",
+        "transport": "Train",
+        "country": "Australia",
+        "region": "New South Wales",
+        "place": "Blue Mountains"
+      },
+      {
+        "day_id": 18,
+        "itinerary_id": 3,
+        "day_number": 4,
+        "day_plan": "Travel to Melbourne and explore the city.",
+        "accomodation": "Melbourne Central Hotel",
+        "transport": "Flight",
+        "country": "Australia",
+        "region": "Victoria",
+        "place": "Melbourne"
+      },
+      {
+        "day_id": 19,
+        "itinerary_id": 3,
+        "day_number": 5,
+        "day_plan": "Discover the Great Ocean Road and Twelve Apostles.",
+        "accomodation": "Melbourne Central Hotel",
+        "transport": "Car",
+        "country": "Australia",
+        "region": "Victoria",
+        "place": "Great Ocean Road"
+      },
+      {
+        "day_id": 20,
+        "itinerary_id": 3,
+        "day_number": 6,
+        "day_plan": "Fly to Alice Springs and explore the Outback.",
+        "accomodation": "Alice Springs Lodge",
+        "transport": "Flight",
+        "country": "Australia",
+        "region": "Northern Territory",
+        "place": "Alice Springs"
+      },
+      {
+        "day_id": 21,
+        "itinerary_id": 3,
+        "day_number": 7,
+        "day_plan": "Visit Uluru and Kata Tjuta National Park.",
+        "accomodation": "Alice Springs Lodge",
+        "transport": "Bus",
+        "country": "Australia",
+        "region": "Northern Territory",
+        "place": "Uluru"
+      },
+      {
+        "day_id": 22,
+        "itinerary_id": 3,
+        "day_number": 8,
+        "day_plan": "Return to Sydney for your departure.",
+        "accomodation": "Sydney Harbour Hotel",
+        "transport": "Flight",
+        "country": "Australia",
+        "region": "New South Wales",
+        "place": "Sydney"
+      },
+      {
+        "day_id": 23,
+        "itinerary_id": 4,
+        "day_number": 1,
+        "day_plan": "Arrive in Cusco and acclimate to the altitude.",
+        "accomodation": "Cusco Grand Hotel",
+        "transport": "Taxi",
+        "country": "Peru",
+        "region": "Cusco",
+        "place": "Cusco"
+      },
+      {
+        "day_id": 24,
+        "itinerary_id": 4,
+        "day_number": 2,
+        "day_plan": "Tour the Sacred Valley and visit Pisac Market.",
+        "accomodation": "Cusco Grand Hotel",
+        "transport": "Bus",
+        "country": "Peru",
+        "region": "Cusco",
+        "place": "Sacred Valley"
+      },
+      {
+        "day_id": 25,
+        "itinerary_id": 4,
+        "day_number": 3,
+        "day_plan": "Begin the Inca Trail trek to Machu Picchu.",
+        "accomodation": "Camping",
+        "transport": "Walking",
+        "country": "Peru",
+        "region": "Cusco",
+        "place": "Inca Trail"
+      },
+      {
+        "day_id": 26,
+        "itinerary_id": 4,
+        "day_number": 4,
+        "day_plan": "Continue the Inca Trail trek.",
+        "accomodation": "Camping",
+        "transport": "Walking",
+        "country": "Peru",
+        "region": "Cusco",
+        "place": "Inca Trail"
+      },
+      {
+        "day_id": 27,
+        "itinerary_id": 4,
+        "day_number": 5,
+        "day_plan": "Arrive at Machu Picchu and explore the ruins.",
+        "accomodation": "Aguas Calientes Hotel",
+        "transport": "Train",
+        "country": "Peru",
+        "region": "Cusco",
+        "place": "Machu Picchu"
+      },
+      {
+        "day_id": 28,
+        "itinerary_id": 4,
+        "day_number": 6,
+        "day_plan": "Return to Cusco and enjoy a city tour.",
+        "accomodation": "Cusco Grand Hotel",
+        "transport": "Train",
+        "country": "Peru",
+        "region": "Cusco",
+        "place": "Cusco"
+      },
+      {
+        "day_id": 29,
+        "itinerary_id": 4,
+        "day_number": 7,
+        "day_plan": "Fly to Lima and explore the city.",
+        "accomodation": "Lima Beach Hotel",
+        "transport": "Flight",
+        "country": "Peru",
+        "region": "Lima",
+        "place": "Lima"
+      },
+      {
+        "day_id": 30,
+        "itinerary_id": 4,
+        "day_number": 8,
+        "day_plan": "Visit the Larco Museum and enjoy a farewell dinner.",
+        "accomodation": "Lima Beach Hotel",
+        "transport": "Taxi",
+        "country": "Peru",
+        "region": "Lima",
+        "place": "Lima"
+      },
+      {
+        "day_id": 31,
+        "itinerary_id": 5,
+        "day_number": 1,
+        "day_plan": "Arrive in Paris and check into your hotel.",
+        "accomodation": "Parisian Boutique Hotel",
+        "transport": "Taxi",
+        "country": "France",
+        "region": "Île-de-France",
+        "place": "Paris"
+      },
+      {
+        "day_id": 32,
+        "itinerary_id": 5,
+        "day_number": 2,
+        "day_plan": "Visit the Eiffel Tower and Louvre Museum.",
+        "accomodation": "Parisian Boutique Hotel",
+        "transport": "Metro",
+        "country": "France",
+        "region": "Île-de-France",
+        "place": "Paris"
+      },
+      {
+        "day_id": 33,
+        "itinerary_id": 5,
+        "day_number": 3,
+        "day_plan": "Explore Montmartre and enjoy a Seine River cruise.",
+        "accomodation": "Parisian Boutique Hotel",
+        "transport": "Walking",
+        "country": "France",
+        "region": "Île-de-France",
+        "place": "Paris"
+      },
+      {
+        "day_id": 34,
+        "itinerary_id": 5,
+        "day_number": 4,
+        "day_plan": "Day trip to Versailles to visit the palace and gardens.",
+        "accomodation": "Parisian Boutique Hotel",
+        "transport": "Train",
+        "country": "France",
+        "region": "Île-de-France",
+        "place": "Versailles"
+      },
+      {
+        "day_id": 35,
+        "itinerary_id": 5,
+        "day_number": 5,
+        "day_plan": "Relax in the Luxembourg Gardens and visit Notre Dame.",
+        "accomodation": "Parisian Boutique Hotel",
+        "transport": "Walking",
+        "country": "France",
+        "region": "Île-de-France",
+        "place": "Paris"
+      },
+      {
+        "day_id": 36,
+        "itinerary_id": 5,
+        "day_number": 6,
+        "day_plan": "Explore the Latin Quarter and enjoy a cooking class.",
+        "accomodation": "Parisian Boutique Hotel",
+        "transport": "Walking",
+        "country": "France",
+        "region": "Île-de-France",
+        "place": "Paris"
+      },
+      {
+        "day_id": 37,
+        "itinerary_id": 5,
+        "day_number": 7,
+        "day_plan": "Visit the Musée d'Orsay and enjoy a farewell dinner.",
+        "accomodation": "Parisian Boutique Hotel",
+        "transport": "Metro",
+        "country": "France",
+        "region": "Île-de-France",
+        "place": "Paris"
+      },
+      {
+        "day_id": 38,
+        "itinerary_id": 6,
+        "day_number": 1,
+        "day_plan": "Arrive in Tokyo and check into your hotel.",
+        "accomodation": "Tokyo Grand Hotel",
+        "transport": "Taxi",
+        "country": "Japan",
+        "region": "Kanto",
+        "place": "Tokyo"
+      },
+      {
+        "day_id": 39,
+        "itinerary_id": 6,
+        "day_number": 2,
+        "day_plan": "Visit Senso-ji Temple and explore Asakusa.",
+        "accomodation": "Tokyo Grand Hotel",
+        "transport": "Subway",
+        "country": "Japan",
+        "region": "Kanto",
+        "place": "Tokyo"
+      },
+      {
+        "day_id": 40,
+        "itinerary_id": 6,
+        "day_number": 3,
+        "day_plan": "Experience Shibuya Crossing and visit Meiji Shrine.",
+        "accomodation": "Tokyo Grand Hotel",
+        "transport": "Subway",
+        "country": "Japan",
+        "region": "Kanto",
+        "place": "Tokyo"
+      },
+      {
+        "day_id": 41,
+        "itinerary_id": 6,
+        "day_number": 4,
+        "day_plan": "Travel to Kyoto and explore Fushimi Inari Shrine.",
+        "accomodation": "Kyoto Royal Hotel",
+        "transport": "Shinkansen",
+        "country": "Japan",
+        "region": "Kansai",
+        "place": "Kyoto"
+      },
+      {
+        "day_id": 42,
+        "itinerary_id": 6,
+        "day_number": 5,
+        "day_plan": "Visit Kinkaku-ji (Golden Pavilion) and Gion District.",
+        "accomodation": "Kyoto Royal Hotel",
+        "transport": "Local Bus",
+        "country": "Japan",
+        "region": "Kansai",
+        "place": "Kyoto"
+      },
+      {
+        "day_id": 43,
+        "itinerary_id": 6,
+        "day_number": 6,
+        "day_plan": "Day trip to Nara to see Todai-ji Temple and deer park.",
+        "accomodation": "Kyoto Royal Hotel",
+        "transport": "Train",
+        "country": "Japan",
+        "region": "Kansai",
+        "place": "Nara"
+      },
+      {
+        "day_id": 44,
+        "itinerary_id": 6,
+        "day_number": 7,
+        "day_plan": "Travel to Osaka and visit Osaka Castle.",
+        "accomodation": "Osaka City Hotel",
+        "transport": "Train",
+        "country": "Japan",
+        "region": "Kansai",
+        "place": "Osaka"
+      },
+      {
+        "day_id": 45,
+        "itinerary_id": 6,
+        "day_number": 8,
+        "day_plan": "Enjoy shopping in Dotonbori and Umeda.",
+        "accomodation": "Osaka City Hotel",
+        "transport": "Subway",
+        "country": "Japan",
+        "region": "Kansai",
+        "place": "Osaka"
+      },
+      {
+        "day_id": 46,
+        "itinerary_id": 6,
+        "day_number": 9,
+        "day_plan": "Return to Tokyo and prepare for departure.",
+        "accomodation": "Tokyo Grand Hotel",
+        "transport": "Shinkansen",
+        "country": "Japan",
+        "region": "Kanto",
+        "place": "Tokyo"
+      },
+      {
+        "day_id": 47,
+        "itinerary_id": 7,
+        "day_number": 1,
+        "day_plan": "Arrive in Rome and check into your hotel.",
+        "accomodation": "Rome Central Hotel",
+        "transport": "Taxi",
+        "country": "Italy",
+        "region": "Lazio",
+        "place": "Rome"
+      },
+      {
+        "day_id": 48,
+        "itinerary_id": 7,
+        "day_number": 2,
+        "day_plan": "Visit the Colosseum and Roman Forum.",
+        "accomodation": "Rome Central Hotel",
+        "transport": "Walking",
+        "country": "Italy",
+        "region": "Lazio",
+        "place": "Rome"
+      },
+      {
+        "day_id": 49,
+        "itinerary_id": 7,
+        "day_number": 3,
+        "day_plan": "Explore Vatican City and St. Peter's Basilica.",
+        "accomodation": "Rome Central Hotel",
+        "transport": "Walking",
+        "country": "Italy",
+        "region": "Lazio",
+        "place": "Rome"
+      },
+      {
+        "day_id": 50,
+        "itinerary_id": 7,
+        "day_number": 4,
+        "day_plan": "Travel to Florence and visit the Uffizi Gallery.",
+        "accomodation": "Florence Boutique Hotel",
+        "transport": "Train",
+        "country": "Italy",
+        "region": "Tuscany",
+        "place": "Florence"
+      },
+      {
+        "day_id": 51,
+        "itinerary_id": 7,
+        "day_number": 5,
+        "day_plan": "Explore the Florence Cathedral and Ponte Vecchio.",
+        "accomodation": "Florence Boutique Hotel",
+        "transport": "Walking",
+        "country": "Italy",
+        "region": "Tuscany",
+        "place": "Florence"
+      },
+      {
+        "day_id": 52,
+        "itinerary_id": 7,
+        "day_number": 6,
+        "day_plan": "Travel to Venice and explore the Grand Canal.",
+        "accomodation": "Venice Grand Hotel",
+        "transport": "Train",
+        "country": "Italy",
+        "region": "Veneto",
+        "place": "Venice"
+      },
+      {
+        "day_id": 53,
+        "itinerary_id": 7,
+        "day_number": 7,
+        "day_plan": "Visit St. Mark's Basilica and the Doge's Palace.",
+        "accomodation": "Venice Grand Hotel",
+        "transport": "Walking",
+        "country": "Italy",
+        "region": "Veneto",
+        "place": "Venice"
+      },
+      {
+        "day_id": 54,
+        "itinerary_id": 7,
+        "day_number": 8,
+        "day_plan": "Enjoy a gondola ride and explore the islands of Murano and Burano.",
+        "accomodation": "Venice Grand Hotel",
+        "transport": "Boat",
+        "country": "Italy",
+        "region": "Veneto",
+        "place": "Venice"
+      },
+      {
+        "day_id": 55,
+        "itinerary_id": 8,
+        "day_number": 1,
+        "day_plan": "Arrive in Cairo and check into your hotel.",
+        "accomodation": "Cairo City Hotel",
+        "transport": "Taxi",
+        "country": "Egypt",
+        "region": "Cairo",
+        "place": "Cairo"
+      },
+      {
+        "day_id": 56,
+        "itinerary_id": 8,
+        "day_number": 2,
+        "day_plan": "Visit the Pyramids of Giza and the Sphinx.",
+        "accomodation": "Cairo City Hotel",
+        "transport": "Taxi",
+        "country": "Egypt",
+        "region": "Cairo",
+        "place": "Giza"
+      },
+      {
+        "day_id": 57,
+        "itinerary_id": 8,
+        "day_number": 3,
+        "day_plan": "Explore the Egyptian Museum and Khan El Khalili Bazaar.",
+        "accomodation": "Cairo City Hotel",
+        "transport": "Taxi",
+        "country": "Egypt",
+        "region": "Cairo",
+        "place": "Cairo"
+      },
+      {
+        "day_id": 58,
+        "itinerary_id": 8,
+        "day_number": 4,
+        "day_plan": "Travel to Luxor and visit Karnak Temple.",
+        "accomodation": "Luxor Palace Hotel",
+        "transport": "Flight",
+        "country": "Egypt",
+        "region": "Luxor",
+        "place": "Luxor"
+      },
+      {
+        "day_id": 59,
+        "itinerary_id": 8,
+        "day_number": 5,
+        "day_plan": "Explore the Valley of the Kings and Queen Hatshepsut Temple.",
+        "accomodation": "Luxor Palace Hotel",
+        "transport": "Taxi",
+        "country": "Egypt",
+        "region": "Luxor",
+        "place": "Luxor"
+      },
+      {
+        "day_id": 60,
+        "itinerary_id": 8,
+        "day_number": 6,
+        "day_plan": "Cruise along the Nile River to Aswan.",
+        "accomodation": "Nile River Cruise",
+        "transport": "Boat",
+        "country": "Egypt",
+        "region": "Aswan",
+        "place": "Aswan"
+      },
+      {
+        "day_id": 61,
+        "itinerary_id": 8,
+        "day_number": 7,
+        "day_plan": "Visit the Abu Simbel Temples.",
+        "accomodation": "Nile River Cruise",
+        "transport": "Boat",
+        "country": "Egypt",
+        "region": "Aswan",
+        "place": "Abu Simbel"
+      },
+      {
+        "day_id": 62,
+        "itinerary_id": 9,
+        "day_number": 1,
+        "day_plan": "Arrive in Nairobi and check into your hotel.",
+        "accomodation": "Nairobi Safari Hotel",
+        "transport": "Taxi",
+        "country": "Kenya",
+        "region": "Nairobi",
+        "place": "Nairobi"
+      },
+      {
+        "day_id": 63,
+        "itinerary_id": 9,
+        "day_number": 2,
+        "day_plan": "Visit Nairobi National Park and Giraffe Centre.",
+        "accomodation": "Nairobi Safari Hotel",
+        "transport": "Taxi",
+        "country": "Kenya",
+        "region": "Nairobi",
+        "place": "Nairobi"
+      },
+      {
+        "day_id": 64,
+        "itinerary_id": 9,
+        "day_number": 3,
+        "day_plan": "Travel to Maasai Mara and enjoy a game drive.",
+        "accomodation": "Maasai Mara Lodge",
+        "transport": "Flight",
+        "country": "Kenya",
+        "region": "Rift Valley",
+        "place": "Maasai Mara"
+      },
+      {
+        "day_id": 65,
+        "itinerary_id": 9,
+        "day_number": 4,
+        "day_plan": "Enjoy a full day safari in Maasai Mara.",
+        "accomodation": "Maasai Mara Lodge",
+        "transport": "Safari Vehicle",
+        "country": "Kenya",
+        "region": "Rift Valley",
+        "place": "Maasai Mara"
+      },
+      {
+        "day_id": 66,
+        "itinerary_id": 9,
+        "day_number": 5,
+        "day_plan": "Travel to Amboseli National Park and view Mount Kilimanjaro.",
+        "accomodation": "Amboseli Lodge",
+        "transport": "Flight",
+        "country": "Kenya",
+        "region": "Rift Valley",
+        "place": "Amboseli"
+      },
+      {
+        "day_id": 67,
+        "itinerary_id": 9,
+        "day_number": 6,
+        "day_plan": "Enjoy game drives in Amboseli National Park.",
+        "accomodation": "Amboseli Lodge",
+        "transport": "Safari Vehicle",
+        "country": "Kenya",
+        "region": "Rift Valley",
+        "place": "Amboseli"
+      },
+      {
+        "day_id": 68,
+        "itinerary_id": 10,
+        "day_number": 1,
+        "day_plan": "Arrive in Reykjavik and check into your hotel.",
+        "accomodation": "Reykjavik Downtown Hotel",
+        "transport": "Taxi",
+        "country": "Iceland",
+        "region": "Capital Region",
+        "place": "Reykjavik"
+      },
+      {
+        "day_id": 69,
+        "itinerary_id": 10,
+        "day_number": 2,
+        "day_plan": "Explore the Golden Circle, including Thingvellir, Geysir, and Gullfoss.",
+        "accomodation": "Reykjavik Downtown Hotel",
+        "transport": "Tour Bus",
+        "country": "Iceland",
+        "region": "Capital Region",
+        "place": "Reykjavik"
+      },
+      {
+        "day_id": 70,
+        "itinerary_id": 10,
+        "day_number": 3,
+        "day_plan": "Relax in the Blue Lagoon.",
+        "accomodation": "Reykjavik Downtown Hotel",
+        "transport": "Bus",
+        "country": "Iceland",
+        "region": "Capital Region",
+        "place": "Reykjavik"
+      },
+      {
+        "day_id": 71,
+        "itinerary_id": 10,
+        "day_number": 4,
+        "day_plan": "Travel to Akureyri and explore the town.",
+        "accomodation": "Akureyri City Hotel",
+        "transport": "Flight",
+        "country": "Iceland",
+        "region": "Northeast Region",
+        "place": "Akureyri"
+      },
+      {
+        "day_id": 72,
+        "itinerary_id": 10,
+        "day_number": 5,
+        "day_plan": "Explore Lake Myvatn and Dettifoss Waterfall.",
+        "accomodation": "Akureyri City Hotel",
+        "transport": "Car",
+        "country": "Iceland",
+        "region": "Northeast Region",
+        "place": "Lake Myvatn"
+      },
+      {
+        "day_id": 73,
+        "itinerary_id": 10,
+        "day_number": 6,
+        "day_plan": "Return to Reykjavik and enjoy a city day.",
+        "accomodation": "Reykjavik Downtown Hotel",
+        "transport": "Flight",
+        "country": "Iceland",
+        "region": "Capital Region",
+        "place": "Reykjavik"
+      },
+      {
+        "day_id": 74,
+        "itinerary_id": 10,
+        "day_number": 7,
+        "day_plan": "Depart from Reykjavik.",
+        "accomodation": null,
+        "transport": "Taxi",
+        "country": "Iceland",
+        "region": "Capital Region",
+        "place": "Reykjavik"
+      },
+      {
+        "day_id": 75,
+        "itinerary_id": 11,
+        "day_number": 1,
+        "day_plan": "Arrive in Rio de Janeiro and check into your hotel.",
+        "accomodation": "Rio Beach Hotel",
+        "transport": "Taxi",
+        "country": "Brazil",
+        "region": "Rio de Janeiro",
+        "place": "Rio de Janeiro"
     },
     {
-      "day_id": 2,
-      "itinerary_id": 1,
-      "day_number": 2,
-      "day_plan": "Drive to Lucerne and take a boat trip on Lake Lucerne. In the afternoon, explore the Chapel Bridge and Lion Monument. End the day with a scenic walk along the lakeside promenade.",
-      "accomodation": "Lucerne Lodge",
-      "transport": "Rental car",
-      "country": "Switzerland",
-      "region": "Lucerne",
-      "place": "Lucerne"
+        "day_id": 76,
+        "itinerary_id": 11,
+        "day_number": 2,
+        "day_plan": "Visit Christ the Redeemer and Sugarloaf Mountain.",
+        "accomodation": "Rio Beach Hotel",
+        "transport": "Tour Bus",
+        "country": "Brazil",
+        "region": "Rio de Janeiro",
+        "place": "Rio de Janeiro"
     },
     {
-      "day_id": 3,
-      "itinerary_id": 1,
-      "day_number": 3,
-      "day_plan": "Hike in the Swiss Alps, starting from Engelberg. Enjoy panoramic views and a picnic lunch. Return to the hotel for a relaxing evening.",
-      "accomodation": "Engelberg Chalet",
-      "transport": "Rental car",
-      "country": "Switzerland",
-      "region": "Engelberg",
-      "place": "Swiss Alps"
+        "day_id": 77,
+        "itinerary_id": 11,
+        "day_number": 3,
+        "day_plan": "Relax on Copacabana Beach and enjoy a local seafood dinner.",
+        "accomodation": "Rio Beach Hotel",
+        "transport": "Walking",
+        "country": "Brazil",
+        "region": "Rio de Janeiro",
+        "place": "Rio de Janeiro"
     },
     {
-      "day_id": 4,
-      "itinerary_id": 1,
-      "day_number": 4,
-      "day_plan": "Visit the Interlaken region, known for its adventure sports. Go paragliding or take a relaxing boat ride on Lake Thun. In the evening, enjoy local cuisine in Interlaken.",
-      "accomodation": "Interlaken Inn",
-      "transport": "Rental car",
-      "country": "Switzerland",
-      "region": "Bern",
-      "place": "Interlaken"
+        "day_id": 78,
+        "itinerary_id": 12,
+        "day_number": 1,
+        "day_plan": "Arrive in Calgary and check into your hotel.",
+        "accomodation": "Calgary Downtown Hotel",
+        "transport": "Taxi",
+        "country": "Canada",
+        "region": "Alberta",
+        "place": "Calgary"
     },
     {
-      "day_id": 5,
-      "itinerary_id": 1,
-      "day_number": 5,
-      "day_plan": "Explore the city of Zermatt, take a cable car up to the Matterhorn Glacier Paradise. Enjoy the stunning views and perhaps a short hike.",
-      "accomodation": "Zermatt Lodge",
-      "transport": "Train",
-      "country": "Switzerland",
-      "region": "Valais",
-      "place": "Zermatt"
+        "day_id": 79,
+        "itinerary_id": 12,
+        "day_number": 2,
+        "day_plan": "Drive to Banff National Park and explore the town of Banff.",
+        "accomodation": "Banff Mountain Lodge",
+        "transport": "Car",
+        "country": "Canada",
+        "region": "Alberta",
+        "place": "Banff"
     },
     {
-      "day_id": 6,
-      "itinerary_id": 1,
-      "day_number": 6,
-      "day_plan": "A day dedicated to relaxation in the thermal baths at Leukerbad. Enjoy the serene mountain views and the healing waters.",
-      "accomodation": "Leukerbad Spa Hotel",
-      "transport": "Train",
-      "country": "Switzerland",
-      "region": "Valais",
-      "place": "Leukerbad"
+        "day_id": 80,
+        "itinerary_id": 12,
+        "day_number": 3,
+        "day_plan": "Take a scenic drive along Icefields Parkway and visit the Columbia Icefield.",
+        "accomodation": "Banff Mountain Lodge",
+        "transport": "Car",
+        "country": "Canada",
+        "region": "Alberta",
+        "place": "Columbia Icefield"
     },
     {
-      "day_id": 7,
-      "itinerary_id": 1,
-      "day_number": 7,
-      "day_plan": "Return to Zurich, free time for shopping and exploring the city’s cafes. Departure in the evening.",
-      "accomodation": "Zurich Hotel",
-      "transport": "Rental car",
-      "country": "Switzerland",
-      "region": "Zurich",
-      "place": "Zurich"
+        "day_id": 81,
+        "itinerary_id": 13,
+        "day_number": 1,
+        "day_plan": "Arrive in Bangkok and check into your hotel.",
+        "accomodation": "Bangkok City Hotel",
+        "transport": "Taxi",
+        "country": "Thailand",
+        "region": "Bangkok",
+        "place": "Bangkok"
     },
     {
-      "day_id": 8,
-      "itinerary_id": 2,
-      "day_number": 1,
-      "day_plan": "Arrive in Phuket, check-in at the resort, and relax by the beach. Explore Patong Beach's vibrant nightlife in the evening.",
-      "accomodation": "Phuket Resort",
-      "transport": "Taxi",
-      "country": "Thailand",
-      "region": "Phuket",
-      "place": "Patong Beach"
+        "day_id": 82,
+        "itinerary_id": 13,
+        "day_number": 2,
+        "day_plan": "Visit the Grand Palace and Wat Pho.",
+        "accomodation": "Bangkok City Hotel",
+        "transport": "Taxi",
+        "country": "Thailand",
+        "region": "Bangkok",
+        "place": "Bangkok"
     },
     {
-      "day_id": 9,
-      "itinerary_id": 2,
-      "day_number": 2,
-      "day_plan": "Take a day trip to Phi Phi Islands. Enjoy snorkeling, visit Maya Bay, and a beachside lunch. Return to Phuket for dinner at a seaside restaurant.",
-      "accomodation": "Phuket Resort",
-      "transport": "Boat",
-      "country": "Thailand",
-      "region": "Phuket",
-      "place": "Phi Phi Islands"
+        "day_id": 83,
+        "itinerary_id": 13,
+        "day_number": 3,
+        "day_plan": "Explore the Chatuchak Weekend Market and enjoy a traditional Thai dinner.",
+        "accomodation": "Bangkok City Hotel",
+        "transport": "Walking",
+        "country": "Thailand",
+        "region": "Bangkok",
+        "place": "Bangkok"
     },
     {
-      "day_id": 10,
-      "itinerary_id": 2,
-      "day_number": 3,
-      "day_plan": "Visit Phuket's Old Town for a cultural experience, explore the Sino-Portuguese architecture, and enjoy local delicacies.",
-      "accomodation": "Phuket Resort",
-      "transport": "Taxi",
-      "country": "Thailand",
-      "region": "Phuket",
-      "place": "Phuket Old Town"
+        "day_id": 84,
+        "itinerary_id": 14,
+        "day_number": 1,
+        "day_plan": "Arrive in Marrakech and check into your riad.",
+        "accomodation": "Marrakech Riad Hotel",
+        "transport": "Taxi",
+        "country": "Morocco",
+        "region": "Marrakech-Safi",
+        "place": "Marrakech"
     },
     {
-      "day_id": 11,
-      "itinerary_id": 2,
-      "day_number": 4,
-      "day_plan": "Spend the day at Phang Nga Bay. Go on a boat tour to James Bond Island and enjoy kayaking through the limestone caves.",
-      "accomodation": "Phuket Resort",
-      "transport": "Boat",
-      "country": "Thailand",
-      "region": "Phang Nga",
-      "place": "Phang Nga Bay"
+        "day_id": 85,
+        "itinerary_id": 14,
+        "day_number": 2,
+        "day_plan": "Visit the Jardin Majorelle and the Saadian Tombs.",
+        "accomodation": "Marrakech Riad Hotel",
+        "transport": "Taxi",
+        "country": "Morocco",
+        "region": "Marrakech-Safi",
+        "place": "Marrakech"
     },
     {
-      "day_id": 12,
-      "itinerary_id": 2,
-      "day_number": 5,
-      "day_plan": "Relax at Kata Beach, try out surfing, and enjoy a Thai massage in the afternoon. Evening sunset at Promthep Cape.",
-      "accomodation": "Phuket Resort",
-      "transport": "Taxi",
-      "country": "Thailand",
-      "region": "Phuket",
-      "place": "Kata Beach"
+        "day_id": 86,
+        "itinerary_id": 14,
+        "day_number": 3,
+        "day_plan": "Explore the souks and enjoy a traditional Moroccan dinner.",
+        "accomodation": "Marrakech Riad Hotel",
+        "transport": "Walking",
+        "country": "Morocco",
+        "region": "Marrakech-Safi",
+        "place": "Marrakech"
     },
     {
-      "day_id": 13,
-      "itinerary_id": 2,
-      "day_number": 6,
-      "day_plan": "Visit the Big Buddha and Wat Chalong temple. Spend the afternoon at a cooking class learning Thai cuisine.",
-      "accomodation": "Phuket Resort",
-      "transport": "Taxi",
-      "country": "Thailand",
-      "region": "Phuket",
-      "place": "Wat Chalong"
+        "day_id": 87,
+        "itinerary_id": 15,
+        "day_number": 1,
+        "day_plan": "Arrive in Oslo and check into your hotel.",
+        "accomodation": "Oslo City Hotel",
+        "transport": "Taxi",
+        "country": "Norway",
+        "region": "Oslo",
+        "place": "Oslo"
     },
     {
-      "day_id": 14,
-      "itinerary_id": 2,
-      "day_number": 7,
-      "day_plan": "Day trip to the Similan Islands for some of the best diving spots in Thailand. Return in the evening to Phuket.",
-      "accomodation": "Phuket Resort",
-      "transport": "Boat",
-      "country": "Thailand",
-      "region": "Phang Nga",
-      "place": "Similan Islands"
+        "day_id": 88,
+        "itinerary_id": 15,
+        "day_number": 2,
+        "day_plan": "Take a scenic train ride to Bergen and explore the city.",
+        "accomodation": "Bergen Harbor Hotel",
+        "transport": "Train",
+        "country": "Norway",
+        "region": "Hordaland",
+        "place": "Bergen"
     },
     {
-      "day_id": 15,
-      "itinerary_id": 2,
-      "day_number": 8,
-      "day_plan": "Explore the vibrant markets of Phuket, including the Weekend Night Market. Enjoy street food and shop for souvenirs.",
-      "accomodation": "Phuket Resort",
-      "transport": "Taxi",
-      "country": "Thailand",
-      "region": "Phuket",
-      "place": "Phuket"
-    },
-    {
-      "day_id": 16,
-      "itinerary_id": 2,
-      "day_number": 9,
-      "day_plan": "Relaxing day at the resort, enjoying spa services and leisure time by the pool. Evening dinner cruise along the coast.",
-      "accomodation": "Phuket Resort",
-      "transport": "Taxi",
-      "country": "Thailand",
-      "region": "Phuket",
-      "place": "Phuket"
-    },
-    {
-      "day_id": 17,
-      "itinerary_id": 2,
-      "day_number": 10,
-      "day_plan": "Final day for shopping and last-minute exploration. Departure in the evening.",
-      "accomodation": "Phuket Resort",
-      "transport": "Taxi",
-      "country": "Thailand",
-      "region": "Phuket",
-      "place": "Phuket"
-    },
-    {
-      "day_id": 18,
-      "itinerary_id": 3,
-      "day_number": 1,
-      "day_plan": "Arrival in Tokyo, check-in at the hotel. Visit the Meiji Shrine, stroll through Yoyogi Park, and explore the bustling streets of Shibuya. Dinner at a sushi restaurant in Tsukiji.",
-      "accomodation": "Tokyo Central Hotel",
-      "transport": "Public transport",
-      "country": "Japan",
-      "region": "Kanto",
-      "place": "Tokyo"
-    },
-    {
-      "day_id": 19,
-      "itinerary_id": 3,
-      "day_number": 2,
-      "day_plan": "Day trip to Nikko to see the Toshogu Shrine and Kegon Falls. Enjoy the natural beauty of Nikko National Park. Return to Tokyo in the evening.",
-      "accomodation": "Tokyo Central Hotel",
-      "transport": "Train",
-      "country": "Japan",
-      "region": "Kanto",
-      "place": "Nikko"
-    },
-    {
-      "day_id": 20,
-      "itinerary_id": 3,
-      "day_number": 3,
-      "day_plan": "Explore the traditional Asakusa district, visit Senso-ji Temple, and shop at Nakamise Street. Afternoon visit to Akihabara for electronics and anime goods.",
-      "accomodation": "Tokyo Central Hotel",
-      "transport": "Public transport",
-      "country": "Japan",
-      "region": "Kanto",
-      "place": "Tokyo"
-    },
-    {
-      "day_id": 21,
-      "itinerary_id": 3,
-      "day_number": 4,
-      "day_plan": "Visit Tokyo Tower and Zojoji Temple. Afternoon tea at Roppongi Hills, followed by an evening at Tokyo Disneyland.",
-      "accomodation": "Tokyo Central Hotel",
-      "transport": "Public transport",
-      "country": "Japan",
-      "region": "Kanto",
-      "place": "Tokyo"
-    },
-    {
-      "day_id": 22,
-      "itinerary_id": 3,
-      "day_number": 5,
-      "day_plan": "Travel to Kyoto, visit Fushimi Inari Shrine, and stroll through the bamboo forest in Arashiyama. Dinner in Gion.",
-      "accomodation": "Kyoto Ryokan",
-      "transport": "Bullet train",
-      "country": "Japan",
-      "region": "Kansai",
-      "place": "Kyoto"
-    },
-    {
-      "day_id": 23,
-      "itinerary_id": 3,
-      "day_number": 6,
-      "day_plan": "Explore the temples of Kyoto, including Kinkaku-ji (Golden Pavilion) and Ryoan-ji. Afternoon visit to Nijo Castle.",
-      "accomodation": "Kyoto Ryokan",
-      "transport": "Public transport",
-      "country": "Japan",
-      "region": "Kansai",
-      "place": "Kyoto"
-    },
-    {
-      "day_id": 24,
-      "itinerary_id": 3,
-      "day_number": 7,
-      "day_plan": "Visit the historical city of Nara, see the Great Buddha at Todai-ji Temple and feed the deer in Nara Park. Return to Kyoto in the evening.",
-      "accomodation": "Kyoto Ryokan",
-      "transport": "Train",
-      "country": "Japan",
-      "region": "Kansai",
-      "place": "Nara"
-    },
-    {
-      "day_id": 25,
-      "itinerary_id": 3,
-      "day_number": 8,
-      "day_plan": "Travel to Osaka, visit Osaka Castle, and explore the Umeda Sky Building. Evening in the Dotonbori area.",
-      "accomodation": "Osaka Hotel",
-      "transport": "Train",
-      "country": "Japan",
-      "region": "Kansai",
-      "place": "Osaka"
-    },
-    {
-      "day_id": 26,
-      "itinerary_id": 3,
-      "day_number": 9,
-      "day_plan": "Visit Universal Studios Japan. Enjoy various rides and shows. Evening return to Osaka for dinner.",
-      "accomodation": "Osaka Hotel",
-      "transport": "Train",
-      "country": "Japan",
-      "region": "Kansai",
-      "place": "Osaka"
-    },
-    {
-      "day_id": 27,
-      "itinerary_id": 3,
-      "day_number": 10,
-      "day_plan": "Day trip to Hiroshima, visit the Peace Memorial Park and Museum. Afternoon ferry to Miyajima to see the famous floating torii gate.",
-      "accomodation": "Hiroshima Hotel",
-      "transport": "Train and Ferry",
-      "country": "Japan",
-      "region": "Chugoku",
-      "place": "Hiroshima and Miyajima"
-    },
-    {
-      "day_id": 28,
-      "itinerary_id": 3,
-      "day_number": 11,
-      "day_plan": "Return to Osaka, visit the Kaiyukan Aquarium, and spend the afternoon at the Osaka Science Museum. Evening flight to Okinawa.",
-      "accomodation": "Okinawa Resort",
-      "transport": "Flight",
-      "country": "Japan",
-      "region": "Okinawa",
-      "place": "Okinawa"
-    },
-    {
-      "day_id": 29,
-      "itinerary_id": 3,
-      "day_number": 12,
-      "day_plan": "Explore the beaches of Okinawa, visit Shurijo Castle, and enjoy local cuisine. Relax by the beach in the evening.",
-      "accomodation": "Okinawa Resort",
-      "transport": "Car rental",
-      "country": "Japan",
-      "region": "Okinawa",
-      "place": "Okinawa"
-    },
-    {
-      "day_id": 30,
-      "itinerary_id": 3,
-      "day_number": 13,
-      "day_plan": "Take a boat trip to the Kerama Islands, known for their crystal-clear waters and snorkeling spots. Return to Okinawa for a farewell dinner.",
-      "accomodation": "Okinawa Resort",
-      "transport": "Boat",
-      "country": "Japan",
-      "region": "Okinawa",
-      "place": "Kerama Islands"
-    },
-    {
-      "day_id": 31,
-      "itinerary_id": 3,
-      "day_number": 14,
-      "day_plan": "Final day in Okinawa, relaxing at the beach or exploring local markets. Departure in the evening.",
-      "accomodation": "Okinawa Resort",
-      "transport": "Car rental",
-      "country": "Japan",
-      "region": "Okinawa",
-      "place": "Okinawa"
+        "day_id": 89,
+        "itinerary_id": 15,
+        "day_number": 3,
+        "day_plan": "Enjoy a fjord cruise and explore the stunning landscapes.",
+        "accomodation": "Bergen Harbor Hotel",
+        "transport": "Boat",
+        "country": "Norway",
+        "region": "Hordaland",
+        "place": "Bergen"
     }
-  ],
+    ]
+  ,
+  
   "comments": [
     {
       "comment_id": 1,
-      "user_id": 2,
+      "user_id": 1,
       "itinerary_id": 1,
-      "comment_body": "This itinerary looks amazing! Any tips for the best time to visit?",
-      "created_at": "2023-07-26T12:00:00Z"
+      "comment_body": "This looks like an amazing trip! Can't wait to try this out.",
+      "created_at": "2023-08-15T12:34:56.000Z"
     },
     {
       "comment_id": 2,
-      "user_id": 1,
-      "itinerary_id": 2,
-      "comment_body": "I've always wanted to go to Thailand, thanks for the detailed plan!",
-      "created_at": "2023-08-11T09:30:00Z"
+      "user_id": 2,
+      "itinerary_id": 1,
+      "comment_body": "Thanks for sharing this itinerary! Very helpful.",
+      "created_at": "2023-08-16T08:23:45.000Z"
     },
     {
       "comment_id": 3,
       "user_id": 3,
+      "itinerary_id": 2,
+      "comment_body": "I love the detailed descriptions. Makes planning my trip so much easier!",
+      "created_at": "2023-08-17T15:45:23.000Z"
+    },
+    {
+      "comment_id": 4,
+      "user_id": 4,
+      "itinerary_id": 2,
+      "comment_body": "Great itinerary! Perfect for my upcoming vacation.",
+      "created_at": "2023-08-18T10:12:34.000Z"
+    },
+    {
+      "comment_id": 5,
+      "user_id": 5,
       "itinerary_id": 3,
-      "comment_body": "Japan is my favorite destination! Can't wait to try this itinerary.",
-      "created_at": "2023-09-02T14:00:00Z"
+      "comment_body": "Can't wait to follow this itinerary on my trip. Thanks for sharing!",
+      "created_at": "2023-08-19T18:56:12.000Z"
+    },
+    {
+      "comment_id": 6,
+      "user_id": 1,
+      "itinerary_id": 3,
+      "comment_body": "This is exactly what I was looking for. Thanks!",
+      "created_at": "2023-08-20T14:23:09.000Z"
+    },
+    {
+      "comment_id": 7,
+      "user_id": 2,
+      "itinerary_id": 4,
+      "comment_body": "Very well-planned itinerary. Thanks for the tips!",
+      "created_at": "2023-08-21T09:45:56.000Z"
+    },
+    {
+      "comment_id": 8,
+      "user_id": 3,
+      "itinerary_id": 4,
+      "comment_body": "This itinerary is a lifesaver. Thanks for the great advice!",
+      "created_at": "2023-08-22T07:12:34.000Z"
+    },
+    {
+      "comment_id": 9,
+      "user_id": 4,
+      "itinerary_id": 5,
+      "comment_body": "I'm so excited to try out this itinerary. Thanks for sharing!",
+      "created_at": "2023-08-23T11:56:45.000Z"
+    },
+    {
+      "comment_id": 10,
+      "user_id": 5,
+      "itinerary_id": 5,
+      "comment_body": "This is exactly what I needed for my trip planning. Thanks!",
+      "created_at": "2023-08-24T16:34:12.000Z"
+    },
+    {
+      "comment_id": 11,
+      "user_id": 1,
+      "itinerary_id": 6,
+      "comment_body": "Thanks for sharing this itinerary! Very helpful.",
+      "created_at": "2023-08-25T08:23:45.000Z"
+    },
+    {
+      "comment_id": 12,
+      "user_id": 2,
+      "itinerary_id": 6,
+      "comment_body": "I love the detailed descriptions. Makes planning my trip so much easier!",
+      "created_at": "2023-08-26T15:45:23.000Z"
+    },
+    {
+      "comment_id": 13,
+      "user_id": 3,
+      "itinerary_id": 7,
+      "comment_body": "Great itinerary! Perfect for my upcoming vacation.",
+      "created_at": "2023-08-27T10:12:34.000Z"
+    },
+    {
+      "comment_id": 14,
+      "user_id": 4,
+      "itinerary_id": 7,
+      "comment_body": "Can't wait to follow this itinerary on my trip. Thanks for sharing!",
+      "created_at": "2023-08-28T18:56:12.000Z"
+    },
+    {
+      "comment_id": 15,
+      "user_id": 5,
+      "itinerary_id": 8,
+      "comment_body": "This is exactly what I was looking for. Thanks!",
+      "created_at": "2023-08-29T14:23:09.000Z"
+    },
+    {
+      "comment_id": 16,
+      "user_id": 1,
+      "itinerary_id": 8,
+      "comment_body": "Very well-planned itinerary. Thanks for the tips!",
+      "created_at": "2023-08-30T09:45:56.000Z"
+    },
+    {
+      "comment_id": 17,
+      "user_id": 1,
+      "itinerary_id": 9,
+      "comment_body": "This itinerary is a lifesaver. Thanks for the great advice!",
+      "created_at": "2023-08-31T07:12:34.000Z"
+    },
+    {
+      "comment_id": 18,
+      "user_id": 2,
+      "itinerary_id": 9,
+      "comment_body": "I'm so excited to try out this itinerary. Thanks for sharing!",
+      "created_at": "2023-09-01T11:56:45.000Z"
+    },
+    {
+      "comment_id": 19,
+      "user_id": 3,
+      "itinerary_id": 10,
+      "comment_body": "Thanks for sharing this itinerary! Very helpful.",
+      "created_at": "2023-09-02T08:23:45.000Z"
+    },
+    {
+      "comment_id": 20,
+      "user_id": 2,
+      "itinerary_id": 10,
+      "comment_body": "I love the detailed descriptions. Makes planning my trip so much easier!",
+      "created_at": "2023-09-03T15:45:23.000Z"
     }
   ],
   "itinerary_votes": [
     {
       "vote_id": 1,
       "user_id": 1,
-      "itinerary_id": 2,
+      "itinerary_id": 1,
       "vote_value": 1
     },
     {
       "vote_id": 2,
       "user_id": 2,
-      "itinerary_id": 2,
+      "itinerary_id": 1,
       "vote_value": 1
     },
     {
       "vote_id": 3,
       "user_id": 3,
       "itinerary_id": 2,
-      "vote_value": -1
+      "vote_value": 1
     },
     {
       "vote_id": 4,
-      "user_id": 2,
-      "itinerary_id": 1,
-      "vote_value": -1
+      "user_id": 4,
+      "itinerary_id": 2,
+      "vote_value": 1
     },
     {
       "vote_id": 5,
+      "user_id": 5,
+      "itinerary_id": 3,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 6,
+      "user_id": 1,
+      "itinerary_id": 3,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 7,
+      "user_id": 2,
+      "itinerary_id": 4,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 8,
       "user_id": 3,
-      "itinerary_id": 1,
+      "itinerary_id": 4,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 9,
+      "user_id": 4,
+      "itinerary_id": 5,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 10,
+      "user_id": 1,
+      "itinerary_id": 5,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 11,
+      "user_id": 1,
+      "itinerary_id": 6,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 12,
+      "user_id": 2,
+      "itinerary_id": 6,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 13,
+      "user_id": 3,
+      "itinerary_id": 7,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 14,
+      "user_id": 4,
+      "itinerary_id": 7,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 15,
+      "user_id": 5,
+      "itinerary_id": 8,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 16,
+      "user_id": 1,
+      "itinerary_id": 8,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 17,
+      "user_id": 1,
+      "itinerary_id": 9,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 18,
+      "user_id": 2,
+      "itinerary_id": 9,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 19,
+      "user_id": 1,
+      "itinerary_id": 10,
+      "vote_value": 1
+    },
+    {
+      "vote_id": 20,
+      "user_id": 2,
+      "itinerary_id": 10,
       "vote_value": 1
     }
   ]
