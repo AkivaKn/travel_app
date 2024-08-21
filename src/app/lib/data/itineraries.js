@@ -79,9 +79,11 @@ export async function getItineraryById(id) {
     WHERE comments.itinerary_id= ${id}
     ORDER BY comments.created_at DESC;`;
 
+    const itineraryDays = daysRes.rows.sort((a, b) => a.day_number - b.day_number)
+
     const itineraryObject = {
       itineraryInfo: itineraryRes.rows[0],
-      itineraryDays: daysRes.rows,
+      itineraryDays: itineraryDays,
       itineraryComments: commentsRes.rows,
     };
 
