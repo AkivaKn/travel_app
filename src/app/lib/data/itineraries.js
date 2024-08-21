@@ -35,12 +35,14 @@ export async function postItinerary(formData, daysArray) {
     if (itinerary_image.size > 0) {
       itinerary_image_url = await uploadImage(itinerary_image);
     }
+  console.log('postttt');
+
     const itineraries_res = await sql`
       INSERT INTO itineraries 
       (title, itinerary_image_url, itinerary_description, user_id, budget)
       VALUES (${title}, ${itinerary_image_url}, ${itinerary_description}, ${user_id}, ${budget})
       RETURNING *`;
-
+console.log(itineraries_res);
     const itineraryInfo = itineraries_res.rows[0];
     const itineraryDays = await postDays(daysArray, itineraryInfo.itinerary_id);
 
@@ -173,7 +175,7 @@ export async function patchItinerary(
   }
 }
 
-export async function deleteItinerary({itinerary_id }) {
+export async function deleteItinerary(itinerary_id) {
   const session = await auth();
   const currentUserId = session?.user?.user_id;
 
@@ -183,12 +185,12 @@ export async function deleteItinerary({itinerary_id }) {
         WHERE itinerary_id = ${itinerary_id}
         AND user_id = ${currentUserId}
         RETURNING *`;
-
     if (deletedItinerary.rows.length === 0) {
       throw new Error();
     }
     return deletedItinerary.rows[0];
   } catch (error) {
+    console.log('error');
     return error;
   }
 }

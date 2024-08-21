@@ -8,7 +8,6 @@ import { patchItinerary, postItinerary } from "../lib/data/itineraries";
 import { validateItinerariesForm } from "../utils/validation_utils";
 import { useRouter } from "next/navigation";
 
-//route caching
 export default function UpdateItineraryForm({ itinerary, page }) {
   const router = useRouter();
   let newItineraryDays;
@@ -39,7 +38,7 @@ export default function UpdateItineraryForm({ itinerary, page }) {
         city: "",
       },
     ];
-    //newBudget = 1;
+    newBudget = 1;
   }
 
   const [budget, setBudget] = useState(newBudget);
@@ -104,65 +103,68 @@ export default function UpdateItineraryForm({ itinerary, page }) {
   }
 
   return (
-    <div className='w-full max-w-full flex-center flex-col '>
+    <div className="w-full max-w-full flex-center flex-col ">
       <form
-        className='mt-10 w-full max-w-5xl flex flex-col gap-7 glassmorphism'
-        action={createItinerary}>
+        className="mt-10 w-full max-w-5xl flex flex-col gap-7 glassmorphism"
+        action={createItinerary}
+      >
         <section>
-          <div className='mb-2 '>
+          <div className="mb-2 ">
             <label
-              className='font-satoshi font-semibold text-base text-gray-700'
-              htmlFor='title'>
+              className="font-satoshi font-semibold text-base text-gray-700"
+              htmlFor="title"
+            >
               Title
             </label>
           </div>
           {errors.title && <p>{errors.title}</p>}
 
           <input
-            className='form_input'
-            id='title'
-            name='title'
-            type='text'
-            placeholder='Enter itinerary title here...'
+            className="form_input"
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Enter itinerary title here..."
             defaultValue={itinerary?.itineraryInfo?.title}
           />
         </section>
 
         <section>
-          <div className='mb-2 block'>
+          <div className="mb-2 block">
             <label
-              className='font-satoshi font-semibold text-base text-gray-700'
-              htmlFor='itineraryDescription'>
+              className="font-satoshi font-semibold text-base text-gray-700"
+              htmlFor="itineraryDescription"
+            >
               Description
             </label>
           </div>
           <textarea
-            className='form_textarea'
-            id='itineraryDescription'
-            name='itineraryDescription'
-            placeholder='Enter a short description of your itinerary here...
-            '
-            defaultValue={
-              itinerary?.itineraryInfo?.itinerary_description
-            }></textarea>
+            className="form_textarea"
+            id="itineraryDescription"
+            name="itineraryDescription"
+            placeholder="Enter a short description of your itinerary here...
+            "
+            defaultValue={itinerary?.itineraryInfo?.itinerary_description}
+          ></textarea>
         </section>
 
         <section>
-          <div className='mb-2 block'>
+          <div className="mb-2 block">
             <label
-              className='font-satoshi font-semibold text-base text-gray-700'
-              htmlFor='slider'>
+              className="font-satoshi font-semibold text-base text-gray-700"
+              htmlFor="slider"
+            >
               Budget
             </label>
 
-            <input type='hidden' id='budget' name='budget' value={budget} />
+            <input type="hidden" id="budget" name="budget" value={budget} />
           </div>
 
           <ReactSlider
-            id='slider'
-            className='horizontal-slider w-full'
-            thumbClassName='example-thumb'
-            trackClassName='example-track'
+            id="slider"
+            className="horizontal-slider w-full"
+            thumbClassName="example-thumb"
+            trackClassName="example-track"
             defaultValue={budget}
             onAfterChange={(newValue, thumbIndex) => {
               //console.log(newValue, "<--new value budget");
@@ -180,43 +182,45 @@ export default function UpdateItineraryForm({ itinerary, page }) {
 
         <section>
           <img src={image} />
-          <div className='mb-2 block'>
+          <div className="mb-2 block">
             <label
-              htmlFor='itineraryImage'
-              className='font-satoshi font-semibold text-base text-gray-700'>
+              htmlFor="itineraryImage"
+              className="font-satoshi font-semibold text-base text-gray-700"
+            >
               Upload Image (max 4.5mb)
             </label>
           </div>
           <label>
             <input
-              className='text-sm text-grey-500
+              className="text-sm text-grey-500
               file:mr-5 file:py-3 file:px-10
               file:rounded-full file:border-0
               file:text-md file:font-semibold  file:text-white
               file:bg-gradient-to-r file:from-blue-600 file:to-amber-600
-              hover:file:cursor-pointer hover:file:opacity-80'
-              id='itineraryImage'
-              name='itineraryImage'
-              type='file'
-              accept='image/*'
+              hover:file:cursor-pointer hover:file:opacity-80"
+              id="itineraryImage"
+              name="itineraryImage"
+              type="file"
+              accept="image/*"
               onChange={handleShowImage}
             />
           </label>
         </section>
 
-        <ul className='border-t-2 border-b-2 border-black gap-7' id='daysList'>
+        <ul className="border-t-2 border-b-2 border-black gap-7" id="daysList">
           {dayInputs.map((day, index) => {
             return (
-              <li className='border-b-2 border-grey' key={index}>
-                <h3 className='font-satoshi font-semibold text-base text-gray-700 py-2'>{`Day ${
+              <li className="border-b-2 border-grey" key={index}>
+                <h3 className="font-satoshi font-semibold text-base text-gray-700 py-2">{`Day ${
                   index + 1
                 }`}</h3>
 
-                <section className='mb-7'>
-                  <div className='mb-2 block'>
+                <section className="mb-7">
+                  <div className="mb-2 block">
                     <label
-                      className='font-satoshi font-normal text-base text-gray-700'
-                      htmlFor='dayPlan'>
+                      className="font-satoshi font-normal text-base text-gray-700"
+                      htmlFor="dayPlan"
+                    >
                       Day Plan
                     </label>
                   </div>
@@ -226,19 +230,21 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                     }
                   })}
                   <textarea
-                    className='form_textarea'
-                    id='dayPlan'
-                    name='dayPlan'
+                    className="form_textarea"
+                    id="dayPlan"
+                    name="dayPlan"
                     value={day.dayPlan}
                     onChange={(event) => handleFormChange(index, event)}
-                    placeholder="Describe the day's activities here..."></textarea>
+                    placeholder="Describe the day's activities here..."
+                  ></textarea>
                 </section>
 
-                <section className='mb-7'>
-                  <div className='mb-2 block'>
+                <section className="mb-7">
+                  <div className="mb-2 block">
                     <label
-                      className='font-satoshi font-normal text-base text-gray-700'
-                      htmlFor='transport'>
+                      className="font-satoshi font-normal text-base text-gray-700"
+                      htmlFor="transport"
+                    >
                       Transport
                     </label>
                   </div>
@@ -248,12 +254,12 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                     }
                   })}
                   <input
-                    className='form_input'
-                    id='transport'
-                    name='transport'
-                    type='text'
+                    className="form_input"
+                    id="transport"
+                    name="transport"
+                    type="text"
                     value={day.transport}
-                    placeholder='Describe any transport used...'
+                    placeholder="Describe any transport used..."
                     onChange={(event) => handleFormChange(index, event)}
                   />
                 </section>
@@ -266,11 +272,12 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                   key={index}
                 />
 
-                <section className='mb-7'>
-                  <div className='mb-2 block'>
+                <section className="mb-7">
+                  <div className="mb-2 block">
                     <label
-                      className='font-satoshi font-normal text-base text-gray-700'
-                      htmlFor='accomodation'>
+                      className="font-satoshi font-normal text-base text-gray-700"
+                      htmlFor="accomodation"
+                    >
                       Accomodation
                     </label>
                   </div>
@@ -280,18 +287,19 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                     }
                   })}
                   <input
-                    className='form_input'
-                    id='accomodation'
-                    name='accomodation'
-                    type='text'
-                    placeholder='Recommend accomodation (optional)'
+                    className="form_input"
+                    id="accomodation"
+                    name="accomodation"
+                    type="text"
+                    placeholder="Recommend accomodation (optional)"
                     value={day.accomodation}
                     onChange={(event) => handleFormChange(index, event)}
                   />
                 </section>
                 <Button
-                  className='red_btn my-5 w-52'
-                  onClick={() => removeDay(index)}>
+                  className="red_btn my-5 w-52"
+                  onClick={() => removeDay(index)}
+                >
                   Remove Day
                 </Button>
               </li>
@@ -299,13 +307,13 @@ export default function UpdateItineraryForm({ itinerary, page }) {
           })}
         </ul>
 
-        <div className='w-full'>
-          <Button className='outline_btn w-52' onClick={addAnotherDay}>
+        <div className="w-full">
+          <Button className="outline_btn w-52" onClick={addAnotherDay}>
             Add Another Day
           </Button>
         </div>
 
-        <Button className='black_btn' type='submit'>
+        <Button className="black_btn" type="submit">
           Submit
         </Button>
       </form>
