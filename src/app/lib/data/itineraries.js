@@ -5,23 +5,6 @@ import { uploadImage } from "./images";
 import { del } from "@vercel/blob";
 import { postDays } from "./days";
 
-export async function getPopularItineraries() {
-  try {
-    const res = await sql`
-        SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
-        FROM itineraries i
-        FULL JOIN itinerary_votes v
-        ON i.itinerary_id=v.itinerary_id
-        GROUP BY i.itinerary_id
-        ORDER BY total_votes DESC
-        LIMIT 3`;
-    return res.rows;
-  } catch (error) {
-    console.error("Data fetching error:", error);
-    throw new Error("500: Server error");
-  }
-}
-
 export async function postItinerary(formData, daysArray) {
   const session = await auth();
   const user_id = session.user.user_id;
@@ -35,14 +18,13 @@ export async function postItinerary(formData, daysArray) {
     if (itinerary_image.size > 0) {
       itinerary_image_url = await uploadImage(itinerary_image);
     }
-  console.log('postttt');
 
     const itineraries_res = await sql`
       INSERT INTO itineraries 
       (title, itinerary_image_url, itinerary_description, user_id, budget)
       VALUES (${title}, ${itinerary_image_url}, ${itinerary_description}, ${user_id}, ${budget})
       RETURNING *`;
-console.log(itineraries_res);
+    console.log(itineraries_res);
     const itineraryInfo = itineraries_res.rows[0];
     const itineraryDays = await postDays(daysArray, itineraryInfo.itinerary_id);
 
@@ -81,7 +63,9 @@ export async function getItineraryById(id) {
     WHERE comments.itinerary_id= ${id}
     ORDER BY comments.created_at DESC;`;
 
-    const itineraryDays = daysRes.rows.sort((a, b) => a.day_number - b.day_number)
+    const itineraryDays = daysRes.rows.sort(
+      (a, b) => a.day_number - b.day_number
+    );
 
     const itineraryObject = {
       itineraryInfo: itineraryRes.rows[0],
@@ -96,9 +80,9 @@ export async function getItineraryById(id) {
   }
 }
 
-export async function getItineraries() {
+export async function getItineraries(limit) {
   try {
-    const allItinerariesSQL = await sql`
+    let sqlString = `
     SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) AS number_of_days, uv.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
     FROM itineraries i 
     LEFT JOIN days d
@@ -124,7 +108,12 @@ export async function getItineraries() {
     ) loc
     ON i.itinerary_id=loc.itinerary_id
     GROUP BY i.itinerary_id, uv.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
-    ;`;
+    `;
+
+    if (limit) {
+      sqlString += `LIMIT ${limit}`;
+    }
+    const allItinerariesSQL = await sql.query(sqlString);
 
     return allItinerariesSQL.rows;
   } catch (error) {
@@ -192,7 +181,7 @@ export async function deleteItinerary(itinerary_id) {
     }
     return deletedItinerary.rows[0];
   } catch (error) {
-    console.log('error');
+    console.log("error");
     return error;
   }
 }
