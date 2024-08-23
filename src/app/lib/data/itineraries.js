@@ -115,6 +115,7 @@ export async function getItineraries(limit) {
     }
     const allItinerariesSQL = await sql.query(sqlString);
 
+
     return allItinerariesSQL.rows;
   } catch (error) {
     console.error("Data fetching error:", error);

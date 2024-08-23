@@ -64,7 +64,7 @@ export default function CommentCard({ session, comment, setComments }) {
    }
 
   return (
-    <section className="border border-gray-300 rounded-lg p-6 mb-6 shadow-lg bg-emerald-100">
+    <section className=" rounded-xl border border-gray-300 bg-white p-5">
       <div className="flex justify-between items-center mb-2">
         <h1 className="text-xl font-semibold">{comment.username}</h1>
         <p className="text-lg text-gray-900 ">

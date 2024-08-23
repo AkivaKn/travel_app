@@ -44,13 +44,13 @@ export default function CommentForm({ session, itineraryId, setComments }) {
       }}
       method="post"
       >
-           <div className="flex justify-between items-end mb-4" >
+      <div className="flex flex-col justify-between items-end mb-4 rounded-xl border border-gray-300 bg-white p-5" >
       <textarea
         name="commentBody"
         placeholder={`Comment as ${session?.user?.username}`}
         value={commentInput}
         onChange={handleChange}
-        className="form_input"
+        className="form_input mb-4"
         maxLength={300}
           ></textarea>
           {error && <p>{error}</p>}

@@ -3,7 +3,7 @@ export function validateSignInForm({ email, password }) {
   const emailRegex = /^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/;
   const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,16}$/;
   if (!email) {
-    errors.email = "Please provide your email address.";
+    errors.email = "Email is required.";
   } else if (!emailRegex.test(email) || email.length > 320) {
     errors.email = "Email is invalid.";
   }
@@ -47,12 +47,17 @@ export function validateRegisterForm({
   if (!password) {
     errors.password = "Password is required.";
   } else if (password !== confirmPassword) {
-    errors.password = "Passwords must match.";
+    errors.password = "Passwords must match."
+    errors.confirmPassword="Passwords must match.";
   } else if (password.length < 8 || password.length > 16) {
     errors.password = "Password must be between 8 and 16 characters.";
   } else if (!passwordRegex.test(password)) {
     errors.password =
       "Password must contain at least one lowercase letter and one digit.";
+  }
+
+  if(!confirmPassword){
+    errors.confirmPassword = "Please confirm password."
   }
 
   if (bio.length > 1000) {

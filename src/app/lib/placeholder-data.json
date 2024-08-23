@@ -5,8 +5,7 @@
       "username": "Traveler101",
       "email": "traveler101@example.com",
       "password": "password123",
-      "bio": "Avid traveler and adventure seeker. Love exploring new cultures.",
-      "avatar_img_url": "https://example.com/avatar1.jpg"
+      "bio": "Avid traveler and adventure seeker. Love exploring new cultures."
     },
     {
       "user_id": 2,
@@ -14,7 +13,7 @@
       "email": "globetrotter@example.com",
       "password": "password456",
       "bio": "Exploring the world, one country at a time.",
-      "avatar_img_url": "https://example.com/avatar2.jpg"
+      "avatar_img_url": "https://www.itij.com/sites/itij/files/2020-02/happy-female-traveller.jpg"
     },
     {
       "user_id": 3,
@@ -22,7 +21,7 @@
       "email": "wanderlust@example.com",
       "password": "password789",
       "bio": "Photographer with a passion for travel and adventure.",
-      "avatar_img_url": "https://example.com/avatar3.jpg"
+      "avatar_img_url": "https://i0.wp.com/travelradar.aero/wp-content/uploads/2021/08/philipp-kammerer-6Mxb_mZ_Q8E-unsplash.jpg?fit=2449%2C1633&ssl=1"
     },
     {
       "user_id": 4,
@@ -30,7 +29,7 @@
       "email": "adventurequeen@example.com",
       "password": "password321",
       "bio": "Living life on the edge. Mountains, oceans, and everything in between.",
-      "avatar_img_url": "https://example.com/avatar4.jpg"
+      "avatar_img_url": "https://img.freepik.com/premium-photo/portrait-female-traveler-mountains-adventure-travel-hiking-concept-happy-woman-red-cap-enjoying-sunlight-hike-mountains-female-tourist-with-glasses_135372-602.jpg"
     },
     {
       "user_id": 5,
@@ -38,14 +37,14 @@
       "email": "culturevulture@example.com",
       "password": "password654",
       "bio": "Art and history enthusiast. Exploring the cultural wonders of the world.",
-      "avatar_img_url": "https://example.com/avatar5.jpg"
+      "avatar_img_url": "https://preview.redd.it/male-25-profile-review-no-likes-since-change-v0-jfpqox0ms76d1.jpg?width=640&crop=smart&auto=webp&s=140fc8019f0ac028104393e74cca97c452e091f3"
     }
   ],
   "itineraries": [
     {
       "itinerary_id": 1,
       "title": "Greek Adventure",
-      "itinerary_image_url": "https://example.com/itinerary1.jpg",
+      "itinerary_image_url": "https://media.gadventures.com/media-server/cache/c7/e5/c7e55bf3509aec7ecbe5f988ab075670.jpg",
       "itinerary_description": "Explore the wonders of ancient Greece.",
       "user_id": 1,
       "created_at": "2024-08-01",
@@ -54,7 +53,7 @@
     {
       "itinerary_id": 2,
       "title": "New Zealand Explorer",
-      "itinerary_image_url": "https://example.com/itinerary2.jpg",
+      "itinerary_image_url": "https://www.telegraph.co.uk/content/dam/Travel/2019/September/nz.jpg",
       "itinerary_description": "Adventure in the land of the long white cloud.",
       "user_id": 2,
       "created_at": "2024-08-02",
@@ -63,7 +62,7 @@
     {
       "itinerary_id": 3,
       "title": "Australian Outback",
-      "itinerary_image_url": "https://example.com/itinerary3.jpg",
+      "itinerary_image_url": "https://media.gq.com/photos/5b991a2b3ef4233944b15bae/master/pass/gq-travel-guide-australia-outback-northern-territory.jpg",
       "itinerary_description": "Experience the rugged beauty of Australia.",
       "user_id": 3,
       "created_at": "2024-08-03",
@@ -72,7 +71,7 @@
     {
       "itinerary_id": 4,
       "title": "Peruvian Peaks",
-      "itinerary_image_url": "https://example.com/itinerary4.jpg",
+      "itinerary_image_url": "https://www.peru.travel/Contenido/AcercaDePeru/Imagen/en/6/0.0/Principal/Machu%20Picchu.jpg",
       "itinerary_description": "Hike the Inca Trail to Machu Picchu.",
       "user_id": 4,
       "created_at": "2024-08-04",
@@ -81,7 +80,7 @@
     {
       "itinerary_id": 5,
       "title": "Parisian Romance",
-      "itinerary_image_url": "https://example.com/itinerary5.jpg",
+      "itinerary_image_url": "https://media.cntraveller.com/photos/653783ab9da3a22eb97452f9/16:9/w_2560%2Cc_limit/Cheapest_time_to_go_to_Paris_October23_Getty_Images.jpg",
       "itinerary_description": "A romantic getaway in the city of love.",
       "user_id": 5,
       "created_at": "2024-08-05",
@@ -90,7 +89,7 @@
     {
       "itinerary_id": 6,
       "title": "Japanese Journey",
-      "itinerary_image_url": "https://example.com/itinerary6.jpg",
+      "itinerary_image_url": "https://afar.brightspotcdn.com/dims4/default/b06a879/2147483647/strip/true/crop/1357x720+41+0/resize/1440x764!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2Fcf%2F8a%2F20b4a2c544a58be93512ad67084c%2Fbohler-japankk-4006.jpg",
       "itinerary_description": "Explore the cultural and natural wonders of Japan.",
       "user_id": 1,
       "created_at": "2024-08-06",
@@ -99,7 +98,7 @@
     {
       "itinerary_id": 7,
       "title": "Italian Odyssey",
-      "itinerary_image_url": "https://example.com/itinerary7.jpg",
+      "itinerary_image_url": "https://cdn.kimkim.com/files/a/images/55d7ea8718fda7b5b1c4c3a68f239c128e5b29a6/original-4521771c354baf2a58b2658514a129e5.jpg",
       "itinerary_description": "A journey through Italy's most iconic destinations.",
       "user_id": 2,
       "created_at": "2024-08-07",
@@ -108,7 +107,7 @@
     {
       "itinerary_id": 8,
       "title": "Egyptian Expedition",
-      "itinerary_image_url": "https://example.com/itinerary8.jpg",
+      "itinerary_image_url": "https://m.economictimes.com/thumb/msid-58084960,width-1200,height-900,resizemode-4,imgsize-133701/how-egypt-offers-a-captivating-canvas-of-the-past-and-the-present.jpg",
       "itinerary_description": "Discover the ancient treasures of Egypt.",
       "user_id": 3,
       "created_at": "2024-08-08",
@@ -117,7 +116,7 @@
     {
       "itinerary_id": 9,
       "title": "Safari in Kenya",
-      "itinerary_image_url": "https://example.com/itinerary9.jpg",
+      "itinerary_image_url": "https://www.thetimes.com/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2Fee3ef81c-1280-487e-b48c-3527c77e4edd.jpg?crop=1564%2C880%2C318%2C0&resize=1200",
       "itinerary_description": "Experience the wildlife and culture of Kenya.",
       "user_id": 4,
       "created_at": "2024-08-09",
@@ -126,7 +125,7 @@
     {
       "itinerary_id": 10,
       "title": "Icelandic Adventure",
-      "itinerary_image_url": "https://example.com/itinerary10.jpg",
+      "itinerary_image_url": "https://cdn.britannica.com/71/73371-050-9DFAEC1E/Reykjavik-Iceland.jpg",
       "itinerary_description": "Explore the land of fire and ice.",
       "user_id": 5,
       "created_at": "2024-08-10",
@@ -135,7 +134,7 @@
     {
       "itinerary_id": 11,
       "title": "Brazilian Beaches",
-      "itinerary_image_url": "https://example.com/itinerary11.jpg",
+      "itinerary_image_url": "https://upgradedpoints.com/wp-content/uploads/2023/07/Best-Beaches-in-Brazil.jpg",
       "itinerary_description": "Relax on the sandy shores of Brazil.",
       "user_id": 1,
       "created_at": "2024-08-11",
@@ -144,7 +143,7 @@
     {
       "itinerary_id": 12,
       "title": "Canadian Rockies",
-      "itinerary_image_url": "https://example.com/itinerary12.jpg",
+      "itinerary_image_url": "https://hips.hearstapps.com/hmg-prod/images/moraine-lake-and-the-valley-of-the-ten-peaks-in-the-royalty-free-image-1571062944.jpg",
       "itinerary_description": "Adventure through the stunning Canadian Rockies.",
       "user_id": 2,
       "created_at": "2024-08-12",
@@ -153,7 +152,7 @@
     {
       "itinerary_id": 13,
       "title": "Thai Temples",
-      "itinerary_image_url": "https://example.com/itinerary13.jpg",
+      "itinerary_image_url": "https://blog.bangkokair.com/wp-content/uploads/2023/07/temples-to-visit-in-bangkok-1.jpeg",
       "itinerary_description": "Discover the spiritual heart of Thailand.",
       "user_id": 3,
       "created_at": "2024-08-13",
@@ -162,7 +161,7 @@
     {
       "itinerary_id": 14,
       "title": "Moroccan Magic",
-      "itinerary_image_url": "https://example.com/itinerary14.jpg",
+      "itinerary_image_url": "https://www.nomadicmatt.com/wp-content/uploads/2018/02/moroccoguide.jpg",
       "itinerary_description": "Experience the colors and flavors of Morocco.",
       "user_id": 4,
       "created_at": "2024-08-14",
@@ -171,7 +170,7 @@
     {
       "itinerary_id": 15,
       "title": "Norwegian Fjords",
-      "itinerary_image_url": "https://example.com/itinerary15.jpg",
+      "itinerary_image_url": "https://www.muchbetteradventures.com/magazine/content/images/2019/07/12102307/iStock-535553449.jpg",
       "itinerary_description": "Sail through the majestic fjords of Norway.",
       "user_id": 5,
       "created_at": "2024-08-15",

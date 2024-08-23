@@ -2,11 +2,21 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { logout } from "../lib/data/users";
+import SignInForm from "./SignInForm";
+import RegisterForm from "./RegisterForm"
 
 export default function Nav({ session, signOut }) {
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [toggleRegister, setToggleRegister] = useState(false)
+  
+  const modalRef = useRef()
+  const handleSignInClick = () =>{
+    const modalElement = modalRef.current;
+    modalElement.showModal();
+    setToggleDropdown(false)
+  }
 
   return (
     <nav className='flex pt-5 px-5 mb-5'>
@@ -37,23 +47,33 @@ export default function Nav({ session, signOut }) {
             <button className='black_btn w-[100%]'>Sign Out</button>
           </form>
         ) : (
-          <Link className='black_btn w-[25%] max-w-48' href='/login'>
+          <button className='black_btn w-[25%] max-w-48' onClick={handleSignInClick}>
             Sign In
-          </Link>
+          </button>
         )}
       </div>
 
       {session?.user && (
         <div className='hidden sm:flex absolute flex-col items-center ml-[1%] w-min-fit'>
-          <Image
-            src='/assets/icons/profile.svg'
+          <img
+            src={session.user.avatar_img_url ? session.user.avatar_img_url : `https://ui-avatars.com/api?name=${session.user.username}&rounded=true&background=random`}
             alt='User Avatar'
-            width={25}
-            height={25}
+            width={35}
+            height={35}
           />
           <p className='text-red-500'>{session?.user.username}</p>
         </div>
       )}
+
+      <dialog
+        ref={modalRef}
+        className="w-[80%] sm:w-[50%] relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+          {toggleRegister?
+          <RegisterForm modalRef={modalRef} setToggleRegister={setToggleRegister}/>
+          :
+          <SignInForm modalRef={modalRef} setToggleRegister={setToggleRegister}/>
+          }
+      </dialog>
 
       {/* Mobile Navigation */}
       <div className='absolute right-4 sm:hidden'>
@@ -87,15 +107,16 @@ export default function Nav({ session, signOut }) {
                 onClick={() => setToggleDropdown(false)}>
                 Post Itinerary
               </Link>
-              <Link
-                type='button'
-                onClick={() => {
-                  setToggleDropdown(false);
-                }}
-                href='/signout'
+              <form
+                action={()=>{
+                  logout()
+                  setToggleDropdown(false)
+                  }}>
+              <button
                 className='mt-5 w-full black_btn'>
                 Sign Out
-              </Link>
+              </button>
+              </form>
             </div>
           ) : (
             <div className='dropdown'>
@@ -111,15 +132,12 @@ export default function Nav({ session, signOut }) {
                 onClick={() => setToggleDropdown(false)}>
                 Post Itinerary
               </Link>
-              <Link
+              <button
                 type='button'
-                onClick={() => {
-                  setToggleDropdown(false);
-                }}
-                href='/login'
+                onClick={handleSignInClick}
                 className='mt-5 w-full black_btn'>
                 Sign In
-              </Link>
+              </button>
             </div>
           ))}
       </div>
