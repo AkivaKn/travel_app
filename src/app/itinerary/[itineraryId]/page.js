@@ -7,8 +7,6 @@ import FullItinerary from "@/app/components/FullItinerary";
 export default async function ViewSingleItinerary({ params }) {
   const { itineraryId } = params;
   const session = await auth();
-  console.log(session);
-
   const itinerary = await getItineraryById(itineraryId);
   return <FullItinerary session={session} itinerary={itinerary} />;
 }
