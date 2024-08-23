@@ -1,11 +1,11 @@
 import {auth} from "../../auth"
 import Carroussel from "./components/Carroussel";
 import ItineraryCard from "./components/ItineraryCard";
-import { getPopularItineraries } from "./lib/data/itineraries";
+import { getItineraries } from "./lib/data/itineraries";
 import { getAllImages } from "./lib/data/images";
 
 export default async function Home() {
-  const popularItineraries = await getPopularItineraries();
+  const popularItineraries = await getItineraries(3);
   const images = await getAllImages();
   const session = await auth()
   return (
