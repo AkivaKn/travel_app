@@ -51,7 +51,7 @@ export default function FullItinerary({ itinerary, session }) {
           {itineraryInfo.title}
         </h1>
 
-        <section className="w-full max-w-5xl flex flex-col glassmorphism my-10">
+        <section className="w-full max-w-5xl flex flex-col glassmorphism mt-10">
           <div>
             <img
               src={
@@ -69,11 +69,11 @@ export default function FullItinerary({ itinerary, session }) {
                 <span className="font-bold">{formattedDate}</span>
               </p>
               {session?.user?.user_id === itineraryInfo.user_id && (
-                <div>
+                <div className=" flex items-center">
                   <Link
                     href={`/itinerary/update/${itineraryInfo.itinerary_id}`}
                   >
-                    <MdOutlineModeEdit className="text-2xl mr-3 hover:text-sky-700" />
+                    <MdOutlineModeEdit className=" text-2xl mr-3 hover:text-sky-700" />
                   </Link>
                   <button onClick={handleDeleteClick}>
                     <RiDeleteBin6Line className="text-2xl hover:text-red-600" />
@@ -98,7 +98,7 @@ export default function FullItinerary({ itinerary, session }) {
             />
           </div>
         </section>
-        <h1 className="text-3xl font-bold mb-4 ">Days</h1>
+        <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">Days</h1>
         <ol className="space-y-4">
           {itineraryDays.map((day) => (
             <li key={day.day_id}>

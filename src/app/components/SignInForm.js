@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { login } from "../lib/data/users";
 import { validateSignInForm } from "../utils/validation_utils";
+import { IoMdClose } from "react-icons/io";
+import { MdOutlineClose } from "react-icons/md";
 
-export default function SignInForm() {
+export default function SignInForm({ modalRef, setToggleRegister }) {
   const [errors, setErrors] = useState({});
   async function signInUser(formData) {
     const user = {
@@ -16,48 +18,118 @@ export default function SignInForm() {
     if (formErrors.email || formErrors.password) {
       setErrors(formErrors);
     } else {
-      login(user);
+      await login(user);
+      const modalElement = modalRef.current;
+      modalElement.close();
     }
   }
 
+  function handleClose() {
+    const modalElement = modalRef.current;
+    modalElement.close();
+  }
+
   return (
-    <div className='h-screen flex max-height:100px max-width:100px m-3 p-3 border-black border-2'>
-      <div className='grow'>
+    <div>
+      <div className="grow">
+        <div className="flex justify-between text-xl mb-7">
+          <h3 className="font-satoshi font-semibold text-gray-700 ">Sign in</h3>
+          <button onClick={handleClose}>
+            <IoMdClose />
+          </button>
+        </div>
         <div>
-          <h3 className='text-xl font-medium text-gray-900 dark:text-white my-3'>
-            Sign in to our platform
-          </h3>
           <form action={signInUser} noValidate>
             <div>
-              <div className='mb-2 block'>
-                <label htmlFor='email'>Email</label>
-              </div>
-              <input className='w-full' id='email' name='email' type='email' />
-              {errors.email && <p>{errors.email}</p>}
-            </div>
-            <div className='my-3'>
-              <div className='mb-2 block'>
-                <label htmlFor='password'>Password</label>
+              <div className="mb-2 block">
+                <label
+                  className="font-satoshi font-semibold text-base text-gray-700"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
               </div>
               <input
-                className='w-full'
-                id='password'
-                name='password'
-                type='password'
+                className="form_input"
+                id="email"
+                name="email"
+                type="email"
               />
-              {errors.password && <p>{errors.password}</p>}
+              {errors.email && (
+                <div
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                  role="alert"
+                >
+                  <strong className="font-bold">Error! </strong>
+                  <span className="block sm:inline">{errors.email}</span>
+                  <button
+                    className="absolute top-0 bottom-0 right-0 px-2"
+                    onClick={() => {
+                      setErrors(() => {
+                        let newErrors = { password: errors.password };
+                        return newErrors;
+                      });
+                    }}
+                  >
+                    <MdOutlineClose />
+                  </button>
+                </div>
+              )}
             </div>
-            <div className='w-full'>
-              <Button type='submit'>Sign In</Button>
+            <div className="my-3">
+              <div className="mb-2 block">
+                <label
+                  className="font-satoshi font-semibold text-base text-gray-700"
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+              </div>
+              <input
+                className="form_input"
+                id="password"
+                name="password"
+                type="password"
+              />
+
+              {errors.password && (
+                <div
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                  role="alert"
+                >
+                  <strong className="font-bold">Error! </strong>
+                  <span className="block sm:inline">{errors.password}</span>
+                  <button
+                    className="absolute top-0 bottom-0 right-0 px-2"
+                    onClick={() => {
+                      setErrors(() => {
+                        let newErrors = { email: errors.email };
+                        return newErrors;
+                      });
+                    }}
+                  >
+                    <MdOutlineClose />
+                  </button>
+                </div>
+              )}
+            </div>
+            <div className="w-full mt-5 mb-3">
+              <button 
+              className="black_btn_large_text w-full"
+              type="submit">
+                Sign In</button>
             </div>
           </form>
-          <div className='flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300'>
+          <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
             Not registered?&nbsp;
-            <Link
-              href='/register'
-              className='text-cyan-700 hover:underline dark:text-cyan-500'>
+            <button
+              onClick={() => {
+                setToggleRegister(true);
+              }}
+              className="text-cyan-700 hover:underline dark:text-cyan-500"
+            >
               Create account
-            </Link>
+            </button>
           </div>
         </div>
       </div>

@@ -25,11 +25,11 @@ export default function Carroussel({ images }) {
 
   return (
     <>
-      <div className='head_text orange_gradient text-center pb-4 '>
+      {/* <div className=' head_text orange_gradient text-center pb-4 '>
         Explore{" "}
-      </div>
-      <div className='w-1/2 h-1/2 m-auto'>
-        <ImageGallery onClick={handleClick} items={mappedImages} />
+      </div> */}
+      <div className='max-w-full mx-auto mb-24 mt-10'>
+        <ImageGallery onClick={handleClick} items={mappedImages} showFullscreenButton={false}/>
       </div>
     </>
   );

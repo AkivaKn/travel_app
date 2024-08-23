@@ -1,6 +1,6 @@
 export default function DayCard({ day }) {
   return (
-    <section className="border border-gray-300 rounded-lg p-6 mb-6 shadow-lg bg-sky-100">
+    <section className="glassmorphism">
       <h2 className="text-2xl font-bold mb-2">Day {day.day_number}</h2>
       <div className="mb-4">
         <h3 className="text-xl font-semibold mb-1">Day Plan:</h3>

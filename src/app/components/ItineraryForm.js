@@ -1,8 +1,7 @@
 "use client";
-import { Button } from "flowbite-react";
 import ReactSlider from "react-slider";
 import { generateBudgetString } from "../utils/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PlacesSelector from "./PlacesSelector";
 import { patchItinerary, postItinerary } from "../lib/data/itineraries";
 import { validateItinerariesForm } from "../utils/validation_utils";
@@ -139,7 +138,7 @@ export default function UpdateItineraryForm({ itinerary, page }) {
             </label>
           </div>
           <textarea
-            className="form_textarea"
+            className="form_textarea h-[200px]"
             id="itineraryDescription"
             name="itineraryDescription"
             placeholder="Enter a short description of your itinerary here...
@@ -230,7 +229,7 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                     }
                   })}
                   <textarea
-                    className="form_textarea"
+                    className="form_textarea h-[200px]"
                     id="dayPlan"
                     name="dayPlan"
                     value={day.dayPlan}
@@ -296,26 +295,26 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                     onChange={(event) => handleFormChange(index, event)}
                   />
                 </section>
-                <Button
+                <button
                   className="red_btn my-5 w-52"
                   onClick={() => removeDay(index)}
                 >
                   Remove Day
-                </Button>
+                </button>
               </li>
             );
           })}
         </ul>
 
         <div className="w-full">
-          <Button className="outline_btn w-52" onClick={addAnotherDay}>
+          <button className="outline_btn w-52" onClick={addAnotherDay}>
             Add Another Day
-          </Button>
+          </button>
         </div>
 
-        <Button className="black_btn" type="submit">
+        <button className="black_btn" type="submit">
           Submit
-        </Button>
+        </button>
       </form>
     </div>
   );
