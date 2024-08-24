@@ -22,7 +22,6 @@ export default function ItineraryCard({ itinerary, session }) {
           {itinerary.title}
         </h2>
       </Link>
-
         <p>{itinerary.number_of_days} days</p>
       {/* Description */}
       <div className='h-32 overflow-hidden'>

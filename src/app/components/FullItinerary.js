@@ -19,6 +19,8 @@ export default function FullItinerary({ itinerary, session }) {
   const formattedBudget = formatBudget(itineraryInfo.budget);
   const router = useRouter();
 
+  console.log(itineraryComments)
+
   const handleDeleteClick = () => {
     const modalElement = modalRef.current;
     modalElement.showModal();
@@ -63,7 +65,7 @@ export default function FullItinerary({ itinerary, session }) {
               className="w-full h-auto rounded-lg shadow-md object-scale-down mb-4"
             />
             <div className="flex justify-between">
-              <p className=" text-gray-700 mx-2 text-lg mb-2">
+              <p className=" text-gray-700 mx-2 sm:text-lg text-sm mb-2">
                 Posted by{" "}
                 <span className="font-bold">{itineraryInfo.username}</span> on{" "}
                 <span className="font-bold">{formattedDate}</span>
@@ -82,13 +84,13 @@ export default function FullItinerary({ itinerary, session }) {
               )}
             </div>
           </div>
-          <p className="text-gray-700 mx-2 mb-4 text-lg">
+          <p className="text-gray-700 mx-2 mb-4 sm:text-lg text-sm">
             {itineraryInfo.itinerary_description}
           </p>
           <div className="flex justify-between mx-2">
             <div className="flex items-center">
-              <h2 className="text-lg font-semibold mr-2">Budget:</h2>
-              <p className="text-gray-700 text-lg">
+              <h2 className="sm:text-lg text-sm font-semibold mr-2">Budget:</h2>
+              <p className="text-gray-700 sm:text-lg text-sm">
                 <span className="font-bold">{formattedBudget}</span>
               </p>
             </div>

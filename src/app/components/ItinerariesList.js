@@ -65,9 +65,7 @@ export default function ItinerariesList({ session }) {
 
   return (
     <section className=' w-full max-w-full flex-center flex-col p-4'>
-      <h1 className='text-center text-3xl mx-auto head_text green_gradient'>
-        Plan Your Trip
-      </h1>
+      
       <div className='mt-10 w-full max-w-5xl flex flex-col gap-7 glassmorphism'>
         <div className=' w-full mx-auto'>
           <h1 className='font-satoshi font-semibold text-base text-gray-700 mb-2 mt-4'>

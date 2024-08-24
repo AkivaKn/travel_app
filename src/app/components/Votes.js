@@ -110,9 +110,9 @@ export default function Votes({ itineraryInfo, session }) {
         </>
       )}
       <div className="flex items-center">
-        <h2 className="text-lg font-semibold mr-2">Votes:</h2>
-        <p className="text-lg text-gray-700">
-          <span className="font-bold">{displayedVoteCount}</span>
+        <h2 className="sm:text-lg text-sm font-semibold mr-2">Votes:</h2>
+        <p className="sm:text-lg text-sm text-gray-700">
+          <span className="font-bold sm:text-lg text-sm">{displayedVoteCount}</span>
         </p>
       </div>
     </div>

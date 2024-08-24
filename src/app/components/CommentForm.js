@@ -50,7 +50,7 @@ export default function CommentForm({ session, itineraryId, setComments }) {
         placeholder={`Comment as ${session?.user?.username}`}
         value={commentInput}
         onChange={handleChange}
-        className="form_input mb-4"
+        className="form_input mb-4 sm:text-lg text-sm"
         maxLength={300}
           ></textarea>
           {error && <p>{error}</p>}

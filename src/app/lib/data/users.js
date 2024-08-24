@@ -6,17 +6,18 @@ import { signIn } from "../../../../auth";
 import { signOut } from "../../../../auth";
 
 export async function getUserFromDb(email, password) {
+  
   try {
-    const res = await sql`
-              SELECT * FROM users where email = ${email};
-          `;
-    const user = res.rows[0];
-    if (!user) {
-      throw new Error("user not found");
-    }
-    if (!(await bcrypt.compare(password, user.password))) {
-      throw new Error("invalid password");
-    }
+        const res = await sql`
+                  SELECT * FROM users where email = ${email};
+              `;
+        const user = res.rows[0];
+        if (!user) {
+          throw new Error("user not found");
+        }
+        if (!(await bcrypt.compare(password, user.password))) {
+          throw new Error("invalid password");
+        }
     return {
       user_id: user.user_id,
       username: user.username,
@@ -29,6 +30,25 @@ export async function getUserFromDb(email, password) {
     return null;
   }
 }
+
+// export async function getUserAvatar(userId){
+//   try{
+//     const res=await sql`
+//           SELECT * from users where user_id = ${user_id}
+//           `;
+//     const user = res.rows[0];
+//     if(!user){
+//       throw new Error('user not found');
+//     }
+//     return user.avatar_img_url,
+//     ;
+//   } catch (error) {
+//     console.error("Authorisation error:", error);
+//     return null;
+//   }
+// }
+
+
 
 export async function postNewUser(formData) {
   const username = formData.get("username");
