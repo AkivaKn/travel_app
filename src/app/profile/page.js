@@ -2,8 +2,8 @@ import { auth } from "../../../auth";
 import ProfilePage from "../components/ProfilePage";
 
 export default async function Profile() {
-      const { user } = await auth();
+      const session = await auth();
     return <div>
-        <ProfilePage user = {user}/>
+        <ProfilePage user = {session?.user}/>
     </div>
 }

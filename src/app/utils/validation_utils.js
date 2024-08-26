@@ -18,7 +18,7 @@ export function validateSignInForm({ email, password }) {
   return errors;
 }
 
-export function validateRegisterForm({
+export function validateUserDetailsForm({
   username,
   email,
   password,
@@ -46,17 +46,17 @@ export function validateRegisterForm({
 
   if (!password && isPasswordRequired) {
     errors.password = "Password is required.";
-  } else if (password !== confirmPassword) {
+  } else if (password && password !== confirmPassword) {
     errors.password = "Passwords must match."
     errors.confirmPassword="Passwords must match.";
-  } else if (password.length < 8 || password.length > 16) {
+  } else if (password && password.length < 8 || password && password.length > 16) {
     errors.password = "Password must be between 8 and 16 characters.";
-  } else if (!passwordRegex.test(password)) {
+  } else if (password && !passwordRegex.test(password)) {
     errors.password =
       "Password must contain at least one lowercase letter and one digit.";
   }
 
-  if(!confirmPassword){
+  if(password && !confirmPassword){
     errors.confirmPassword = "Please confirm password."
   }
 

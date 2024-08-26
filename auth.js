@@ -21,7 +21,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           // No user found, so this is their first attempt to login
           // meaning this is also the place you could do registration
           throw new Error("User not found.");
-        }
+        } 
         // return user object with their profile data
         return user;
       },

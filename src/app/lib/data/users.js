@@ -85,12 +85,11 @@ export async function updateUser(formData, avatarImageUrl, userId) {
     try {
     let sqlStr = `
     UPDATE users
-    SET username = $1, email = $2, bio = $3`;
+    SET username = $1, email = $2, bio = $3, avatar_img_url = $4`;
 
     if (avatar_img.size > 0) {
       avatarImageUrl && del(avatarImageUrl);
       avatarImageUrl = await uploadImage(avatar_img);
-      sqlStr += `, avatar_img_url = $4`;
     }
 
     let params = [username, email, bio, avatarImageUrl, userId]
@@ -105,7 +104,7 @@ export async function updateUser(formData, avatarImageUrl, userId) {
                 RETURNING *`;
     console.log(sqlStr);
     
-    const res = await sql.query(sqlStr)
+    const res = await sql.query(sqlStr,params)
     console.log(res.rows[0]);
     
     return res.rows[0]

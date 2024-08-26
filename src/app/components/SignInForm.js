@@ -10,17 +10,21 @@ import { MdOutlineClose } from "react-icons/md";
 export default function SignInForm({ modalRef, setToggleRegister }) {
   const [errors, setErrors] = useState({});
   async function signInUser(formData) {
-    const user = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
-    const formErrors = validateSignInForm(user);
-    if (formErrors.email || formErrors.password) {
-      setErrors(formErrors);
-    } else {
-      await login(user);
-      const modalElement = modalRef.current;
-      modalElement.close();
+    try {
+      const user = {
+        email: formData.get("email"),
+        password: formData.get("password"),
+      };
+      const formErrors = validateSignInForm(user);
+      if (formErrors.email || formErrors.password) {
+        setErrors(formErrors);
+      } else {
+        await login(user);
+        const modalElement = modalRef.current;
+        modalElement.close();
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 

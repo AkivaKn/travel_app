@@ -1,15 +1,45 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
-import { updateUser } from "../lib/data/users";
+import { logout, updateUser } from "../lib/data/users";
+import { useRouter } from "next/navigation";
+import { validateUserDetailsForm } from "../utils/validation_utils";
 
 export default function ProfilePage({ user }) {
   const [editProfile, setEditProfile] = useState(false);
   const [errors, setErrors] = useState({});
-
+  const router = useRouter()
+  useEffect(() => {
+    
+    if (!user) {
+    router.replace('/')
+  }
+  },[])
   async function handleSubmit(formData) {
-    await updateUser(formData, user?.avatar_img_url, user?.user_id)
-    setEditProfile(false)
+    try {
+      const updatedUser = {
+        username: formData.get("username"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+        bio: formData.get("bio"),
+        avatar_img: formData.get("avatar_img"),
+        confirmPassword : formData.get("confirmPassword")
+      };
+
+      const formErrors = validateUserDetailsForm(updatedUser, false);
+      if (Object.keys(formErrors).length > 0) {
+        setErrors(formErrors);
+      } else {
+        await updateUser(formData, user?.avatar_img_url, user?.user_id)
+        await logout();
+        router.replace('/')
+        setEditProfile(false)
+        setErrors({})
+      }
+      
+    } catch (error) {
+      setErrors({serverError:'Please try again.'})
+    }
   }
 
   return (
@@ -21,7 +51,7 @@ export default function ProfilePage({ user }) {
         {editProfile ? "Cancel" : "Edit Profile"}
       </button>
       {editProfile ? (
-        <form action={handleSubmit}>
+        <form action={handleSubmit} noValidate>
           <div className="my-3">
             <div className="mb-2 block">
               <label
@@ -59,7 +89,7 @@ export default function ProfilePage({ user }) {
               id="username"
               name="username"
               type="text"
-              defaultValue={user.username}
+              defaultValue={user?.username}
             />
             {errors.username && (
               <div
@@ -98,7 +128,7 @@ export default function ProfilePage({ user }) {
               id="email"
               name="email"
               type="email"
-              defaultValue={user.email}
+              defaultValue={user?.email}
             />
             {errors.email && (
               <div
@@ -137,6 +167,7 @@ export default function ProfilePage({ user }) {
               id="password"
               name="password"
               type="password"
+              // placeholder="New password (optional)"
             />
             {errors.password && (
               <div
@@ -213,7 +244,7 @@ export default function ProfilePage({ user }) {
               className="form_textarea h-[100px]"
               id="bio"
               name="bio"
-              defaultValue={user.bio}
+              defaultValue={user?.bio}
             ></textarea>
             {errors.bio && (
               <div
@@ -239,7 +270,30 @@ export default function ProfilePage({ user }) {
           </div>
           <button className="black_btn" type="submit">
             Save Changes
+          </button><button className="black_btn" type="submit">
+            Save Changes
           </button>
+          {errors.serverError && (
+              <div
+                className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                role="alert"
+              >
+                <strong className="font-bold">Error! </strong>
+                <span className="block sm:inline">{errors.serverError}</span>
+                <button
+                  className="absolute top-0 bottom-0 right-0 px-2"
+                  onClick={() => {
+                    setErrors(() => {
+                      let newErrors = { ...errors };
+                      delete newErrors.serverError;
+                      return newErrors;
+                    });
+                  }}
+                >
+                  <MdOutlineClose />
+                </button>
+              </div>
+            )}
         </form>
       ) : (
         <>
@@ -248,7 +302,7 @@ export default function ProfilePage({ user }) {
             src={
               user?.avatar_img_url
                 ? user?.avatar_img_url
-                : `https://ui-avatars.com/api?name=${user.username}&rounded=true&background=random`
+                : `https://ui-avatars.com/api?name=${user?.username}&rounded=true&background=random`
             }
             alt="user profile image"
           />
