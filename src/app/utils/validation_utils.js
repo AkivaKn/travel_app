@@ -24,7 +24,7 @@ export function validateRegisterForm({
   password,
   confirmPassword,
   bio,
-}) {
+}, isPasswordRequired = true) {
   let errors = {};
   const usernameRegex = /^[\w]+$/;
   const emailRegex = /^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -44,7 +44,7 @@ export function validateRegisterForm({
     errors.email = "Email is invalid.";
   }
 
-  if (!password) {
+  if (!password && isPasswordRequired) {
     errors.password = "Password is required.";
   } else if (password !== confirmPassword) {
     errors.password = "Passwords must match."
