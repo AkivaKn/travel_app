@@ -5,7 +5,6 @@ import ReactSlider from "react-slider";
 import { filterItineraries, generateBudgetString } from "../utils/utils";
 import { getItineraries } from "../lib/data/itineraries";
 import ItineraryCard from "./ItineraryCard";
-import Typewriter from "typewriter-effect";
 
 export default function ItinerariesList({ session }) {
   const [budget, setBudget] = useState(1);
@@ -66,7 +65,7 @@ export default function ItinerariesList({ session }) {
 
   return (
     <section className=' w-full max-w-full flex-center flex-col p-4'>
-      <div className='mt-10 w-full max-w-5xl flex flex-col gap-7 glassmorphism'>
+      <div className='w-full max-w-5xl flex flex-col gap-7 glassmorphism'>
         <div className=' w-full mx-auto'>
           <h1 className='font-satoshi font-semibold text-base text-gray-700 mb-2 mt-4'>
             Where do you want to go?
@@ -140,29 +139,6 @@ export default function ItinerariesList({ session }) {
             </button>
           </div>
         </div>
-      </div>
-
-      <div className="sm:mt-32 hidden sm:block text-md font-satoshi drop-shadow-6xl leading-[1.15] green_gradient sm:text-6xl">
-        <Typewriter
-          options={{
-            strings: [
-              "Spain",
-              "Turkey",
-              "Cyprus",
-              "Portugal",
-              "India",
-              "Thailand",
-              "Domincan Republic",
-              "Mexico",
-              "Cuba",
-              "St Lucia",
-              "Jamaica",
-              "Barbados",
-            ],
-            autoStart: true,
-            loop: true,
-          }}
-        />
       </div>
       <ul className="flex flex-wrap justify-center mt-10 max-w-5xl">
         {itinerariesList.map((itinerary) => (
