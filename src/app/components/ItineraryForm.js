@@ -6,6 +6,7 @@ import PlacesSelector from "./PlacesSelector";
 import { patchItinerary, postItinerary } from "../lib/data/itineraries";
 import { validateItinerariesForm } from "../utils/validation_utils";
 import { useRouter } from "next/navigation";
+import { MdOutlineClose } from "react-icons/md";
 
 export default function UpdateItineraryForm({ itinerary, page }) {
   const router = useRouter();
@@ -116,7 +117,6 @@ export default function UpdateItineraryForm({ itinerary, page }) {
               Title
             </label>
           </div>
-          {errors.title && <p>{errors.title}</p>}
 
           <input
             className="form_input"
@@ -126,6 +126,27 @@ export default function UpdateItineraryForm({ itinerary, page }) {
             placeholder="Enter itinerary title here..."
             defaultValue={itinerary?.itineraryInfo?.title}
           />
+          {errors.title && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold">Error! </strong>
+              <span className="block sm:inline">{errors.title}</span>
+              <button
+                className="absolute top-0 bottom-0 right-0 px-2"
+                onClick={() => {
+                  setErrors(() => {
+                    let newErrors = { ...errors };
+                    delete newErrors.title;
+                    return newErrors;
+                  });
+                }}
+              >
+                <MdOutlineClose />
+              </button>
+            </div>
+          )}
         </section>
 
         <section>
@@ -165,8 +186,7 @@ export default function UpdateItineraryForm({ itinerary, page }) {
             thumbClassName="example-thumb"
             trackClassName="example-track"
             defaultValue={budget}
-            onAfterChange={(newValue, thumbIndex) => {
-              //console.log(newValue, "<--new value budget");
+            onAfterChange={(newValue) => {
               setBudget(newValue);
             }}
             min={1}
@@ -223,11 +243,6 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                       Day Plan
                     </label>
                   </div>
-                  {errors.days?.map((error) => {
-                    if (error.dayPlan && error.index === index) {
-                      return <p key={error.index}>{error.dayPlan}</p>;
-                    }
-                  })}
                   <textarea
                     className="form_textarea h-[200px]"
                     id="dayPlan"
@@ -235,7 +250,41 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                     value={day.dayPlan}
                     onChange={(event) => handleFormChange(index, event)}
                     placeholder="Describe the day's activities here..."
-                  ></textarea>
+                    ></textarea>
+                    {errors.days?.map((error) => {
+                      if (error.dayPlan && error.index === index) {
+                        return (
+                          <div
+                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                            role="alert"
+                            key={error.index}
+                          >
+                            <strong className="font-bold">Error! </strong>
+                            <span className="block sm:inline">
+                              {error.dayPlan}
+                            </span>
+                            <button
+                              className="absolute top-0 bottom-0 right-0 px-2"
+                              onClick={() => {
+                                setErrors(() => {
+                                  let newDaysErrors = [];
+                                  errors.days.forEach((error) => {
+                                    if (!error.dayPlan || error.index !== index) {
+                                      newDaysErrors.push(error)
+                                    };
+                                  });
+                                  let newErrors = { ...errors }
+                                  newErrors.days = newDaysErrors;
+                                  return newErrors
+                                });
+                              }}
+                            >
+                              <MdOutlineClose />
+                            </button>
+                          </div>
+                        );
+                      }
+                    })}
                 </section>
 
                 <section className="mb-7">
@@ -247,11 +296,6 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                       Transport
                     </label>
                   </div>
-                  {errors.days?.map((error) => {
-                    if (error.transport && error.index === index) {
-                      return <p key={error.index}>{error.transport}</p>;
-                    }
-                  })}
                   <input
                     className="form_input"
                     id="transport"
@@ -261,6 +305,40 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                     placeholder="Describe any transport used..."
                     onChange={(event) => handleFormChange(index, event)}
                   />
+                  {errors.days?.map((error) => {
+                      if (error.transport && error.index === index) {
+                        return (
+                          <div
+                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                            role="alert"
+                            key={error.index}
+                          >
+                            <strong className="font-bold">Error! </strong>
+                            <span className="block sm:inline">
+                              {error.transport}
+                            </span>
+                            <button
+                              className="absolute top-0 bottom-0 right-0 px-2"
+                              onClick={() => {
+                                setErrors(() => {
+                                  let newDaysErrors = [];
+                                  errors.days.forEach((error) => {
+                                    if (!error.transport || error.index !== index) {
+                                      newDaysErrors.push(error)
+                                    };
+                                  });
+                                  let newErrors = { ...errors }
+                                  newErrors.days = newDaysErrors;
+                                  return newErrors
+                                });
+                              }}
+                            >
+                              <MdOutlineClose />
+                            </button>
+                          </div>
+                        );
+                      }
+                    })}
                 </section>
                 <PlacesSelector
                   errors={errors}
@@ -269,6 +347,7 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                   index={index}
                   day={day}
                   key={index}
+                  setErrors={setErrors}
                 />
 
                 <section className="mb-7">
@@ -294,6 +373,40 @@ export default function UpdateItineraryForm({ itinerary, page }) {
                     value={day.accomodation}
                     onChange={(event) => handleFormChange(index, event)}
                   />
+                  {errors.days?.map((error) => {
+                      if (error.accomodation && error.index === index) {
+                        return (
+                          <div
+                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                            role="alert"
+                            key={error.index}
+                          >
+                            <strong className="font-bold">Error! </strong>
+                            <span className="block sm:inline">
+                              {error.accomodation}
+                            </span>
+                            <button
+                              className="absolute top-0 bottom-0 right-0 px-2"
+                              onClick={() => {
+                                setErrors(() => {
+                                  let newDaysErrors = [];
+                                  errors.days.forEach((error) => {
+                                    if (!error.accomodation || error.index !== index) {
+                                      newDaysErrors.push(error)
+                                    };
+                                  });
+                                  let newErrors = { ...errors }
+                                  newErrors.days = newDaysErrors;
+                                  return newErrors
+                                });
+                              }}
+                            >
+                              <MdOutlineClose />
+                            </button>
+                          </div>
+                        );
+                      }
+                    })}
                 </section>
                 <button
                   className="red_btn my-5 w-52"
