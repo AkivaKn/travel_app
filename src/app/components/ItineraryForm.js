@@ -103,7 +103,7 @@ export default function UpdateItineraryForm({ itinerary, page }) {
   }
 
   return (
-    <div className="w-full max-w-full flex-center flex-col ">
+    <div className="w-full max-w-full flex-center flex-col p-4">
       <form
         className="mt-10 w-full max-w-5xl flex flex-col gap-7 glassmorphism"
         action={createItinerary}

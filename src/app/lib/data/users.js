@@ -6,17 +6,18 @@ import { signIn } from "../../../../auth";
 import { signOut } from "../../../../auth";
 
 export async function getUserFromDb(email, password) {
+  
   try {
-    const res = await sql`
-              SELECT * FROM users where email = ${email};
-          `;
-    const user = res.rows[0];
-    if (!user) {
-      throw new Error("user not found");
-    }
-    if (!(await bcrypt.compare(password, user.password))) {
-      throw new Error("invalid password");
-    }
+        const res = await sql`
+                  SELECT * FROM users where email = ${email};
+              `;
+        const user = res.rows[0];
+        if (!user) {
+          throw new Error("user not found");
+        }
+        if (!(await bcrypt.compare(password, user.password))) {
+          throw new Error("invalid password");
+        }
     return {
       user_id: user.user_id,
       username: user.username,
@@ -29,6 +30,9 @@ export async function getUserFromDb(email, password) {
     return null;
   }
 }
+
+
+
 
 export async function postNewUser(formData) {
   const username = formData.get("username");

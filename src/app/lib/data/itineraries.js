@@ -43,21 +43,21 @@ export async function postItinerary(formData, daysArray) {
 export async function getItineraryById(id) {
   try {
     const itineraryRes = await sql`
-    SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, u.username, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
+    SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, u.username, u.avatar_img_url, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
     FROM itineraries i
     FULL JOIN itinerary_votes v
     ON i.itinerary_id=v.itinerary_id
     INNER JOIN users u
     ON i.user_id=u.user_id
     WHERE i.itinerary_id= ${id}
-    GROUP BY i.itinerary_id, u.username`;
+    GROUP BY i.itinerary_id, u.username, u.avatar_img_url`;
 
     const daysRes = await sql`
     SELECT * FROM days
     WHERE days.itinerary_id= ${id}`;
 
     const commentsRes = await sql`
-    SELECT comments.comment_id, comments.user_id, comments.itinerary_id, comments.comment_body, u.username, comments.created_at FROM comments 
+    SELECT comments.comment_id, comments.user_id, comments.itinerary_id, comments.comment_body, u.username, u.avatar_img_url, comments.created_at FROM comments 
     INNER JOIN users u
     ON comments.user_id=u.user_id
     WHERE comments.itinerary_id= ${id}
