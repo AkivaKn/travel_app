@@ -73,7 +73,7 @@ export async function logout() {
   await signOut();
 }
 
-export async function updateUser(formData, oldAvatarImgUrl, userId) {
+export async function updateUser(formData, avatarImageUrl, userId) {
   const username = formData.get("username");
   const email = formData.get("email");
   const password = formData.get("password");
@@ -82,22 +82,27 @@ export async function updateUser(formData, oldAvatarImgUrl, userId) {
   
   console.log(username, email, bio);
   
-  try {
+    try {
     let sqlStr = `
     UPDATE users
-    SET username = '${username}', email = '${email}', bio = '${bio}'`;
+    SET username = $1, email = $2, bio = $3`;
+
     if (avatar_img.size > 0) {
-      oldAvatarImgUrl && del(oldAvatarImgUrl);
-      const itineraryImageUrl = await uploadImage(itinerary_image);
-      sqlStr += `, avatar_img_url = '${itineraryImageUrl}'`;
+      avatarImageUrl && del(avatarImageUrl);
+      avatarImageUrl = await uploadImage(avatar_img);
+      sqlStr += `, avatar_img_url = $4`;
     }
+
+    let params = [username, email, bio, avatarImageUrl, userId]
+
     if (password) {
       const hashedPassword = await bcrypt.hash(password, 10);
-      sqlStr += `, password = '${hashedPassword}'`;
+      sqlStr += `, password = $6`;
+      params.push(hashedPassword)
     }
-    sqlStr += ` WHERE user_id = ${userId}
-                RETURNING *`;
 
+    sqlStr += ` WHERE user_id = $5
+                RETURNING *`;
     console.log(sqlStr);
     
     const res = await sql.query(sqlStr)
