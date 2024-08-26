@@ -85,15 +85,15 @@ export async function updateUser(formData, oldAvatarImgUrl, userId) {
   try {
     let sqlStr = `
     UPDATE users
-    SET username = ${username}, email = ${email}, bio= ${bio}`;
+    SET username = '${username}', email = '${email}', bio = '${bio}'`;
     if (avatar_img.size > 0) {
       oldAvatarImgUrl && del(oldAvatarImgUrl);
       const itineraryImageUrl = await uploadImage(itinerary_image);
-      sqlStr += `, avatar_img_url = ${itineraryImageUrl}`;
+      sqlStr += `, avatar_img_url = '${itineraryImageUrl}'`;
     }
     if (password) {
       const hashedPassword = await bcrypt.hash(password, 10);
-      sqlStr += `, password = ${hashedPassword}`;
+      sqlStr += `, password = '${hashedPassword}'`;
     }
     sqlStr += ` WHERE user_id = ${userId}
                 RETURNING *`;
