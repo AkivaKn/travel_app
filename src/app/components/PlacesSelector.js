@@ -2,6 +2,7 @@ import { Country, State, City } from "country-state-city";
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import CreatableSelect from "react-select/creatable";
+import { MdOutlineClose } from "react-icons/md";
 
 export default function PlacesSelector({
   dayInputs,
@@ -9,6 +10,7 @@ export default function PlacesSelector({
   index,
   errors,
   day,
+  setErrors
 }) {
   const [selectedCountry, setSelectedCountry] = useState(
     day.country ? { name: day.country } : null
@@ -80,11 +82,7 @@ export default function PlacesSelector({
       <h1 className='font-satoshi font-normal text-base text-gray-700'>
         Location
       </h1>
-      {errors.days?.map((error) => {
-        if (error.country && error.index === index) {
-          return <p key={error.index}>{error.country}</p>;
-        }
-      })}
+     
 
       <Select
         isClearable
@@ -102,11 +100,41 @@ export default function PlacesSelector({
         value={selectedCountry}
         onChange={(country) => handleSelectCountryChange(country, index)}
       />
-      {errors.days?.map((error) => {
-        if (error.region && error.index === index) {
-          return <p key={error.index}>{error.region}</p>;
-        }
-      })}
+       {errors.days?.map((error) => {
+                      if (error.country && error.index === index) {
+                        return (
+                          <div
+                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                            role="alert"
+                            key={error.index}
+                          >
+                            <strong className="font-bold">Error! </strong>
+                            <span className="block sm:inline">
+                              {error.country}
+                            </span>
+                            <button
+                              className="absolute top-0 bottom-0 right-0 px-2"
+                              onClick={() => {
+                                setErrors(() => {
+                                  let newDaysErrors = [];
+                                  errors.days.forEach((error) => {
+                                    if (!error.country || error.index !== index) {
+                                      newDaysErrors.push(error)
+                                    };
+                                  });
+                                  let newErrors = { ...errors }
+                                  newErrors.days = newDaysErrors;
+                                  return newErrors
+                                });
+                              }}
+                            >
+                              <MdOutlineClose />
+                            </button>
+                          </div>
+                        );
+                      }
+                    })}
+     
       <Select
         isClearable
         className=' rounded-lg mt-2 text-sm text-gray-500 outline-0'
@@ -123,12 +151,42 @@ export default function PlacesSelector({
         value={selectedRegion}
         onChange={(region) => handleSelectRegionChange(region, index)}
       />
+       {errors.days?.map((error) => {
+                      if (error.region && error.index === index) {
+                        return (
+                          <div
+                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                            role="alert"
+                            key={error.index}
+                          >
+                            <strong className="font-bold">Error! </strong>
+                            <span className="block sm:inline">
+                              {error.region}
+                            </span>
+                            <button
+                              className="absolute top-0 bottom-0 right-0 px-2"
+                              onClick={() => {
+                                setErrors(() => {
+                                  let newDaysErrors = [];
+                                  errors.days.forEach((error) => {
+                                    if (!error.region || error.index !== index) {
+                                      newDaysErrors.push(error)
+                                    };
+                                  });
+                                  let newErrors = { ...errors }
+                                  newErrors.days = newDaysErrors;
+                                  return newErrors
+                                });
+                              }}
+                            >
+                              <MdOutlineClose />
+                            </button>
+                          </div>
+                        );
+                      }
+                    })}
 
-      {errors.days?.map((error) => {
-        if (error.city && error.index === index) {
-          return <p key={error.index}>{error.city}</p>;
-        }
-      })}
+     
       <CreatableSelect
         isClearable
         className='rounded-lg mt-2 text-sm text-gray-500 outline-0'
@@ -139,6 +197,40 @@ export default function PlacesSelector({
         value={selectedCity}
         onChange={(city) => handleSelectCityChange(city, index)}
       />
+       {errors.days?.map((error) => {
+                      if (error.city && error.index === index) {
+                        return (
+                          <div
+                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                            role="alert"
+                            key={error.index}
+                          >
+                            <strong className="font-bold">Error! </strong>
+                            <span className="block sm:inline">
+                              {error.city}
+                            </span>
+                            <button
+                              className="absolute top-0 bottom-0 right-0 px-2"
+                              onClick={() => {
+                                setErrors(() => {
+                                  let newDaysErrors = [];
+                                  errors.days.forEach((error) => {
+                                    if (!error.city || error.index !== index) {
+                                      newDaysErrors.push(error)
+                                    };
+                                  });
+                                  let newErrors = { ...errors }
+                                  newErrors.days = newDaysErrors;
+                                  return newErrors
+                                });
+                              }}
+                            >
+                              <MdOutlineClose />
+                            </button>
+                          </div>
+                        );
+                      }
+                    })}
     </div>
   );
 }
