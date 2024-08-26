@@ -4,7 +4,6 @@ import { deleteComment, patchComment } from "../lib/data/comments";
 import { dateFormatting } from "../utils/utils";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineModeEdit, MdOutlineClose } from "react-icons/md";
-import { getUserFromDb } from "../lib/data/users";
 
 export default function CommentCard({ session, comment, setComments }) {
   const [error, setError] = useState("");

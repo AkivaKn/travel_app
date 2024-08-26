@@ -31,22 +31,6 @@ export async function getUserFromDb(email, password) {
   }
 }
 
-// export async function getUserAvatar(userId){
-//   try{
-//     const res=await sql`
-//           SELECT * from users where user_id = ${user_id}
-//           `;
-//     const user = res.rows[0];
-//     if(!user){
-//       throw new Error('user not found');
-//     }
-//     return user.avatar_img_url,
-//     ;
-//   } catch (error) {
-//     console.error("Authorisation error:", error);
-//     return null;
-//   }
-// }
 
 
 
