@@ -24,7 +24,7 @@ export default function SignInForm({ modalRef, setToggleRegister }) {
         modalElement.close();
       }
     } catch (error) {
-      console.log(error)
+      setErrors({ serverError: "Please try again." });
     }
   }
 
@@ -118,10 +118,30 @@ export default function SignInForm({ modalRef, setToggleRegister }) {
               )}
             </div>
             <div className="w-full mt-5 mb-3">
-              <button 
-              className="black_btn_large_text w-full"
-              type="submit">
-                Sign In</button>
+              <button className="black_btn_large_text w-full" type="submit">
+                Sign In
+              </button>
+              {errors.serverError && (
+                <div
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
+                  role="alert"
+                >
+                  <strong className="font-bold">Error! </strong>
+                  <span className="block sm:inline">{errors.serverError}</span>
+                  <button
+                    className="absolute top-0 bottom-0 right-0 px-2"
+                    onClick={() => {
+                      setErrors(() => {
+                        let newErrors = { ...errors };
+                        delete newErrors.serverError;
+                        return newErrors;
+                      });
+                    }}
+                  >
+                    <MdOutlineClose />
+                  </button>
+                </div>
+              )}
             </div>
           </form>
           <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
