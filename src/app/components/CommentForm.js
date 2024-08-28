@@ -21,9 +21,7 @@ export default function CommentForm({ session, itineraryId, setComments }) {
         itineraryId: itineraryId,
         userId: session?.user?.user_id,
       };
-      console.log(newComment, "new comment");
         const postedComment = await postComment(newComment);
-        console.log(postedComment, "posted");
       postedComment.username = session?.user?.username;
       setComments((comments) => [postedComment, ...comments]);
         setCommentInput("");

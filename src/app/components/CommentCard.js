@@ -138,15 +138,15 @@ export default function CommentCard({ session, comment, setComments }) {
                 </div>
               )}
             </div>
-        </section>
           )}
       {errors.comment && (
         <ErrorAlert
-          errors={errors}
-          setErrors={setErrors}
-          errorKey={"comment"}
+        errors={errors}
+        setErrors={setErrors}
+        errorKey={"comment"}
         />
       )}
+      </section>)}
     </>
   );
 }
