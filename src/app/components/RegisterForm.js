@@ -149,7 +149,7 @@ export default function RegisterForm({ modalRef, setToggleRegister }) {
                 <ErrorAlert
                   errors={errors}
                   setErrors={setErrors}
-                  errorKey={"password"}
+                  errorKey={"confirmPassword"}
                 />
               )}
             </div>

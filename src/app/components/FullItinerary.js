@@ -10,10 +10,11 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useRef, useState } from "react";
 import { deleteItinerary } from "../lib/data/itineraries";
 import { useRouter } from "next/navigation";
+import ErrorAlert from "./ErrorAlert";
 
 export default function FullItinerary({ itinerary, session }) {
   const modalRef = useRef();
-  const [dialogError, setDialogError] = useState("");
+  const [dialogError, setDialogError] = useState({});
   const { itineraryInfo, itineraryDays, itineraryComments } = itinerary;
   const formattedDate = dateFormatting(itineraryInfo.created_at);
   const formattedBudget = formatBudget(itineraryInfo.budget);
@@ -27,12 +28,12 @@ export default function FullItinerary({ itinerary, session }) {
 
   const handleDelete = async (event) => {
     event.target.disabled = true;
-    setDialogError("");
+    setDialogError({});
     try {
       await deleteItinerary(itineraryInfo.itinerary_id);
       router.replace("/");
     } catch (error) {
-      setDialogError("Error when deleting itinerary. Please try again.");
+      setDialogError({delete: "Please try again."});
       event.target.disabled = false;
       console.log(error);
     }
@@ -41,7 +42,7 @@ export default function FullItinerary({ itinerary, session }) {
   const cancelDelete = () => {
     const modalElement = modalRef.current;
     modalElement.close();
-    setDialogError("");
+    setDialogError({});
   };
   
   return (
@@ -92,13 +93,12 @@ export default function FullItinerary({ itinerary, session }) {
                 <span className="font-bold">{formattedBudget}</span>
               </p>
             </div>
-            <Votes
-              itineraryInfo={itineraryInfo}
-              session={session}
-            />
+            <Votes itineraryInfo={itineraryInfo} session={session} />
           </div>
         </section>
-        <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">Days</h1>
+        <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">
+          Days
+        </h1>
         <ol className="space-y-4">
           {itineraryDays.map((day) => (
             <li key={day.day_id}>
@@ -116,7 +116,6 @@ export default function FullItinerary({ itinerary, session }) {
         ref={modalRef}
         className="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5"
       >
-        
         <div className="relative p-4 w-full max-w-md h-full md:h-auto">
           <button
             type="button"
@@ -154,6 +153,13 @@ export default function FullItinerary({ itinerary, session }) {
           <p className="mb-4 text-gray-500 dark:text-gray-300">
             Are you sure you want to delete this item?
           </p>
+          {dialogError.delete && (
+            <ErrorAlert
+              errors={dialogError}
+              setErrors={setDialogError}
+              errorKey={"delete"}
+            />
+          )}
           <div className="flex justify-center items-center space-x-4">
             <button
               onClick={cancelDelete}

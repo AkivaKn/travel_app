@@ -31,7 +31,7 @@ export function validateUserDetailsForm({
   const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,16}$/;
 
   if (!username) {
-    errors.username = "Please enter a username.";
+    errors.username = "Username is required.";
   } else if (username.length < 5 || username.length > 20) {
     errors.username = "Username must be between 5 and 20 characters.";
   } else if (!usernameRegex.test(username)) {
@@ -39,7 +39,7 @@ export function validateUserDetailsForm({
   }
 
   if (!email) {
-    errors.email = "Please provide your email address.";
+    errors.email = "Email is required.";
   } else if (!emailRegex.test(email) || email.length > 320) {
     errors.email = "Email is invalid.";
   }

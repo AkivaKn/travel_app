@@ -4,6 +4,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { checkPassword, deleteUser, logout, updateUser } from "../lib/data/users";
 import { useRouter } from "next/navigation";
 import { validateUserDetailsForm } from "../utils/validation_utils";
+import ErrorAlert from "./ErrorAlert";
 
 export default function ProfilePage({ user }) {
   const [editProfile, setEditProfile] = useState(false);
@@ -58,8 +59,7 @@ export default function ProfilePage({ user }) {
       await logout()
       router.replace("/");
     } catch (error) {
-      console.log(error);
-      setDialogError({password: error});
+      setDialogError({ password: error.message });
     }
   };
 
@@ -123,25 +123,11 @@ export default function ProfilePage({ user }) {
                     defaultValue={user?.username}
                   />
                   {errors.username && (
-                    <div
-                      className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
-                      role="alert"
-                    >
-                      <strong className="font-bold">Error! </strong>
-                      <span className="block sm:inline">{errors.username}</span>
-                      <button
-                        className="absolute top-0 bottom-0 right-0 px-2"
-                        onClick={() => {
-                          setErrors(() => {
-                            let newErrors = { ...errors };
-                            delete newErrors.username;
-                            return newErrors;
-                          });
-                        }}
-                      >
-                        <MdOutlineClose />
-                      </button>
-                    </div>
+                    <ErrorAlert
+                      errors={errors}
+                      setErrors={setErrors}
+                      errorKey={"username"}
+                    />
                   )}
                 </div>
                 <div className="my-3">
@@ -161,25 +147,11 @@ export default function ProfilePage({ user }) {
                     defaultValue={user?.email}
                   />
                   {errors.email && (
-                    <div
-                      className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
-                      role="alert"
-                    >
-                      <strong className="font-bold">Error! </strong>
-                      <span className="block sm:inline">{errors.email}</span>
-                      <button
-                        className="absolute top-0 bottom-0 right-0 px-2"
-                        onClick={() => {
-                          setErrors(() => {
-                            let newErrors = { ...errors };
-                            delete newErrors.email;
-                            return newErrors;
-                          });
-                        }}
-                      >
-                        <MdOutlineClose />
-                      </button>
-                    </div>
+                    <ErrorAlert
+                      errors={errors}
+                      setErrors={setErrors}
+                      errorKey={"email"}
+                    />
                   )}
                 </div>
                 <div className="my-3">
@@ -188,7 +160,7 @@ export default function ProfilePage({ user }) {
                       className="font-satoshi font-semibold text-base text-gray-700"
                       htmlFor="password"
                     >
-                      Password
+                      Password (optional)
                     </label>
                   </div>
                   <input
@@ -199,25 +171,11 @@ export default function ProfilePage({ user }) {
                     // placeholder="New password (optional)"
                   />
                   {errors.password && (
-                    <div
-                      className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
-                      role="alert"
-                    >
-                      <strong className="font-bold">Error! </strong>
-                      <span className="block sm:inline">{errors.password}</span>
-                      <button
-                        className="absolute top-0 bottom-0 right-0 px-2"
-                        onClick={() => {
-                          setErrors(() => {
-                            let newErrors = { ...errors };
-                            delete newErrors.password;
-                            return newErrors;
-                          });
-                        }}
-                      >
-                        <MdOutlineClose />
-                      </button>
-                    </div>
+                    <ErrorAlert
+                      errors={errors}
+                      setErrors={setErrors}
+                      errorKey={"password"}
+                    />
                   )}
                 </div>
                 <div className="my-3">
@@ -236,27 +194,11 @@ export default function ProfilePage({ user }) {
                     type="password"
                   />
                   {errors.confirmPassword && (
-                    <div
-                      className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
-                      role="alert"
-                    >
-                      <strong className="font-bold">Error! </strong>
-                      <span className="block sm:inline">
-                        {errors.confirmPassword}
-                      </span>
-                      <button
-                        className="absolute top-0 bottom-0 right-0 px-2"
-                        onClick={() => {
-                          setErrors(() => {
-                            let newErrors = { ...errors };
-                            delete newErrors.confirmPassword;
-                            return newErrors;
-                          });
-                        }}
-                      >
-                        <MdOutlineClose />
-                      </button>
-                    </div>
+                    <ErrorAlert
+                      errors={errors}
+                      setErrors={setErrors}
+                      errorKey={"confirmPassword"}
+                    />
                   )}
                 </div>
                 <div>
@@ -275,52 +217,22 @@ export default function ProfilePage({ user }) {
                     defaultValue={user?.bio}
                   ></textarea>
                   {errors.bio && (
-                    <div
-                      className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
-                      role="alert"
-                    >
-                      <strong className="font-bold">Error! </strong>
-                      <span className="block sm:inline">{errors.bio}</span>
-                      <button
-                        className="absolute top-0 bottom-0 right-0 px-2"
-                        onClick={() => {
-                          setErrors(() => {
-                            let newErrors = { ...errors };
-                            delete newErrors.bio;
-                            return newErrors;
-                          });
-                        }}
-                      >
-                        <MdOutlineClose />
-                      </button>
-                    </div>
+                    <ErrorAlert
+                      errors={errors}
+                      setErrors={setErrors}
+                      errorKey={"bio"}
+                    />
                   )}
                 </div>
                 <button className="black_btn" type="submit">
                   Save Changes
                 </button>
                 {errors.serverError && (
-                  <div
-                    className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 mt-1 rounded relative"
-                    role="alert"
-                  >
-                    <strong className="font-bold">Error! </strong>
-                    <span className="block sm:inline">
-                      {errors.serverError}
-                    </span>
-                    <button
-                      className="absolute top-0 bottom-0 right-0 px-2"
-                      onClick={() => {
-                        setErrors(() => {
-                          let newErrors = { ...errors };
-                          delete newErrors.serverError;
-                          return newErrors;
-                        });
-                      }}
-                    >
-                      <MdOutlineClose />
-                    </button>
-                  </div>
+                  <ErrorAlert
+                    errors={errors}
+                    setErrors={setErrors}
+                    errorKey={"serverError"}
+                  />
                 )}
               </form>
             ) : (
@@ -385,8 +297,15 @@ export default function ProfilePage({ user }) {
             <span className="sr-only">Close modal</span>
           </button>
           <form action={handleDelete}>
-            <label htmlFor="password">Enter your password</label>
+            <label htmlFor="password">Confirm your password</label>
             <input name="password" id="password" type="password"></input>
+            {dialogError.password && (
+              <ErrorAlert
+                errors={dialogError}
+                setErrors={setDialogError}
+                errorKey={"password"}
+              />
+            )}
             <div className="flex justify-center items-center space-x-4">
               <button
                 onClick={cancelDelete}

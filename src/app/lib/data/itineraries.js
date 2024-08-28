@@ -178,7 +178,7 @@ export async function deleteItinerary(itinerary_id) {
     }
     return deletedItinerary.rows[0];
   } catch (error) {
-    console.log("error");
+    console.log(error);
     return error;
   }
 }

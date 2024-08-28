@@ -80,7 +80,6 @@ export async function updateUser(formData, avatarImageUrl, userId) {
   const bio = formData.get("bio");
   const avatar_img = formData.get("avatar_img");
 
-  console.log(username, email, bio);
 
   try {
     let sqlStr = `
@@ -102,10 +101,8 @@ export async function updateUser(formData, avatarImageUrl, userId) {
 
     sqlStr += ` WHERE user_id = $5
                 RETURNING *`;
-    console.log(sqlStr);
 
     const res = await sql.query(sqlStr, params);
-    console.log(res.rows[0]);
 
     return res.rows[0];
   } catch (error) {
