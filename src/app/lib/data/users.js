@@ -79,10 +79,10 @@ export async function updateUser(formData, avatarImageUrl, userId) {
   const password = formData.get("password");
   const bio = formData.get("bio");
   const avatar_img = formData.get("avatar_img");
-  
+
   console.log(username, email, bio);
-  
-    try {
+
+  try {
     let sqlStr = `
     UPDATE users
     SET username = $1, email = $2, bio = $3, avatar_img_url = $4`;
@@ -92,25 +92,54 @@ export async function updateUser(formData, avatarImageUrl, userId) {
       avatarImageUrl = await uploadImage(avatar_img);
     }
 
-    let params = [username, email, bio, avatarImageUrl, userId]
+    let params = [username, email, bio, avatarImageUrl, userId];
 
     if (password) {
       const hashedPassword = await bcrypt.hash(password, 10);
       sqlStr += `, password = $6`;
-      params.push(hashedPassword)
+      params.push(hashedPassword);
     }
 
     sqlStr += ` WHERE user_id = $5
                 RETURNING *`;
     console.log(sqlStr);
-    
-    const res = await sql.query(sqlStr,params)
-    console.log(res.rows[0]);
-    
-    return res.rows[0]
 
+    const res = await sql.query(sqlStr, params);
+    console.log(res.rows[0]);
+
+    return res.rows[0];
   } catch (error) {
     console.log(error);
     return error;
+  }
+}
+
+export async function checkPassword(email, password) {
+  try {
+    const res = await sql`
+                  SELECT password FROM users where email = ${email};
+              `;
+    const user = res.rows[0];
+    if (!(await bcrypt.compare(password, user.password))) {
+      throw "Incorrect password";
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+}
+
+export async function deleteUser(email) {
+  try {
+    const res = await sql`
+      DELETE FROM users
+      WHERE email = ${email}
+      RETURNING *`;
+    if (res.rows.length === 0) {
+      throw "500: Server error";
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
   }
 }
