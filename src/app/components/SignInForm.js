@@ -6,6 +6,7 @@ import { validateSignInForm } from "../utils/validation_utils";
 import { IoMdClose } from "react-icons/io";
 
 import ErrorAlert from "./ErrorAlert";
+import { MdOutlineClose } from "react-icons/md";
 
 export default function SignInForm({ modalRef, setToggleRegister }) {
   const [errors, setErrors] = useState({});

@@ -6,6 +6,8 @@ import { validateUserDetailsForm } from "../utils/validation_utils";
 import { useState, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import ErrorAlert from "./ErrorAlert";
+import { MdOutlineClose } from "react-icons/md";
+
 
 export default function RegisterForm({ modalRef, setToggleRegister }) {
   const [errors, setErrors] = useState({});
