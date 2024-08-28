@@ -12,7 +12,6 @@ export default function Carroussel({ images }) {
     const currentImage = images.filter(
       (image) => image.itinerary_image_url === e.target.src
     )[0];
-    console.log(currentImage);
     router.push(`/itinerary/${currentImage.itinerary_id}`);
   }
 

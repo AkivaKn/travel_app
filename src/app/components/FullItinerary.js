@@ -19,7 +19,6 @@ export default function FullItinerary({ itinerary, session }) {
   const formattedBudget = formatBudget(itineraryInfo.budget);
   const router = useRouter();
 
-  console.log(itineraryComments)
 
   const handleDeleteClick = () => {
     const modalElement = modalRef.current;
@@ -27,7 +26,6 @@ export default function FullItinerary({ itinerary, session }) {
   };
 
   const handleDelete = async (event) => {
-    console.log(event.target);
     event.target.disabled = true;
     setDialogError("");
     try {
