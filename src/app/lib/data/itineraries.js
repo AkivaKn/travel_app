@@ -24,7 +24,6 @@ export async function postItinerary(formData, daysArray) {
       (title, itinerary_image_url, itinerary_description, user_id, budget)
       VALUES (${title}, ${itinerary_image_url}, ${itinerary_description}, ${user_id}, ${budget})
       RETURNING *`;
-    console.log(itineraries_res);
     const itineraryInfo = itineraries_res.rows[0];
     const itineraryDays = await postDays(daysArray, itineraryInfo.itinerary_id);
 
@@ -135,14 +134,11 @@ export async function patchItinerary(
   const itinerary_image = formData.get("itineraryImage");
   const session = await auth();
   const currentUserId = session?.user?.user_id;
-  console.log(budget);
 
   try {
     if (itinerary_image.size > 0) {
-      console.log(itineraryImageUrl);
       itineraryImageUrl && del(itineraryImageUrl);
       itineraryImageUrl = await uploadImage(itinerary_image);
-      console.log(itineraryImageUrl);
     }
     const patchItinerary = await sql`
     UPDATE itineraries

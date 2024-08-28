@@ -4,9 +4,10 @@ import { deleteComment, patchComment } from "../lib/data/comments";
 import { dateFormatting } from "../utils/utils";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineModeEdit, MdOutlineClose } from "react-icons/md";
+import ErrorAlert from "./ErrorAlert";
 
 export default function CommentCard({ session, comment, setComments }) {
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [editComment, setEditComment] = useState(false);
   const [commentInput, setCommentInput] = useState(comment.comment_body);
   const [isPending, setIsPending] = useState(false);
@@ -14,7 +15,7 @@ export default function CommentCard({ session, comment, setComments }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const handleDeleteClick = async (event) => {
     event.target.disabled = true;
-    setError("");
+    setErrors({});
     try {
       await deleteComment(comment);
       setIsDeleted(true);
@@ -26,7 +27,7 @@ export default function CommentCard({ session, comment, setComments }) {
         });
       }, 6000);
     } catch (error) {
-      setError("Error when deleting comment. Please try again.");
+      setErrors({ comment: "Error when deleting comment. Please try again." });
       event.target.disabled = false;
     }
   };
@@ -46,21 +47,18 @@ export default function CommentCard({ session, comment, setComments }) {
         commentInput,
         comment.comment_id
       );
-      console.log(updatedComment, "updated");
+
       updatedComment.username = session?.user?.username;
       await setCommentBody(commentInput);
       setEditComment(false);
-      setError("");
+      setErrors({});
     } catch (error) {
-      console.log(error);
-      setError("Error editing comment. Please try again.");
+      setErrors({ comment: "Error editing comment. Please try again." });
     } finally {
       setIsPending(false);
     }
   };
-  const handleCloseClick = () => {
-    setError("");
-  };
+
   const handleCancelClick = () => {
     setEditComment(false);
   };
@@ -141,22 +139,14 @@ export default function CommentCard({ session, comment, setComments }) {
               )}
             </div>
           )}
-
-          {error && (
-            <div
-              className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'
-              role='alert'>
-              <strong className='font-bold'>Error! </strong>
-              <span className='block sm:inline'>{error}</span>
-              <button
-                className='absolute top-0 bottom-0 right-0 px-4 py-3'
-                onClick={handleCloseClick}>
-                <MdOutlineClose />
-              </button>
-            </div>
-          )}
-        </section>
+      {errors.comment && (
+        <ErrorAlert
+        errors={errors}
+        setErrors={setErrors}
+        errorKey={"comment"}
+        />
       )}
+      </section>)}
     </>
   );
 }
