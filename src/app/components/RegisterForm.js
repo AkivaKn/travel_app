@@ -1,12 +1,10 @@
 "use client";
 
 import { postNewUser } from "../lib/data/users";
-import { useRouter } from "next/navigation";
 import { validateUserDetailsForm } from "../utils/validation_utils";
 import { useState, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import ErrorAlert from "./ErrorAlert";
-import { MdOutlineClose } from "react-icons/md";
 
 
 export default function RegisterForm({ modalRef, setToggleRegister }) {
@@ -199,27 +197,11 @@ export default function RegisterForm({ modalRef, setToggleRegister }) {
             <div className='w-full mt-5 mb-3'>
             
                {errors.serverError && (
-              <div
-                className="bg-red-100 border border-red-400 text-red-700 px-4 py-1 my-1 rounded relative"
-                role="alert"
-              >
-                <strong className="font-bold">Error! </strong>
-                <span className="block sm:inline">{errors.serverError}</span>
-                <button
-                  className="absolute top-0 bottom-0 right-0 px-2"
-                  onClick={() => {
-                    setErrors(() => {<button className="black_btn" type="submit">
-                      Save Changes
-                    </button>
-                      let newErrors = { ...errors };
-                      delete newErrors.serverError;
-                      return newErrors;
-                    });
-                  }}
-                >
-                  <MdOutlineClose />
-                </button>
-              </div>
+                <ErrorAlert
+                  errors={errors}
+                  setErrors={setErrors}
+                  errorKey={"serverError"}
+                />
               )}
               <button className="black_btn_large_text w-full"
                 type='submit'>Register</button>
