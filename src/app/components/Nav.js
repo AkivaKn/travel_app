@@ -70,7 +70,7 @@ export default function Nav({ session, signOut }) {
       </div>
 
       {session?.user && (
-        <div className="hidden sm:flex absolute flex-col items-center ml-[1%] w-min-fit">
+        <Link className="hidden sm:flex absolute flex-col items-center ml-[1%] w-min-fit" href={'/profile'}>
           <img
             src={
               session.user.avatar_img_url
@@ -82,7 +82,7 @@ export default function Nav({ session, signOut }) {
             height={35}
           />
           <p className="text-red-500">{session?.user.username}</p>
-        </div>
+        </Link>
       )}
 
       <dialog

@@ -1,7 +1,7 @@
 "use client";
 import ReactSlider from "react-slider";
 import { generateBudgetString } from "../utils/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlacesSelector from "./PlacesSelector";
 import { patchItinerary, postItinerary } from "../lib/data/itineraries";
 import { validateItinerariesForm } from "../utils/validation_utils";
@@ -9,7 +9,13 @@ import { useRouter } from "next/navigation";
 import { MdOutlineClose } from "react-icons/md";
 import ErrorAlert from "./ErrorAlert";
 
-export default function UpdateItineraryForm({ itinerary, page }) {
+export default function ItineraryForm({ itinerary, page,user }) {
+  useEffect(() => {
+    
+    if (!user) {
+    router.replace('/')
+  }
+  },[])
   const router = useRouter();
   let newItineraryDays;
   let newBudget;
