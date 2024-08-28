@@ -48,7 +48,7 @@ export async function deleteVote(session, itineraryId) {
     }
     return deletedVote.rows[0];
   } catch (error) {
-    console.log("error");
+    console.log(error);
     return error;
   }
 }
