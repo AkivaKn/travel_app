@@ -138,6 +138,7 @@ export default function CommentCard({ session, comment, setComments }) {
                 </div>
               )}
             </div>
+        </section>
           )}
       {errors.comment && (
         <ErrorAlert
