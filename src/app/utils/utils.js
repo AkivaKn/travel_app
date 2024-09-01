@@ -8,7 +8,6 @@ function dateFormatting(date) {
     .replace(/ /g, "-");
   return formattedDate;
 }
-
 function formatBudget(budget) {
   if (budget === 1) {
     return "$";
@@ -18,11 +17,9 @@ function formatBudget(budget) {
     return "$$$";
   }
 }
-
 function generateBudgetString(length, char) {
   return Array.from({ length }, () => char).join("");
 }
-
 function filterItineraries(
   allItineraries,
   locationArr,
@@ -32,19 +29,16 @@ function filterItineraries(
 ) {
   minDays ? null : (minDays = 0);
   maxDays ? null : (maxDays = 99999999);
-
   let filteredMatchScores = [];
   let itineraries = allItineraries.filter((itinerary) => {
     return (
       itinerary.number_of_days >= minDays && itinerary.number_of_days <= maxDays
     );
   });
-
   itineraries.forEach((itinerary) => {
     itinerary.matchScore = 0;
     filteredMatchScores.push(itinerary);
   });
-
   if (locationArr.length > 0) {
     const matchScores = itineraries.map((itinerary) => {
       locationArr.forEach((location) => {
@@ -75,10 +69,8 @@ function filterItineraries(
     });
   }
   filteredMatchScores.sort((a, b) => b.matchScore - a.matchScore);
-
   return filteredMatchScores;
 }
-
 module.exports = {
   generateBudgetString,
   dateFormatting,

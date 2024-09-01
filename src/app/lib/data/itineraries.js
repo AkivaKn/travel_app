@@ -47,27 +47,16 @@ export async function getItineraryById(id) {
     WHERE itinerary_id=${id}`
     const userExists=checkUser.rows[0].user_id
 
-    let sqlStr
-    
-    if(userExists){
-      sqlStr=`
+    let sqlStr=`
       SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, u.username, u.avatar_img_url, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
       FROM itineraries i
       FULL JOIN itinerary_votes v
       ON i.itinerary_id=v.itinerary_id
-      INNER JOIN users u
+      LEFT JOIN users u
       ON i.user_id=u.user_id
       WHERE i.itinerary_id= ${id}
       GROUP BY i.itinerary_id, u.username, u.avatar_img_url`
-    } else{
-      sqlStr=`
-      SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
-      FROM itineraries i
-      FULL JOIN itinerary_votes v
-      ON i.itinerary_id=v.itinerary_id
-      WHERE i.itinerary_id= ${id}
-      GROUP BY i.itinerary_id`
-    }
+ 
 
     const itineraryRes = await sql.query(sqlStr);
 
@@ -102,24 +91,34 @@ export async function getItineraryById(id) {
 export async function getItineraries(limit) {
   try {
     let sqlString = `
-      SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, u.username, u.avatar_img_url, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes, loc.country_list, loc.region_list, loc.place_list
-      FROM itineraries i
-      RIGHT JOIN itinerary_votes v
-      ON i.itinerary_id=v.itinerary_id
-      FULL JOIN users u
-      ON i.user_id=u.user_id
+    SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) AS number_of_days, u.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
 
-      INNER JOIN(
+    FROM itineraries i
+    LEFT JOIN days d
+    ON i.itinerary_id=d.itinerary_id
+    LEFT JOIN users u
+    ON i.user_id=u.user_id
+
+    LEFT JOIN (
+      SELECT i.itinerary_id, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
+      FROM itineraries i
+      FULL JOIN itinerary_votes v
+      ON i.itinerary_id=v.itinerary_id
+      GROUP BY i.itinerary_id
+    ) uv
+
+    ON i.itinerary_id=uv.itinerary_id
+
+    LEFT JOIN(
       SELECT i.itinerary_id, ARRAY_AGG(DISTINCT(country)) AS country_list, ARRAY_AGG(DISTINCT(region)) AS region_list, ARRAY_AGG(DISTINCT(place)) AS place_list
       FROM itineraries i
       JOIN days d
       ON i.itinerary_id = d.itinerary_id
       GROUP BY i.itinerary_id
     ) loc
-
     ON i.itinerary_id=loc.itinerary_id
-      GROUP BY i.itinerary_id, u.username, u.avatar_img_url, loc.country_list, loc.region_list, loc.place_list
-      ORDER BY total_votes DESC
+    GROUP BY i.itinerary_id, u.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
+    ORDER BY total_votes DESC
     `;
 
     if (limit) {
@@ -127,7 +126,6 @@ export async function getItineraries(limit) {
      
     }
     const allItinerariesSQL = await sql.query(sqlString);
-
     return allItinerariesSQL.rows;
   } catch (error) {
     console.error("Data fetching error:", error);

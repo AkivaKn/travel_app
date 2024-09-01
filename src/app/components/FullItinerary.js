@@ -66,7 +66,11 @@ export default function FullItinerary({ itinerary, session }) {
             <div className="flex justify-between">
               <p className=" text-gray-700 mx-2 sm:text-lg text-sm mb-2">
                 Posted by{" "}
-                <span className="font-bold">{itineraryInfo.username}</span> on{" "}
+                {itineraryInfo.username ? 
+                <span className="font-bold">{itineraryInfo.username}</span> 
+                : <span className="font-bold">[Deleted User] </span> 
+              }
+                on{" "}
                 <span className="font-bold">{formattedDate}</span>
               </p>
               {session?.user?.user_id === itineraryInfo.user_id && (
