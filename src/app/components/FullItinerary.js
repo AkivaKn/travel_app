@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import ErrorAlert from "./ErrorAlert";
 import Map from "./Map"
 
-export default function FullItinerary({ itinerary, session, coordinates, locations, apiKey }) {
+export default function FullItinerary({ itinerary, session, coordinates, locations }) {
   const modalRef = useRef();
   const [dialogError, setDialogError] = useState({});
   const { itineraryInfo, itineraryDays, itineraryComments } = itinerary;
