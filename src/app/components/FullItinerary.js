@@ -11,15 +11,16 @@ import { useRef, useState } from "react";
 import { deleteItinerary } from "../lib/data/itineraries";
 import { useRouter } from "next/navigation";
 import ErrorAlert from "./ErrorAlert";
+import Map from "./Map"
 
-export default function FullItinerary({ itinerary, session }) {
+export default function FullItinerary({ itinerary, session, coordinates, locations }) {
   const modalRef = useRef();
   const [dialogError, setDialogError] = useState({});
   const { itineraryInfo, itineraryDays, itineraryComments } = itinerary;
   const formattedDate = dateFormatting(itineraryInfo.created_at);
   const formattedBudget = formatBudget(itineraryInfo.budget);
   const router = useRouter();
-
+  const apiKey = process.env.NEXT_PUBLIC_REACT_APP_API_KEY; 
 
   const handleDeleteClick = () => {
     const modalElement = modalRef.current;
@@ -66,7 +67,11 @@ export default function FullItinerary({ itinerary, session }) {
             <div className="flex justify-between">
               <p className=" text-gray-700 mx-2 sm:text-lg text-sm mb-2">
                 Posted by{" "}
-                <span className="font-bold">{itineraryInfo.username}</span> on{" "}
+                {itineraryInfo.username ? 
+                <span className="font-bold">{itineraryInfo.username}</span> 
+                : <span className="font-bold">[Deleted User] </span> 
+              }
+                on{" "}
                 <span className="font-bold">{formattedDate}</span>
               </p>
               {session?.user?.user_id === itineraryInfo.user_id && (
@@ -96,6 +101,14 @@ export default function FullItinerary({ itinerary, session }) {
             <Votes itineraryInfo={itineraryInfo} session={session} />
           </div>
         </section>
+        {apiKey && 
+        <>
+        <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">
+          Map
+        </h1>
+        <Map coordinates={coordinates} locations={locations} apiKey={apiKey}/>
+        </>
+        }
         <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">
           Days
         </h1>

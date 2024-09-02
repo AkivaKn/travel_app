@@ -4,6 +4,7 @@ import { auth } from "../../../../auth";
 import { uploadImage } from "./images";
 import { del } from "@vercel/blob";
 import { postDays } from "./days";
+import { FaCommentDollar } from "react-icons/fa";
 
 export async function postItinerary(formData, daysArray) {
   const session = await auth();
@@ -41,20 +42,30 @@ export async function postItinerary(formData, daysArray) {
 
 export async function getItineraryById(id) {
   try {
-    const itineraryRes = await sql`
-    SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, u.username, u.avatar_img_url, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
-    FROM itineraries i
-    FULL JOIN itinerary_votes v
-    ON i.itinerary_id=v.itinerary_id
-    INNER JOIN users u
-    ON i.user_id=u.user_id
-    WHERE i.itinerary_id= ${id}
-    GROUP BY i.itinerary_id, u.username, u.avatar_img_url`;
+    const checkUser = await sql`
+    SELECT user_id 
+    FROM itineraries
+    WHERE itinerary_id=${id}`
+    const userExists=checkUser.rows[0].user_id
+
+    let sqlStr=`
+      SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, u.username, u.avatar_img_url, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
+      FROM itineraries i
+      FULL JOIN itinerary_votes v
+      ON i.itinerary_id=v.itinerary_id
+      LEFT JOIN users u
+      ON i.user_id=u.user_id
+      WHERE i.itinerary_id= ${id}
+      GROUP BY i.itinerary_id, u.username, u.avatar_img_url`
+ 
+
+    const itineraryRes = await sql.query(sqlStr);
 
     const daysRes = await sql`
     SELECT * FROM days
     WHERE days.itinerary_id= ${id}`;
 
+   
     const commentsRes = await sql`
     SELECT comments.comment_id, comments.user_id, comments.itinerary_id, comments.comment_body, u.username, u.avatar_img_url, comments.created_at FROM comments 
     INNER JOIN users u
@@ -71,7 +82,7 @@ export async function getItineraryById(id) {
       itineraryDays: itineraryDays,
       itineraryComments: commentsRes.rows,
     };
-
+    
     return itineraryObject;
   } catch (error) {
     console.error("Data fetching error:", error);
@@ -84,11 +95,13 @@ export async function getItineraries(limit,user_id) {
     let params = [];
     let sqlString = `
     SELECT i.itinerary_id, i.title, i.itinerary_image_url, i.user_id, i.itinerary_description, i.created_at, i.budget, COALESCE(CAST(COUNT(d.day_number)AS INTEGER),0) AS number_of_days, u.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
+
     FROM itineraries i
     LEFT JOIN days d
     ON i.itinerary_id=d.itinerary_id
     LEFT JOIN users u
     ON i.user_id=u.user_id
+
     LEFT JOIN (
       SELECT i.itinerary_id, COALESCE(CAST(SUM(vote_value)AS INTEGER),0) AS total_votes
       FROM itineraries i
@@ -96,6 +109,7 @@ export async function getItineraries(limit,user_id) {
       ON i.itinerary_id=v.itinerary_id
       GROUP BY i.itinerary_id
     ) uv
+
     ON i.itinerary_id=uv.itinerary_id
 
     LEFT JOIN(
@@ -114,10 +128,12 @@ export async function getItineraries(limit,user_id) {
 sqlString += `GROUP BY i.itinerary_id, u.username, uv.total_votes, loc.country_list, loc.region_list, loc.place_list
     ORDER BY total_votes DESC `
     if (limit) {
+
       params.push(limit)
       sqlString += `LIMIT $${params.length}`;
     }
     const allItinerariesSQL = await sql.query(sqlString,params);
+
 
     return allItinerariesSQL.rows;
   } catch (error) {
