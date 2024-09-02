@@ -10,18 +10,27 @@ import {
 import { useRouter } from "next/navigation";
 import { validateUserDetailsForm } from "../utils/validation_utils";
 import ErrorAlert from "./ErrorAlert";
+import { getItineraries } from "../lib/data/itineraries";
+import ItinerariesList from "./ItinerariesList";
 
-export default function ProfilePage({ user }) {
+export default function ProfilePage({ session}) {
   const [editProfile, setEditProfile] = useState(false);
   const [errors, setErrors] = useState({});
   const [dialogError, setDialogError] = useState({});
+  const [itineraries,setItineraries] = useState([])
   const router = useRouter();
   const modalRef = useRef();
+  const user = session?.user;
 
   useEffect(() => {
     if (!user) {
       router.replace("/");
     }
+    const fetchItineraries = async () => {
+      const itineraries = await getItineraries(undefined, user?.user_id);
+      setItineraries(itineraries);
+    };
+    fetchItineraries();
   }, []);
   async function handleSubmit(formData) {
     try {
@@ -75,7 +84,7 @@ export default function ProfilePage({ user }) {
 
   return (
     <>
-      <div className="flex justify-center h-[85vh]">
+      <div className="flex justify-center">
         {/* <div className="flex w-1/2 p-2 bg-white rounded-xl shadow-lg mx-4 mb-8 flex-col p-6"> */}
         {editProfile ? (
           <div className="flex w-full">
@@ -158,14 +167,14 @@ export default function ProfilePage({ user }) {
                 <div className="mb-2 block">
                   <label
                     className="font-satoshi font-semibold text-base text-gray-700"
-                    htmlFor="password"
+                    htmlFor="profile-password"
                   >
                     Password (optional)
                   </label>
                 </div>
                 <input
                   className="form_input"
-                  id="password"
+                  id="profile-password"
                   name="password"
                   type="password"
                   // placeholder="New password (optional)"
@@ -245,8 +254,8 @@ export default function ProfilePage({ user }) {
             </form>
           </div>
         ) : (
-          <div className="w-full grid grid-cols-3 p-8">
-            <div className="flex flex-col justify-center items-center">
+          <div className={`w-full ${itineraries.length >0 &&`md:grid grid-cols-3`} md:p-8`}>
+            <div className="flex flex-col justify-center items-center h-[80vh]">
               <img
                 className="w-48 h-48 rounded-full object-cover my-3"
                 src={
@@ -259,7 +268,10 @@ export default function ProfilePage({ user }) {
               <h1 className="sm:text-xl text-lg font-semibold my-3">
                 {user?.username}
               </h1>
-              <p className="sm:text-lg text-sm my-3">{user?.email}</p>
+                <p className="sm:text-lg text-sm my-3">{user?.email}</p>
+                <p className="sm:text-lg text-sm text-gray-900 p-4">
+                {user?.bio}
+                </p>
               <div className="flex my-3">
                 <button
                   className="black_btn "
@@ -271,12 +283,13 @@ export default function ProfilePage({ user }) {
                   Delete account
                 </button>
               </div>
+              </div>
+              {itineraries.length > 0 &&
+            <div className="col-start-2 col-span-2 justify-center items-center md:bg-white md:rounded-xl md:shadow-lg">
+              
+                <ItinerariesList session={session} itineraries={itineraries}/>
             </div>
-            <div className="flex col-start-2 col-span-2 justify-center items-center bg-white rounded-xl shadow-lg">
-              <p className="sm:text-lg text-sm text-gray-900 p-4">
-                {user?.bio}
-              </p>
-            </div>
+              }
           </div>
         )}
       </div>
