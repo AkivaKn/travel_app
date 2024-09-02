@@ -5,7 +5,6 @@ import ReactSlider from "react-slider";
 import { filterItineraries, generateBudgetString } from "../utils/utils";
 import { getItineraries } from "../lib/data/itineraries";
 import ItineraryCard from "./ItineraryCard";
-
 export default function ItinerariesList({ session }) {
   const [budget, setBudget] = useState(1);
   const [inputValue, setInputValue] = useState("");
@@ -15,7 +14,6 @@ export default function ItinerariesList({ session }) {
   const [minDays, setMinDays] = useState("");
   const [maxDays, setMaxDays] = useState("");
   const [filter, setFilter] = useState(true);
-
   useEffect(() => {
     const fetchItineraries = async () => {
       const itineraries = await getItineraries();
@@ -23,7 +21,6 @@ export default function ItinerariesList({ session }) {
     };
     fetchItineraries();
   }, []);
-
   const handleKeyDown = (event) => {
     if (!inputValue) return;
     switch (event.key) {
@@ -34,7 +31,6 @@ export default function ItinerariesList({ session }) {
         event.preventDefault();
     }
   };
-
   const createOption = (label) => ({
     label,
     value: label,
@@ -45,7 +41,6 @@ export default function ItinerariesList({ session }) {
   const handleMaxDays = (event) => {
     setMaxDays(event.target.value);
   };
-
   useEffect(() => {
     const searchLocations = value.map((location) => location.value);
     const filteredItineraries = filterItineraries(
@@ -55,14 +50,11 @@ export default function ItinerariesList({ session }) {
       minDays,
       maxDays
     );
-
     setItinerariesList(filteredItineraries);
   }, [allItineraries, filter]);
-
   const handleClick = () => {
     setFilter(!filter);
   };
-
   return (
     <section className=' w-full max-w-full flex-center flex-col p-4'>
       <div className='w-full max-w-5xl flex flex-col gap-7 glassmorphism'>
