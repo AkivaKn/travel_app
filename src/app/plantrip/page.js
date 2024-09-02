@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "../../../auth";
-import ItinerariesList from "../components/ItinerariesList";
+import ItinerariesSection from "../components/ItinerariesSection";
 import TypewriterTitle from "../components/TypewriterTitle";
 
 export default async function PlanTrip() {
@@ -19,7 +19,7 @@ export default async function PlanTrip() {
           />
         </div>
       </div>
-      <ItinerariesList session={session} />;
+      <ItinerariesSection session={session} />;
     </div>
   );
 }
