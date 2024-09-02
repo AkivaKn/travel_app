@@ -4,6 +4,7 @@ import { auth } from "../../../../auth";
 import { uploadImage } from "./images";
 import { del } from "@vercel/blob";
 import { postDays } from "./days";
+import { FaCommentDollar } from "react-icons/fa";
 
 export async function postItinerary(formData, daysArray) {
   const session = await auth();
@@ -64,6 +65,7 @@ export async function getItineraryById(id) {
     SELECT * FROM days
     WHERE days.itinerary_id= ${id}`;
 
+   
     const commentsRes = await sql`
     SELECT comments.comment_id, comments.user_id, comments.itinerary_id, comments.comment_body, u.username, u.avatar_img_url, comments.created_at FROM comments 
     INNER JOIN users u
@@ -80,7 +82,7 @@ export async function getItineraryById(id) {
       itineraryDays: itineraryDays,
       itineraryComments: commentsRes.rows,
     };
-
+    
     return itineraryObject;
   } catch (error) {
     console.error("Data fetching error:", error);
