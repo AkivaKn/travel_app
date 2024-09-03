@@ -5,18 +5,18 @@ import Image from "next/image";
 import React, { useState, useRef } from "react";
 import { logout } from "../lib/data/users";
 import SignInForm from "./SignInForm";
-import RegisterForm from "./RegisterForm"
+import RegisterForm from "./RegisterForm";
 
 export default function Nav({ session, signOut }) {
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [toggleRegister, setToggleRegister] = useState(false)
-  
-  const modalRef = useRef()
-  const handleSignInClick = () =>{
+  const [toggleRegister, setToggleRegister] = useState(false);
+
+  const modalRef = useRef();
+  const handleSignInClick = () => {
     const modalElement = modalRef.current;
     modalElement.showModal();
-    setToggleDropdown(false)
-  }
+    setToggleDropdown(false);
+  };
 
   return (
     <nav className="flex pt-5 px-5 mb-5">
@@ -70,8 +70,12 @@ export default function Nav({ session, signOut }) {
       </div>
 
       {session?.user && (
-        <Link className="hidden sm:flex absolute flex-col items-center ml-[1%] w-min-fit" href={'/profile'}>
+        <Link
+          className="hidden sm:flex absolute flex-col items-center ml-[1%] w-min-fit"
+          href={"/profile"}
+        >
           <img
+            className="rounded-full object-cover w-10 h-10"
             src={
               session.user.avatar_img_url
                 ? session.user.avatar_img_url

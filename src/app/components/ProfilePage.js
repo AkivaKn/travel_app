@@ -1,23 +1,36 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
-import { checkPassword, deleteUser, logout, updateUser } from "../lib/data/users";
+import {
+  checkPassword,
+  deleteUser,
+  logout,
+  updateUser,
+} from "../lib/data/users";
 import { useRouter } from "next/navigation";
 import { validateUserDetailsForm } from "../utils/validation_utils";
 import ErrorAlert from "./ErrorAlert";
+import { getItineraries } from "../lib/data/itineraries";
+import ItinerariesList from "./ItinerariesList";
 
-export default function ProfilePage({ user }) {
+export default function ProfilePage({ session }) {
   const [editProfile, setEditProfile] = useState(false);
   const [errors, setErrors] = useState({});
   const [dialogError, setDialogError] = useState({});
+  const [itineraries, setItineraries] = useState([]);
   const router = useRouter();
   const modalRef = useRef();
-
+  const user = session?.user;
 
   useEffect(() => {
     if (!user) {
       router.replace("/");
     }
+    const fetchItineraries = async () => {
+      const itineraries = await getItineraries(undefined, user?.user_id);
+      setItineraries(itineraries);
+    };
+    fetchItineraries();
   }, []);
   async function handleSubmit(formData) {
     try {
@@ -51,12 +64,12 @@ export default function ProfilePage({ user }) {
   };
 
   const handleDelete = async (formData) => {
-    const password = formData.get("password")
+    const password = formData.get("password");
     setDialogError({});
     try {
-      await checkPassword(user?.email, password)
-      await deleteUser(user?.email)
-      await logout()
+      await checkPassword(user?.email, password);
+      await deleteUser(user?.email);
+      await logout();
       router.replace("/");
     } catch (error) {
       setDialogError({ password: error.message });
@@ -71,206 +84,225 @@ export default function ProfilePage({ user }) {
 
   return (
     <>
-      <div className="flex justify-center ">
-        <div className="flex w-1/2 p-2 bg-white rounded-xl shadow-lg mx-4 mb-8  flex-col">
-          <div className="flex justify-end border-2 border-black">
-            <button
-              className="black_btn "
-              onClick={() => setEditProfile(!editProfile)}
+      <div className="flex justify-center">
+        {/* <div className="flex w-1/2 p-2 bg-white rounded-xl shadow-lg mx-4 mb-8 flex-col p-6"> */}
+        {editProfile ? (
+          <div className="flex w-full">
+            <form
+              className="w-full flex p-2 bg-white rounded-xl shadow-lg mx-4 mb-8 flex-col p-6"
+              action={handleSubmit}
+              noValidate
             >
-              {editProfile ? "Cancel" : "Edit Profile"}
-            </button>
-          </div>
-          <div className="flex w-full items-center border-2 border-black flex-col">
-            {editProfile ? (
-              <form action={handleSubmit} noValidate>
-                <div className="my-3">
-                  <div className="mb-2 block">
-                    <label
-                      className="font-satoshi font-semibold text-base text-gray-700"
-                      htmlFor="avatar_img"
-                    >
-                      Profile Picture (max 4.5mb)
-                    </label>
-                  </div>
-                  <input
-                    className=" text-sm text-grey-500
+              <div className="my-3">
+                <div className="mb-2 block">
+                  <label
+                    className="font-satoshi font-semibold text-base text-gray-700"
+                    htmlFor="avatar_img"
+                  >
+                    Profile Picture (max 4.5mb)
+                  </label>
+                </div>
+                <input
+                  className=" text-sm text-grey-500
                   file:mr-5 file:py-3 file:px-10
                   file:rounded-full file:border-0
                   file:text-md file:font-semibold  file:text-white
                   file:bg-gradient-to-r file:from-blue-600 file:to-amber-600
                   hover:file:cursor-pointer hover:file:opacity-80"
-                    id="avatar_img"
-                    name="avatar_img"
-                    type="file"
-                    accept="image/*"
-                  />
+                  id="avatar_img"
+                  name="avatar_img"
+                  type="file"
+                  accept="image/*"
+                />
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <label
+                    className="font-satoshi font-semibold text-base text-gray-700"
+                    htmlFor="username"
+                  >
+                    Username
+                  </label>
                 </div>
-                <div>
-                  <div className="mb-2 block">
-                    <label
-                      className="font-satoshi font-semibold text-base text-gray-700"
-                      htmlFor="username"
-                    >
-                      Username
-                    </label>
-                  </div>
-                  <input
-                    className="form_input"
-                    id="username"
-                    name="username"
-                    type="text"
-                    defaultValue={user?.username}
-                  />
-                  {errors.username && (
-                    <ErrorAlert
-                      errors={errors}
-                      setErrors={setErrors}
-                      errorKey={"username"}
-                    />
-                  )}
-                </div>
-                <div className="my-3">
-                  <div className="mb-2 block">
-                    <label
-                      className="font-satoshi font-semibold text-base text-gray-700"
-                      htmlFor="email"
-                    >
-                      Email
-                    </label>
-                  </div>
-                  <input
-                    className="form_input"
-                    id="email"
-                    name="email"
-                    type="email"
-                    defaultValue={user?.email}
-                  />
-                  {errors.email && (
-                    <ErrorAlert
-                      errors={errors}
-                      setErrors={setErrors}
-                      errorKey={"email"}
-                    />
-                  )}
-                </div>
-                <div className="my-3">
-                  <div className="mb-2 block">
-                    <label
-                      className="font-satoshi font-semibold text-base text-gray-700"
-                      htmlFor="password"
-                    >
-                      Password (optional)
-                    </label>
-                  </div>
-                  <input
-                    className="form_input"
-                    id="password"
-                    name="password"
-                    type="password"
-                    // placeholder="New password (optional)"
-                  />
-                  {errors.password && (
-                    <ErrorAlert
-                      errors={errors}
-                      setErrors={setErrors}
-                      errorKey={"password"}
-                    />
-                  )}
-                </div>
-                <div className="my-3">
-                  <div className="mb-2 block">
-                    <label
-                      htmlFor="confirmPassword"
-                      className="font-satoshi font-semibold text-base text-gray-700"
-                    >
-                      Confirm password
-                    </label>
-                  </div>
-                  <input
-                    className="form_input"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                  />
-                  {errors.confirmPassword && (
-                    <ErrorAlert
-                      errors={errors}
-                      setErrors={setErrors}
-                      errorKey={"confirmPassword"}
-                    />
-                  )}
-                </div>
-                <div>
-                  <div className="mb-2 block">
-                    <label
-                      className="font-satoshi font-semibold text-base text-gray-700"
-                      htmlFor="bio"
-                    >
-                      Bio
-                    </label>
-                  </div>
-                  <textarea
-                    className="form_textarea h-[100px]"
-                    id="bio"
-                    name="bio"
-                    defaultValue={user?.bio}
-                  ></textarea>
-                  {errors.bio && (
-                    <ErrorAlert
-                      errors={errors}
-                      setErrors={setErrors}
-                      errorKey={"bio"}
-                    />
-                  )}
-                </div>
-                <button className="black_btn" type="submit">
-                  Save Changes
-                </button>
-                {errors.serverError && (
+                <input
+                  className="form_input"
+                  id="username"
+                  name="username"
+                  type="text"
+                  defaultValue={user?.username}
+                />
+                {errors.username && (
                   <ErrorAlert
                     errors={errors}
                     setErrors={setErrors}
-                    errorKey={"serverError"}
+                    errorKey={"username"}
                   />
                 )}
-              </form>
-            ) : (
-              <>
-                <img
-                  className="w-48 h-48 rounded-full object-cover"
-                  src={
-                    user?.avatar_img_url
-                      ? user?.avatar_img_url
-                      : `https://ui-avatars.com/api?name=${user?.username}&rounded=true&background=random`
-                  }
-                  alt="user profile image"
-                />
-                <h1 className="sm:text-xl text-lg font-semibold">
-                  {user?.username}
-                </h1>
-                <p className="form_input sm:text-lg text-sm">{user?.email}</p>
+              </div>
+              <div className="my-3">
                 <div className="mb-2 block">
-                  <h2 className="font-satoshi font-semibold text-gray-700">
-                    Bio
-                  </h2>
+                  <label
+                    className="font-satoshi font-semibold text-base text-gray-700"
+                    htmlFor="email"
+                  >
+                    Email
+                  </label>
                 </div>
-                <p
-                  className="
-          sm:text-lg
-          text-sm
-          text-gray-900"
+                <input
+                  className="form_input"
+                  id="email"
+                  name="email"
+                  type="email"
+                  defaultValue={user?.email}
+                />
+                {errors.email && (
+                  <ErrorAlert
+                    errors={errors}
+                    setErrors={setErrors}
+                    errorKey={"email"}
+                  />
+                )}
+              </div>
+              <div className="my-3">
+                <div className="mb-2 block">
+                  <label
+                    className="font-satoshi font-semibold text-base text-gray-700"
+                    htmlFor="profile-password"
+                  >
+                    Password (optional)
+                  </label>
+                </div>
+                <input
+                  className="form_input"
+                  id="profile-password"
+                  name="password"
+                  type="password"
+                  // placeholder="New password (optional)"
+                />
+                {errors.password && (
+                  <ErrorAlert
+                    errors={errors}
+                    setErrors={setErrors}
+                    errorKey={"password"}
+                  />
+                )}
+              </div>
+              <div className="my-3">
+                <div className="mb-2 block">
+                  <label
+                    htmlFor="confirmPassword"
+                    className="font-satoshi font-semibold text-base text-gray-700"
+                  >
+                    Confirm password
+                  </label>
+                </div>
+                <input
+                  className="form_input"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                />
+                {errors.confirmPassword && (
+                  <ErrorAlert
+                    errors={errors}
+                    setErrors={setErrors}
+                    errorKey={"confirmPassword"}
+                  />
+                )}
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <label
+                    className="font-satoshi font-semibold text-base text-gray-700"
+                    htmlFor="bio"
+                  >
+                    Bio
+                  </label>
+                </div>
+                <textarea
+                  className="form_textarea h-[100px]"
+                  id="bio"
+                  name="bio"
+                  defaultValue={user?.bio}
+                ></textarea>
+                {errors.bio && (
+                  <ErrorAlert
+                    errors={errors}
+                    setErrors={setErrors}
+                    errorKey={"bio"}
+                  />
+                )}
+              </div>
+              <div className="flex mt-4">
+                <button className="black_btn mr-2" type="submit">
+                  Save Changes
+                </button>
+                <button
+                  className="outline_btn"
+                  onClick={() => setEditProfile(false)}
                 >
-                  {user?.bio}
-                </p>
-                <button className="red_btn" onClick={handleDeleteClick}>
+                  Cancel
+                </button>
+              </div>
+              {errors.serverError && (
+                <ErrorAlert
+                  errors={errors}
+                  setErrors={setErrors}
+                  errorKey={"serverError"}
+                />
+              )}
+            </form>
+          </div>
+        ) : (
+          <div
+            className={`w-full ${
+              itineraries.length > 0 && `md:grid grid-cols-3`
+            } md:p-8`}
+          >
+            <div className="flex flex-col justify-center items-center my-8 md:h-[80vh]">
+              <img
+                className="xl:w-48 xl:h-48 md:w-40 md:h-40 w-48 h-48 rounded-full object-cover my-3 mx-3"
+                src={
+                  user?.avatar_img_url
+                    ? user?.avatar_img_url
+                    : `https://ui-avatars.com/api?name=${user?.username}&rounded=true&background=random`
+                }
+                alt="user profile image"
+              />
+              <h1 className="sm:text-xl text-lg font-semibold my-3 mx-3">
+                {user?.username}
+              </h1>
+              <p className="lg:text-lg text-sm my-3">{user?.email}</p>
+              <p className="lg:text-lg text-sm text-gray-900 my-3 mx-10 md:mx-3 text-center">
+                {user?.bio}
+              </p>
+              <div className="flex flex-wrap justify-center">
+                <button
+                  className="black_btn max-h-9 mx-3 my-3"
+                  onClick={() => setEditProfile(true)}
+                >
+                  Edit Profile
+                </button>
+                <button
+                  className="red_btn max-h-9 my-3 mx-3"
+                  onClick={handleDeleteClick}
+                >
                   Delete account
                 </button>
-              </>
+              </div>
+            </div>
+            {itineraries.length > 0 && (
+              <div className="col-start-2 col-span-2 justify-center items-center md:bg-white md:rounded-xl md:shadow-lg">
+                <h1 className="mt-5 text-4xl font-extrabold leading-[1.15] text-black text-center">
+                  Your Itineraries:
+                </h1>
+                <ItinerariesList session={session} itineraries={itineraries} />
+              </div>
             )}
           </div>
-        </div>
+        )}
       </div>
+      {/* </div> */}
       <dialog
         ref={modalRef}
         className="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5"
