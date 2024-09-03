@@ -65,30 +65,30 @@ export default function ItinerariesSection({ session }) {
   };
 
   return (
-    <section className=' w-full max-w-full flex-center flex-col p-4'>
-      <div className='mt-10 w-full max-w-5xl flex flex-col gap-7 glassmorphism'>
-        <div className=' w-full mx-auto'>
-          <h1 className='font-satoshi font-semibold text-base text-gray-700 mb-2 mt-4'>
+    <section className=" w-full flex-center flex-col p-4">
+      <div className="mt-10 w-full max-w-5xl flex flex-col gap-7 glassmorphism">
+        <div className=" w-full mx-auto">
+          <h1 className="font-satoshi font-semibold text-base text-gray-700 mb-2 mt-4">
             Where do you want to go?
           </h1>
           <form>
-          <CreatableSelect
-            instanceId="filterSelect"
-            className="w-full"
-            components={{
-              DropdownIndicator: null,
-            }}
-            inputValue={inputValue}
-            isClearable
-            isMulti
-            menuIsOpen={false}
-            onChange={(newValue) => setValue(newValue)}
-            onInputChange={(newValue) => setInputValue(newValue)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type a location and press enter"
-            value={value}
+            <CreatableSelect
+              instanceId="filterSelect"
+              className="w-full"
+              components={{
+                DropdownIndicator: null,
+              }}
+              inputValue={inputValue}
+              isClearable
+              isMulti
+              menuIsOpen={false}
+              onChange={(newValue) => setValue(newValue)}
+              onInputChange={(newValue) => setInputValue(newValue)}
+              onKeyDown={handleKeyDown}
+              placeholder="Type a location and press enter"
+              value={value}
             />
-            </form>
+          </form>
         </div>
         <div className="w-full mx-auto ">
           <h1 className="font-satoshi font-semibold text-base text-gray-700 mb-2 mt-4">
@@ -141,30 +141,9 @@ export default function ItinerariesSection({ session }) {
           </div>
         </div>
       </div>
-
-      <div className="sm:mt-32 hidden sm:block text-md font-satoshi drop-shadow-6xl leading-[1.15] green_gradient sm:text-6xl">
-        <Typewriter
-          options={{
-            strings: [
-              "Spain",
-              "Turkey",
-              "Cyprus",
-              "Portugal",
-              "India",
-              "Thailand",
-              "Domincan Republic",
-              "Mexico",
-              "Cuba",
-              "St Lucia",
-              "Jamaica",
-              "Barbados",
-            ],
-            autoStart: true,
-            loop: true,
-          }}
-        />
+      <div className="max-w-5xl">
+        <ItinerariesList session={session} itineraries={itinerariesList} />
       </div>
-      <ItinerariesList session={session} itineraries={itinerariesList}/>
     </section>
   );
 }

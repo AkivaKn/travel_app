@@ -13,11 +13,11 @@ import ErrorAlert from "./ErrorAlert";
 import { getItineraries } from "../lib/data/itineraries";
 import ItinerariesList from "./ItinerariesList";
 
-export default function ProfilePage({ session}) {
+export default function ProfilePage({ session }) {
   const [editProfile, setEditProfile] = useState(false);
   const [errors, setErrors] = useState({});
   const [dialogError, setDialogError] = useState({});
-  const [itineraries,setItineraries] = useState([])
+  const [itineraries, setItineraries] = useState([]);
   const router = useRouter();
   const modalRef = useRef();
   const user = session?.user;
@@ -254,10 +254,14 @@ export default function ProfilePage({ session}) {
             </form>
           </div>
         ) : (
-          <div className={`w-full ${itineraries.length >0 &&`md:grid grid-cols-3`} md:p-8`}>
-            <div className="flex flex-col justify-center items-center h-[80vh]">
+          <div
+            className={`w-full ${
+              itineraries.length > 0 && `md:grid grid-cols-3`
+            } md:p-8`}
+          >
+            <div className="flex flex-col justify-center items-center my-8 md:h-[80vh]">
               <img
-                className="w-48 h-48 rounded-full object-cover my-3"
+                className="xl:w-48 xl:h-48 md:w-40 md:h-40 w-48 h-48 rounded-full object-cover my-3 mx-3"
                 src={
                   user?.avatar_img_url
                     ? user?.avatar_img_url
@@ -265,31 +269,36 @@ export default function ProfilePage({ session}) {
                 }
                 alt="user profile image"
               />
-              <h1 className="sm:text-xl text-lg font-semibold my-3">
+              <h1 className="sm:text-xl text-lg font-semibold my-3 mx-3">
                 {user?.username}
               </h1>
-                <p className="sm:text-lg text-sm my-3">{user?.email}</p>
-                <p className="sm:text-lg text-sm text-gray-900 p-4">
+              <p className="lg:text-lg text-sm my-3">{user?.email}</p>
+              <p className="lg:text-lg text-sm text-gray-900 my-3 mx-10 md:mx-3 text-center">
                 {user?.bio}
-                </p>
-              <div className="flex my-3">
+              </p>
+              <div className="flex flex-wrap justify-center">
                 <button
-                  className="black_btn "
+                  className="black_btn max-h-9 mx-3 my-3"
                   onClick={() => setEditProfile(true)}
                 >
                   Edit Profile
                 </button>
-                <button className="red_btn" onClick={handleDeleteClick}>
+                <button
+                  className="red_btn max-h-9 my-3 mx-3"
+                  onClick={handleDeleteClick}
+                >
                   Delete account
                 </button>
               </div>
-              </div>
-              {itineraries.length > 0 &&
-            <div className="col-start-2 col-span-2 justify-center items-center md:bg-white md:rounded-xl md:shadow-lg">
-              
-                <ItinerariesList session={session} itineraries={itineraries}/>
             </div>
-              }
+            {itineraries.length > 0 && (
+              <div className="col-start-2 col-span-2 justify-center items-center md:bg-white md:rounded-xl md:shadow-lg">
+                <h1 className="mt-5 text-4xl font-extrabold leading-[1.15] text-black text-center">
+                  Your Itineraries:
+                </h1>
+                <ItinerariesList session={session} itineraries={itineraries} />
+              </div>
+            )}
           </div>
         )}
       </div>
