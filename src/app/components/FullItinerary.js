@@ -11,16 +11,21 @@ import { useRef, useState } from "react";
 import { deleteItinerary } from "../lib/data/itineraries";
 import { useRouter } from "next/navigation";
 import ErrorAlert from "./ErrorAlert";
-import Map from "./Map"
+import Map from "./Map";
 
-export default function FullItinerary({ itinerary, session, coordinates, locations }) {
+export default function FullItinerary({
+  itinerary,
+  session,
+  coordinates,
+  locations,
+}) {
   const modalRef = useRef();
   const [dialogError, setDialogError] = useState({});
   const { itineraryInfo, itineraryDays, itineraryComments } = itinerary;
   const formattedDate = dateFormatting(itineraryInfo.created_at);
   const formattedBudget = formatBudget(itineraryInfo.budget);
   const router = useRouter();
-  const apiKey = process.env.NEXT_PUBLIC_REACT_APP_API_KEY; 
+  const apiKey = process.env.NEXT_PUBLIC_REACT_APP_API_KEY;
 
   const handleDeleteClick = () => {
     const modalElement = modalRef.current;
@@ -34,7 +39,7 @@ export default function FullItinerary({ itinerary, session, coordinates, locatio
       await deleteItinerary(itineraryInfo.itinerary_id);
       router.replace("/");
     } catch (error) {
-      setDialogError({delete: "Please try again."});
+      setDialogError({ delete: "Please try again." });
       event.target.disabled = false;
       console.log(error);
     }
@@ -45,7 +50,7 @@ export default function FullItinerary({ itinerary, session, coordinates, locatio
     modalElement.close();
     setDialogError({});
   };
-  
+
   return (
     <>
       <div className="max-w-4xl mx-auto p-4">
@@ -53,8 +58,8 @@ export default function FullItinerary({ itinerary, session, coordinates, locatio
           {itineraryInfo.title}
         </h1>
 
-        <section className="w-full max-w-5xl flex flex-col glassmorphism mt-10">
-          <div>
+        <section className="w-full max-w-5xl flex flex-col mt-10 rounded-xl border border-gray-300 bg-white p-5">
+          <div className="flex flex-col w-full">
             <img
               src={
                 itineraryInfo.itinerary_image_url
@@ -62,17 +67,21 @@ export default function FullItinerary({ itinerary, session, coordinates, locatio
                   : "/assets/images/beach-picture.png"
               }
               alt="Itinerary Image"
-              className="w-full h-auto rounded-lg shadow-md object-scale-down mb-4"
+              className="w-[95%] h-auto mb-4 place-self-center"
             />
             <div className="flex justify-between">
               <p className=" text-gray-700 mx-2 sm:text-lg text-sm mb-2">
                 Posted by{" "}
-                {itineraryInfo.username ? 
-                <span className="font-bold">{itineraryInfo.username}</span> 
-                : <span className="font-bold">[Deleted User] </span> 
-              }
-                on{" "}
-                <span className="font-bold">{formattedDate}</span>
+                {itineraryInfo.username ? (
+                  <Link href={`/user/${itineraryInfo.user_id}`}>
+                    <span className="font-bold hover:text-blue-800 hover:underline">
+                      {itineraryInfo.username}
+                    </span>
+                  </Link>
+                ) : (
+                  <span className="font-bold">[Deleted User]</span>
+                )}
+                &nbsp;on&nbsp;<span className="font-bold">{formattedDate}</span>
               </p>
               {session?.user?.user_id === itineraryInfo.user_id && (
                 <div className=" flex items-center">
@@ -101,14 +110,18 @@ export default function FullItinerary({ itinerary, session, coordinates, locatio
             <Votes itineraryInfo={itineraryInfo} session={session} />
           </div>
         </section>
-        {apiKey && 
-        <>
-        <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">
-          Map
-        </h1>
-        <Map coordinates={coordinates} locations={locations} apiKey={apiKey}/>
-        </>
-        }
+        {apiKey && (
+          <>
+            <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">
+              Map
+            </h1>
+            <Map
+              coordinates={coordinates}
+              locations={locations}
+              apiKey={apiKey}
+            />
+          </>
+        )}
         <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">
           Days
         </h1>

@@ -5,6 +5,7 @@ import { dateFormatting } from "../utils/utils";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineModeEdit, MdOutlineClose } from "react-icons/md";
 import ErrorAlert from "./ErrorAlert";
+import Link from "next/link";
 
 export default function CommentCard({ session, comment, setComments }) {
   const [errors, setErrors] = useState({});
@@ -67,30 +68,33 @@ export default function CommentCard({ session, comment, setComments }) {
     <>
       {isDeleted ? (
         <div
-          className='sm:text-lg text-sm bg-lime-100 border border-lime-400 text-lime-900 p-4 rounded-xl relative my-4'
-          role='alert'>
-          <span className='block sm:inline'>
+          className="sm:text-lg text-sm bg-lime-100 border border-lime-400 text-lime-900 p-4 rounded-xl relative my-4"
+          role="alert"
+        >
+          <span className="block sm:inline">
             Your comment has been deleted!
           </span>
         </div>
       ) : (
-        <section className=' rounded-xl border border-gray-300 bg-white p-5'>
-          <div className='flex justify-between items-center mb-2'>
-            <div className='flex justify-start items-center gap-3'>
+        <section className=" rounded-xl border border-gray-300 bg-white p-5">
+          <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-start items-center gap-3">
               <img
                 src={
                   comment.avatar_img_url
                     ? comment.avatar_img_url
                     : `https://ui-avatars.com/api?name=${comment.username}&rounded=true&background=random&size=128`
                 }
-                alt='Avatar Image'
-                className='w-10 h-10 rounded-full object-cover'
+                alt="Avatar Image"
+                className="w-10 h-10 rounded-full object-cover"
               />
-              <h1 className='sm:text-xl text-lg font-semibold'>
-                {comment.username}
-              </h1>
+              <Link href={`/user/${comment.user_id}`}>
+                <h1 className="sm:text-xl text-lg font-semibold hover:text-blue-800 hover:underline">
+                  {comment.username}
+                </h1>
+              </Link>
             </div>
-            <p className='sm:text-lg text-sm text-gray-900 '>
+            <p className="sm:text-lg text-sm text-gray-900 ">
               {dateFormatting(comment.created_at)}
             </p>
           </div>
@@ -101,52 +105,57 @@ export default function CommentCard({ session, comment, setComments }) {
                   event.preventDefault();
                   handleSubmit();
                 }}
-                method='post'>
+                method="post"
+              >
                 <textarea
-                  name='commentBody'
+                  name="commentBody"
                   value={commentInput}
                   onChange={handleChange}
-                  className='search_input'
-                  maxLength={300}></textarea>
-                <div className='flex justify-between'>
+                  className="search_input"
+                  maxLength={300}
+                ></textarea>
+                <div className="flex justify-between">
                   <button
-                    type='submit'
+                    type="submit"
                     disabled={isPending}
-                    className='black_btn disabled:opacity-75 disabled:bg-gray-500 my-5 w-52 '>
+                    className="black_btn disabled:opacity-75 disabled:bg-gray-500 my-5 w-52 "
+                  >
                     {isPending ? "Loading..." : "Comment"}
                   </button>
                   <button
-                    className='outline_btn my-5 w-52'
-                    onClick={handleCancelClick}>
+                    className="outline_btn my-5 w-52"
+                    onClick={handleCancelClick}
+                  >
                     Cancel
                   </button>
                 </div>
               </form>
             </>
           ) : (
-            <div className='flex justify-between items-center mb-2'>
-              <p className='sm:text-lg text-sm text-gray-900'>{commentBody}</p>
+            <div className="flex justify-between items-center mb-2">
+              <p className="sm:text-lg text-sm text-gray-900">{commentBody}</p>
 
               {session?.user?.user_id === comment.user_id && (
                 <div>
                   <button onClick={handleEditClick}>
-                    <MdOutlineModeEdit className='text-2xl mr-3 hover:text-sky-700' />
+                    <MdOutlineModeEdit className="text-2xl mr-3 hover:text-sky-700" />
                   </button>
                   <button onClick={handleDeleteClick}>
-                    <RiDeleteBin6Line className='text-2xl hover:text-red-600' />
+                    <RiDeleteBin6Line className="text-2xl hover:text-red-600" />
                   </button>
                 </div>
               )}
             </div>
           )}
-      {errors.comment && (
-        <ErrorAlert
-        errors={errors}
-        setErrors={setErrors}
-        errorKey={"comment"}
-        />
+          {errors.comment && (
+            <ErrorAlert
+              errors={errors}
+              setErrors={setErrors}
+              errorKey={"comment"}
+            />
+          )}
+        </section>
       )}
-      </section>)}
     </>
   );
 }
