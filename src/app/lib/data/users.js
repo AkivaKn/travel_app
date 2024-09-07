@@ -80,7 +80,6 @@ export async function updateUser(formData, avatarImageUrl, userId) {
   const bio = formData.get("bio");
   const avatar_img = formData.get("avatar_img");
 
-
   try {
     let sqlStr = `
     UPDATE users
@@ -135,6 +134,21 @@ export async function deleteUser(email) {
     if (res.rows.length === 0) {
       throw "500: Server error";
     }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+}
+
+export async function getUserById(userId) {
+  try {
+    const res = await sql`
+      SELECT username, bio, avatar_img_url FROM users
+      WHERE user_id = ${userId}`;
+    if (res.rows.length === 0) {
+      throw "404: User not found";
+    }
+    return res.rows[0];
   } catch (error) {
     console.log(error);
     throw new Error(error);
