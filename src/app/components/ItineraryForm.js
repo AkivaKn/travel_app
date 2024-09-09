@@ -92,7 +92,8 @@ export default function ItineraryForm({ itinerary, page,user }) {
     }
   }
 
-  function addAnotherDay() {
+  function addAnotherDay(e) {
+    e.preventDefault()
     let newDayInput = {
       dayPlan: "",
       accomodation: "",
