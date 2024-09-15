@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { login } from "../lib/data/users";
 import { validateSignInForm } from "../utils/validation_utils";
 import { IoMdClose } from "react-icons/io";
@@ -8,6 +8,9 @@ import ErrorAlert from "./ErrorAlert";
 
 export default function SignInForm({ modalRef, setToggleRegister }) {
   const [errors, setErrors] = useState({});
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
   async function signInUser(formData) {
     try {
       const user = {
@@ -21,6 +24,8 @@ export default function SignInForm({ modalRef, setToggleRegister }) {
         await login(user);
         const modalElement = modalRef.current;
         modalElement.close();
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
       }
     } catch (error) {
       setErrors({ serverError: "Please try again." });
@@ -30,6 +35,8 @@ export default function SignInForm({ modalRef, setToggleRegister }) {
   function handleClose() {
     const modalElement = modalRef.current;
     modalElement.close();
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
   }
 
   return (
@@ -57,6 +64,7 @@ export default function SignInForm({ modalRef, setToggleRegister }) {
                 id="email"
                 name="email"
                 type="email"
+                ref={emailRef}
               />
               {errors.email && (
                 <ErrorAlert
@@ -80,6 +88,7 @@ export default function SignInForm({ modalRef, setToggleRegister }) {
                 id="password"
                 name="password"
                 type="password"
+                ref={passwordRef}
               />
 
               {errors.password && (
