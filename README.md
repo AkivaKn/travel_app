@@ -1,37 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TravelApp
 
-## Getting Started
+[Hosted Site](https://travel-app-vert-five.vercel.app/)
 
-First, run the development server:
+## Contributors
+
+[Akiva Kaufman](https://github.com/AkivaKn)
+
+[Alex Greaves](https://github.com/AGreaves99)
+
+[Alex Straton](https://github.com/AlexStraton)
+
+[Joe Mosley](https://github.com/JoeMosley96)
+
+## Project Description
+
+A travel application that allows users to search for itineraries and plan trips based on their preferences. The app helps users select destinations, filter by activities or points of interest, and organise their travel itineraries.
+
+Users can:
+
+- Share and explore travel itineraries
+- Comment and vote on itineraries
+- Search and filter by budget, location and trip length
+
+## Technologies used
+
+- Next.js (App Router)
+- React
+- Auth.js
+- TailwindCSS
+- Vercel Postgres
+- Vercel Blob
+- Google Maps API
+
+## Setup
+
+You will need to have Node.js and npm installed globally on your machine.
+
+Clone the repo
+
+```bash
+git clone https://github.com/AkivaKn/travel_app.git
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Setup a Vercel Postgres database and Vercel Blob database
+Follow this get started link: https://vercel.com/docs/getting-started-with-vercel
+
+Create a .env file in the root directory. Copy the environment variables from the settings tab in both databases and paste them in the .env file.
+
+Generate auth secret
+
+```bash
+npx auth secret
+```
+
+Add it to the .env file using the following syntax:
+
+AUTH_SECRET="<your_auth_secret_code_here>"
+
+To enable the Google maps feature, get a Google maps API key
+(https://developers.google.com/maps/documentation) and add the API key to the .env file using the following syntax: NEXT_PUBLIC_REACT_APP_API_KEY="<your_api_key_here>"
+
+Seed the database
+
+```bash
+npm run seed
+```
+
+Run the app
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Approach
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+We approached the development of the app by focusing on the user experience. Using user stories, we identified key features and thought about the user journey. To guide the design, we created wireframes to structure the layout and visualise the flow of different pages. Each page was individually styled after implementing the functionality, with a strong focus on responsiveness.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-https://travel-app-vert-five.vercel.app/
+The project was completed using a combination of pair programming and individual work with close collaboration for identifying and solving bugs. New features were developed on a new branch and merged into main with approval from another team member. This, along with Vercel checks after every merge request helped to avoid bugs in main. Conventional commits were also used for consistency and readability.
