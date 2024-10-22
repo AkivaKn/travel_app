@@ -110,7 +110,7 @@ export default function FullItinerary({
             <Votes itineraryInfo={itineraryInfo} session={session} />
           </div>
         </section>
-        {apiKey && (
+        {(apiKey && coordinates[0] !== null)  && (
           <>
             <h1 className="mt-5 text-3xl text-center mb-5 font-extrabold leading-[1.15] text-black sm:text-4xl ">
               Map
